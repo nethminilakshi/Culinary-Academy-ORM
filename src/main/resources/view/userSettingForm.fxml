@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="settingPane" prefHeight="650.0" prefWidth="804.0" styleClass="pane" stylesheets="@../assets/a/css/pageStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.userSettingFormController">
+   <children>
+      <Label layoutX="68.0" layoutY="88.0" prefHeight="49.0" prefWidth="179.0" text="UserSetting">
+         <font>
+            <Font name="Constantia" size="30.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="138.0" layoutY="178.0" prefHeight="409.0" prefWidth="475.0" styleClass="pane" stylesheets="@../assets/a/css/pageStyle.css">
+         <effect>
+            <DropShadow height="12.21" radius="11.465" spread="0.11" width="35.65">
+               <color>
+                  <Color red="0.7105262875556946" green="0.7105262875556946" blue="0.7105262875556946" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <JFXTextField fx:id="txtName" layoutX="50.0" layoutY="40.0" prefHeight="34.0" prefWidth="196.0" text="Full Name">
+               <effect>
+                  <Glow level="0.15" />
+               </effect>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtUsername" layoutX="50.0" layoutY="153.0" prefHeight="34.0" prefWidth="196.0" text="Username">
+               <effect>
+                  <Glow level="0.15" />
+               </effect>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="39.0" layoutY="312.0" onAction="#btnUpdateOnAction" prefHeight="49.0" prefWidth="117.0" style="-fx-background-color: #4b7523; -fx-background-radius: 8;" text="Update" textFill="#c9c9c9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="290.0" layoutY="312.0" onAction="#btnDeleteOnAction" prefHeight="49.0" prefWidth="117.0" style="-fx-background-color: #7d542e; -fx-background-radius: 8;" text="Delete" textFill="#c9c9c9">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </JFXButton>
+            <JFXPasswordField fx:id="txtPassword" layoutX="50.0" layoutY="211.0" prefHeight="34.0" prefWidth="196.0" promptText="Password">
+               <effect>
+                  <Glow level="0.15" />
+               </effect>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXTextField fx:id="txtEmail" layoutX="50.0" layoutY="97.0" prefHeight="34.0" prefWidth="196.0" text="Email">
+               <effect>
+                  <Glow level="0.15" />
+               </effect>
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

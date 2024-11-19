@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="programPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="233.0" layoutY="27.0" prefHeight="47.0" prefWidth="276.0" text="Culinary Programs">
+         <font>
+            <Font name="Calibri" size="29.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="28.0" arcWidth="28.0" blendMode="LIGHTEN" fill="WHITE" height="466.0" layoutX="49.0" layoutY="82.0" stroke="#f8f8f8" strokeType="INSIDE" width="728.0">
+         <effect>
+            <DropShadow spread="0.16">
+               <color>
+                  <Color red="0.4736842215061188" green="0.46929824352264404" blue="0.46929824352264404" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Label layoutX="78.0" layoutY="154.0" prefHeight="31.0" prefWidth="104.0" text="Program Id :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtId" blendMode="DARKEN" layoutX="192.0" layoutY="157.0" prefHeight="25.0" prefWidth="174.0" style="-fx-border-color: white; -fx-border-radius: 10;" />
+      <Label layoutX="421.0" layoutY="154.0" prefHeight="31.0" prefWidth="121.0" text="Program Name :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtName" blendMode="DARKEN" layoutX="563.0" layoutY="157.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label layoutX="75.0" layoutY="203.0" prefHeight="31.0" prefWidth="104.0" text="Durantion :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtDuration" blendMode="DARKEN" layoutX="189.0" layoutY="205.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="424.0" layoutY="202.0" prefHeight="31.0" prefWidth="104.0" text="Fee(LKR) :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtFee" blendMode="DARKEN" layoutX="560.0" layoutY="206.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label layoutX="75.0" layoutY="254.0" prefHeight="31.0" prefWidth="104.0" text="Reg Fee(LKR) :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtRegFee" blendMode="DARKEN" layoutX="193.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" />
+      <JFXButton fx:id="btnRegister" layoutX="309.0" layoutY="570.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Add Program" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <TextField fx:id="txtProgramName" layoutX="604.0" layoutY="105.0" text="Search Program" />
+      <TableView fx:id="tblPrograms" layoutX="103.0" layoutY="325.0" prefHeight="200.0" prefWidth="621.0" stylesheets="@../assets/a/css/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colProgramId" prefWidth="84.0" text="programId" />
+          <TableColumn fx:id="colProgramName" prefWidth="157.0" text="Program" />
+            <TableColumn fx:id="colDuration" prefWidth="110.0" text="Duration" />
+            <TableColumn fx:id="colFee" prefWidth="139.0" text="Program Fee(LKR)" />
+            <TableColumn fx:id="colRegFee" prefWidth="130.0" text="Reg Fee(LKR)" />
+        </columns>
+         <effect>
+            <Lighting diffuseConstant="1.27" specularConstant="0.0" specularExponent="40.0" surfaceScale="1.85">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </TableView>
+   </children>
+</AnchorPane>

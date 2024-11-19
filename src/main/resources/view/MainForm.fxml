@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.adminMainFormController">
+   <children>
+      <AnchorPane layoutX="1.0" layoutY="1.0" prefHeight="650.0" prefWidth="220.0" styleClass="pane">
+         <children>
+            <VBox layoutY="119.0" prefHeight="369.0" prefWidth="220.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="btnDashboard" onAction="#btnDashboardOnAction" prefHeight="56.0" prefWidth="220.0" text="Dashboard" textFill="#575757">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnStudent" layoutX="10.0" layoutY="10.0" onAction="#btnStudentOnAction" prefHeight="56.0" prefWidth="230.0" text="Student " textFill="#575757">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnPrograms" layoutX="10.0" layoutY="76.0" onAction="#btnProgramsOnAction" prefHeight="56.0" prefWidth="230.0" text="Culinary Courses" textFill="#575757">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnRegister" layoutX="10.0" layoutY="142.0" onAction="#btnRegisterOnAction" prefHeight="56.0" prefWidth="230.0" text="Register" textFill="#575757">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnUserSetting" layoutX="10.0" layoutY="208.0" onAction="#btnSettingOnAction" prefHeight="56.0" prefWidth="230.0" text="Settings" textFill="#575757">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <Label layoutX="49.0" layoutY="44.0" styleClass="label-hostel">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="31.0" layoutY="521.0" onAction="#btnLogoutOnAction" prefHeight="44.0" prefWidth="134.0" text="Logout">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView layoutX="41.0" layoutY="534.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../book-worm/src/main/resources/assets/images/logout-gray.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="holderPane" layoutX="230.0" layoutY="1.0" prefHeight="650.0" prefWidth="804.0" />
+   </children>
+</AnchorPane>

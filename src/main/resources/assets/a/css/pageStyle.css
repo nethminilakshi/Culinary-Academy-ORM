@@ -1,0 +1,7 @@
+
+
+.pane{
+    -fx-background-color: #FFFFFFFF;
+    -fx-background-radius: 15 15 15 15;
+    /*-fx-effect: dropshadow(gaussian, white, 10, 0.5, 0, 0);*/
+}

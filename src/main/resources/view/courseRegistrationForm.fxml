@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="programPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.CourseRegistrationFormController">
+   <children>
+      <Label layoutX="253.0" layoutY="26.0" prefHeight="47.0" prefWidth="276.0" text="Courses Registration">
+         <font>
+            <Font name="Calibri" size="29.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="28.0" arcWidth="28.0" blendMode="LIGHTEN" fill="WHITE" height="364.0" layoutX="26.0" layoutY="70.0" stroke="#f8f8f8" strokeType="INSIDE" width="728.0">
+         <effect>
+            <DropShadow spread="0.17">
+               <color>
+                  <Color red="0.4736842215061188" green="0.46929824352264404" blue="0.46929824352264404" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Label layoutX="56.0" layoutY="103.0" prefHeight="31.0" prefWidth="59.0" text="St Id :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtId" blendMode="MULTIPLY" layoutX="115.0" layoutY="104.0" />
+      <Label layoutX="289.0" layoutY="104.0" prefHeight="31.0" prefWidth="70.0" text="St Name :">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtName" layoutX="365.0" layoutY="107.0" />
+      <Label layoutX="66.0" layoutY="148.0" prefHeight="47.0" prefWidth="171.0" text="Course Details" textFill="#797979">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="207.0" prefHeight="31.0" prefWidth="79.0" text="Course Id :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtCourseId" blendMode="MULTIPLY" layoutX="159.0" layoutY="207.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="48.0" layoutY="246.0" prefHeight="31.0" prefWidth="101.0" text="Course Name :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtNIC" layoutX="564.0" layoutY="105.0" onAction="#searchOnId" prefHeight="31.0" prefWidth="159.0" promptText="Search NIC">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Label layoutX="49.0" layoutY="290.0" prefHeight="31.0" prefWidth="79.0" text="Duration :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtDuration" blendMode="MULTIPLY" layoutX="158.0" layoutY="291.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="49.0" layoutY="334.0" prefHeight="31.0" prefWidth="79.0" text="Fee(LKR) :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField blendMode="MULTIPLY" layoutX="158.0" layoutY="334.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="506.0" layoutY="148.0" prefHeight="47.0" prefWidth="171.0" text="Payment Details" textFill="#797979">
+         <font>
+            <Font name="Arial" size="20.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="cmbName" layoutX="157.0" layoutY="249.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="385.0" layoutY="206.0" prefHeight="31.0" prefWidth="101.0" text="Payment Id :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtpaymentId" blendMode="MULTIPLY" layoutX="517.0" layoutY="206.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="384.0" layoutY="246.0" prefHeight="31.0" prefWidth="101.0" text="Advanced Fee:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtAdFee" blendMode="MULTIPLY" layoutX="514.0" layoutY="251.0" prefHeight="25.0" prefWidth="159.0" />
+      <Label layoutX="383.0" layoutY="290.0" prefHeight="31.0" prefWidth="112.0" text="Remaining Fee :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txtRemFee" blendMode="MULTIPLY" layoutX="519.0" layoutY="290.0" prefHeight="25.0" prefWidth="159.0" />
+      <JFXButton fx:id="btnAdd" layoutX="571.0" layoutY="379.0" onAction="#btnAddOnAction" prefHeight="35.0" prefWidth="90.0" style="-fx-background-color: #99bbf2; -fx-background-radius: 8;" text="Add">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <effect>
+            <Shadow />
+         </effect>
+      </JFXButton>
+      <TableView layoutX="52.0" layoutY="455.0" prefHeight="140.0" prefWidth="663.0" stylesheets="@../assets/a/css/tableStyle.css">
+        <columns>
+          <TableColumn fx:id="colProgramId" prefWidth="82.0" text="Program Id" />
+          <TableColumn fx:id="colStudentId" prefWidth="93.0" text="Student Id" />
+            <TableColumn fx:id="colStudentName" prefWidth="122.0" text="St Name" />
+            <TableColumn fx:id="colPaidFee" prefWidth="114.0" text="Paid Fee" />
+            <TableColumn fx:id="colRemfee" prefWidth="119.0" text="Remaining Fee" />
+            <TableColumn fx:id="colAmount" prefWidth="132.0" text="Full Amount" />
+        </columns>
+         <effect>
+            <Lighting diffuseConstant="1.38" light="$null" specularConstant="0.0" specularExponent="40.0" surfaceScale="1.16">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </TableView>
+      <Label layoutX="384.0" layoutY="331.0" prefHeight="31.0" prefWidth="135.0" text="Registration Date :">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="521.0" layoutY="334.0" prefHeight="25.0" prefWidth="159.0" />
+      <JFXButton fx:id="btnRegister" layoutX="259.0" layoutY="611.0" onAction="#btnRegisterOnAction" prefHeight="30.0" prefWidth="248.0" style="-fx-background-color: #8fdb9f; -fx-background-radius: 5;" text="Register">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <effect>
+            <Shadow />
+         </effect>
+      </JFXButton>
+   </children>
+</AnchorPane>

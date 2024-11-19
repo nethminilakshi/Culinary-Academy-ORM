@@ -1,0 +1,3 @@
+.table-view .column-header-background * {
+    /*-fx-background-color: linear-gradient(to right, #6995db, #a7b1c2);*/
+    -fx-background-color:  #6995db, #a7b1c2;}
