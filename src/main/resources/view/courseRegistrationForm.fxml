@@ -16,7 +16,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="programPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.CourseRegistrationFormController">
+<AnchorPane fx:id="programPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.RegistrationFormController">
    <children>
       <Label layoutX="253.0" layoutY="26.0" prefHeight="47.0" prefWidth="276.0" text="Courses Registration">
          <font>
@@ -60,7 +60,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNIC" layoutX="564.0" layoutY="105.0" onAction="#searchOnId" prefHeight="31.0" prefWidth="159.0" promptText="Search NIC">
+      <TextField fx:id="txtNIC" layoutX="564.0" layoutY="105.0" onAction="#txtSearchOnAction" prefHeight="31.0" prefWidth="159.0" promptText="Search NIC">
          <font>
             <Font size="15.0" />
          </font>
@@ -109,7 +109,7 @@
             <Shadow />
          </effect>
       </JFXButton>
-      <TableView layoutX="52.0" layoutY="455.0" prefHeight="140.0" prefWidth="663.0" stylesheets="@../assets/a/css/tableStyle.css">
+      <TableView fx:id="tblRegistration" layoutX="52.0" layoutY="455.0" prefHeight="140.0" prefWidth="663.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
           <TableColumn fx:id="colProgramId" prefWidth="82.0" text="Program Id" />
           <TableColumn fx:id="colStudentId" prefWidth="93.0" text="Student Id" />

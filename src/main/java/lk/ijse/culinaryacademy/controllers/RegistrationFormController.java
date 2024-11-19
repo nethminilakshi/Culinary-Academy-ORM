@@ -6,13 +6,11 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 public class RegistrationFormController {
-
-    @FXML
-    private AnchorPane registerPane;
 
     @FXML
     private JFXButton btnAdd;
@@ -40,6 +38,12 @@ public class RegistrationFormController {
 
     @FXML
     private TableColumn<?, ?> colStudentName;
+
+    @FXML
+    private AnchorPane programPane;
+
+    @FXML
+    private TableView<?> tblRegistration;
 
     @FXML
     private JFXTextField txtAdFee;
@@ -76,7 +80,7 @@ public class RegistrationFormController {
     }
 
     @FXML
-    void searchOnId(ActionEvent event) {
+    void txtSearchOnAction(ActionEvent event) {
 
     }
 }
