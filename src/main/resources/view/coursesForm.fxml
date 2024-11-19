@@ -61,12 +61,12 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtRegFee" blendMode="DARKEN" layoutX="193.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" />
-      <JFXButton fx:id="btnRegister" layoutX="309.0" layoutY="570.0" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Add Program" textFill="WHITE">
+      <JFXButton fx:id="btnRegister" layoutX="309.0" layoutY="570.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Add Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtProgramName" layoutX="604.0" layoutY="105.0" text="Search Program" />
+      <TextField fx:id="txtProgramName" layoutX="604.0" layoutY="105.0" onAction="#txtSearchOnAction" text="Search Program" />
       <TableView fx:id="tblPrograms" layoutX="103.0" layoutY="325.0" prefHeight="200.0" prefWidth="621.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
           <TableColumn fx:id="colProgramId" prefWidth="84.0" text="programId" />
