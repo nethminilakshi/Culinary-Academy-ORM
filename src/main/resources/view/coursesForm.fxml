@@ -55,12 +55,6 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtFee" blendMode="DARKEN" layoutX="560.0" layoutY="206.0" prefHeight="25.0" prefWidth="180.0" />
-      <Label layoutX="75.0" layoutY="254.0" prefHeight="31.0" prefWidth="104.0" text="Reg Fee(LKR) :">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtRegFee" blendMode="DARKEN" layoutX="193.0" layoutY="253.0" prefHeight="25.0" prefWidth="174.0" />
       <JFXButton fx:id="btnRegister" layoutX="309.0" layoutY="570.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Add Program" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />

@@ -4,6 +4,8 @@ module lk.ijse.culinaryacademy {
     requires javafx.fxml;
     requires javafx.graphics;
     requires com.jfoenix;
+    requires java.persistence;
+    requires static lombok;
 
 
     // Export the main package

@@ -1,11 +1,12 @@
-package lk.ijse.culinaryacademy.dto;
+package lk.ijse.culinaryacademy.tm;
+
 
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CoursesDTO {
+public class CoursesTm {
     private String courseId;
     private String courseName;
     private String duration;

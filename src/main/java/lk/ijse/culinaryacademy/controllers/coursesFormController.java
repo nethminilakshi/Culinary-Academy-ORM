@@ -9,6 +9,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.culinaryacademy.dao.DAOFactory;
+import lk.ijse.culinaryacademy.dao.custom.CoursesDAO;
 
 public class coursesFormController {
     @FXML
@@ -52,6 +54,18 @@ public class coursesFormController {
 
     @FXML
     private JFXTextField txtRegFee;
+
+
+    CoursesDAO coursesDAO = (CoursesDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.COURSE);
+
+    public void initialize() {
+
+
+        loadAllCourses();
+    }
+
+    private void loadAllCourses() {
+    }
 
     @FXML
     void btnAddOnAction(ActionEvent event) {

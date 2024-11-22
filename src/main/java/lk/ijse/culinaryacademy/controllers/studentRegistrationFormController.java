@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.culinaryacademy.tm.StudentTm;
 
 
 public class studentRegistrationFormController {
@@ -17,28 +18,28 @@ public class studentRegistrationFormController {
     private JFXButton btnRegister;
 
     @FXML
-    private TableColumn<?, ?> colAddress;
+    private TableColumn<?, String> colAddress;
 
     @FXML
-    private TableColumn<?, ?> colContact;
+    private TableColumn<?, Integer> colContact;
 
     @FXML
-    private TableColumn<?, ?> colEmail;
+    private TableColumn<?, String> colEmail;
 
     @FXML
-    private TableColumn<?, ?> colNIC;
+    private TableColumn<?, Integer> colNIC;
 
     @FXML
-    private TableColumn<?, ?> colName;
+    private TableColumn<?, String> colName;
 
     @FXML
-    private TableColumn<?, ?> colStId;
+    private TableColumn<?, String> colStId;
 
     @FXML
     private AnchorPane studentRegPane;
 
     @FXML
-    private TableView<?> tbleStudents;
+    private TableView<StudentTm> tbleStudents;
 
     @FXML
     private JFXTextField txtAddress;
@@ -61,9 +62,30 @@ public class studentRegistrationFormController {
     @FXML
     private JFXTextField txtName;
 
-    @FXML
-    void btnRegisterOnAction(ActionEvent event) {
+
+
+    public void btnAddOnAction(ActionEvent actionEvent) {
+       String studentId = txtId.getText();
+         String name = txtName.getText();
+            String address = txtAddress.getText();
+            String contact = txtContact.getText();
+            String email = txtEmail.getText();
 
     }
 
+
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+    }
+
+
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+    }
+
+//    private boolean isValidate() {
+//    }
 }

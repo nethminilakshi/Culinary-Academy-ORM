@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
    <children>
-      <JFXButton fx:id="btnRegister" layoutX="299.0" layoutY="560.0" onAction="#btnRegisterOnAction" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Save registration" textFill="WHITE">
+      <JFXButton fx:id="btnAdd" layoutX="36.0" layoutY="570.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #849ef5; -fx-background-radius: 12;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -94,5 +94,20 @@
             </Lighting>
          </effect>
       </TableView>
+      <JFXButton fx:id="btnUpdate" layoutX="172.0" layoutY="570.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #84f584; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" layoutX="468.0" layoutY="570.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #eb504d; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClear" layoutX="618.0" layoutY="570.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #f54ce1; -fx-background-radius: 12;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
