@@ -1,11 +1,9 @@
 package lk.ijse.culinaryacademy.entity;
 
-
-import javax.persistence.*;
- import lombok.*;
+import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,18 +11,19 @@ import java.util.List;
 @Entity
 @Table(name = "Students")
 
-public class Students  {
-@Id
-private String studentId;
-private String NIC;
-private String Name;
-private String Email;
-private String Address;
-private String Contact;
+public class Students {
+    @Id
+    private String studentId;
+    private String name;
+    private String nic;
+    private String email;
+    private String address;
+    private int contact;
 
 
-@OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-private List<StudentRegDetails> studentRegDetails;
+//@OneToMany(fetch = FetchType.EAGER, mappedBy = "students", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<StudentRegDetails> studentCourses;}
+
 }
 
 

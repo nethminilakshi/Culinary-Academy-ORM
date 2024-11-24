@@ -1,8 +1,10 @@
 package lk.ijse.culinaryacademy.entity;
 
-import lombok.*;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,7 +19,9 @@ private String courseName;
 private String duration;
 private double courseFee;
 
-@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-private List<StudentRegDetails> studentRegDetails;
+//@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
+//private List<StudentRegDetails> studentRegDetails;
+
+
 
 }

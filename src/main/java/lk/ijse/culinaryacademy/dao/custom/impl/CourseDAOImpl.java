@@ -1,52 +1,54 @@
 package lk.ijse.culinaryacademy.dao.custom.impl;
 
+import lk.ijse.culinaryacademy.Config.FactoryConfiguration;
 import lk.ijse.culinaryacademy.dao.custom.CoursesDAO;
 import lk.ijse.culinaryacademy.entity.Courses;
 
-import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+
 
 public class CourseDAOImpl implements CoursesDAO {
 
-public boolean save() throws IOException {
+
+    @Override
+    public boolean save(Courses dto) throws SQLException {
         return false;
     }
 
-    public boolean update() throws IOException {
+    @Override
+    public boolean update(Courses dto) throws SQLException {
         return false;
     }
 
-    public boolean delete() throws IOException {
+    @Override
+    public Courses search(String id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public boolean delete(String contact) throws SQLException {
         return false;
     }
-    public Courses findById() throws IOException {
-        return null;
-    }
-    public List<Courses> getAll() throws IOException {
-        return null;
-    }
+
     @Override
-    public String getCurrentId() throws IOException {
+    public ArrayList<Courses> getAll() throws SQLException, ClassNotFoundException {
         return null;
     }
 
     @Override
-    public List<String> getCourseId() {
+    public List<String> getIds() throws SQLException {
         return null;
     }
 
     @Override
-    public List<String> getCourseIds() {
-        return null;
-    }
-
-    @Override
-    public Courses getCourseById(String courseId) {
-        return null;
-    }
-
-    @Override
-    public int getProgramCount() {
+    public int getCount() throws SQLException {
         return 0;
+    }
+
+    @Override
+    public String autoGenarateId() throws SQLException {
+        return null;
     }
 }

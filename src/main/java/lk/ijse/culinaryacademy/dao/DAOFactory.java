@@ -1,9 +1,7 @@
 package lk.ijse.culinaryacademy.dao;
 
 import lk.ijse.culinaryacademy.dao.custom.impl.CourseDAOImpl;
-import lk.ijse.culinaryacademy.dao.custom.impl.RegistrationDAOmpl;
 import lk.ijse.culinaryacademy.dao.custom.impl.StudentDAOImpl;
-import lk.ijse.culinaryacademy.dao.custom.impl.StudentRegDetailsDAOImpl;
 
 public class DAOFactory {
     private static DAOFactory daoFactory;
@@ -23,10 +21,10 @@ public class DAOFactory {
                 return new CourseDAOImpl();
             case STUDENT:
                 return new StudentDAOImpl();
-            case REGISTRATION:
-                return new RegistrationDAOmpl();
-            case STUDENTREGDETAILS:
-                return new StudentRegDetailsDAOImpl();
+//            case REGISTRATION:
+//                return new RegistrationDAOmpl();
+//            case STUDENTREGDETAILS:
+//                return new StudentRegDetailsDAOImpl();
 
             default:
                 return null;

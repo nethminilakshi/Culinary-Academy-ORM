@@ -1,17 +1,18 @@
-// module-info.java
 module lk.ijse.culinaryacademy {
     requires javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
-    requires com.jfoenix;
-    requires java.persistence;
+    requires java.sql;
     requires static lombok;
+    requires jakarta.persistence;
+    requires org.hibernate.orm.core;
+    requires com.jfoenix;
+    requires java.naming;
 
-
-    // Export the main package
-    exports lk.ijse.culinaryacademy;
-
-    // Export AND open the controllers package to javafx.fxml
-    exports lk.ijse.culinaryacademy.controllers;
+    // Export the package containing your Launcher class
+    exports lk.ijse.culinaryacademy to javafx.graphics;
+    opens lk.ijse.culinaryacademy to javafx.fxml;
+    exports lk.ijse.culinaryacademy.controllers to javafx.fxml;
     opens lk.ijse.culinaryacademy.controllers to javafx.fxml;
+
 }

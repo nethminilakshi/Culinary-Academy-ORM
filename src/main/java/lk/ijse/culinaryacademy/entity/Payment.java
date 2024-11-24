@@ -1,4 +1,4 @@
 package lk.ijse.culinaryacademy.entity;
 
-public class Registration {
+public class Payment {
 }

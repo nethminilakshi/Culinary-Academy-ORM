@@ -1,18 +1,22 @@
 package lk.ijse.culinaryacademy.entity;
 
+import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.*;
 
-import javax.persistence.*;
+import java.util.Date;
+
 
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name = "StudentRegDetails")
-public class StudentRegDetails {
+public class StudentCoursesDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int studentRegId;
+    private int studentCourseId;
+    private Date registrationDate;
 
   @ManyToOne
     @JoinColumn(name = "studentId")

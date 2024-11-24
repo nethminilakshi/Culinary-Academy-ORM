@@ -4,10 +4,12 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class adminMainFormController {
 
@@ -18,7 +20,7 @@ public class adminMainFormController {
     private JFXButton btnPrograms;
 
     @FXML
-    private JFXButton btnRegister;
+    private JFXButton btnPayment;
 
     @FXML
     private JFXButton btnStudent;
@@ -73,21 +75,23 @@ public class adminMainFormController {
 
     @FXML
     void btnProgramsOnAction(ActionEvent event) throws IOException {
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/coursesForm.fxml"));
-        Pane programPane = (Pane) fxmlLoader.load();
+
+        URL resource = getClass().getResource("/view/coursesForm.fxml");
+        assert resource != null;
+        Parent load = FXMLLoader.load(resource);
         holderPane.getChildren().clear();
-        holderPane.getChildren().add(programPane);
+        holderPane.getChildren().add(load);
 
     }
 
 
 
-    public void btnRegisterOnAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/RegistrationForm.fxml"));
-        Pane registerPane = (Pane) fxmlLoader.load();
-
+    public void btnPaymentOnAction(ActionEvent actionEvent) throws IOException {
+        URL resource = getClass().getResource("/view/paymentForm.fxml");
+        assert resource != null;
+        Parent load = FXMLLoader.load(resource);
         holderPane.getChildren().clear();
-        holderPane.getChildren().add(registerPane);
+        holderPane.getChildren().add(load);
     }
 
 
@@ -112,7 +116,7 @@ public class adminMainFormController {
         btnDashboard.getStyleClass().remove("JFX-button-Dashboard-active");
         btnPrograms.getStyleClass().remove("JFX-button-Programs-active");
         btnStudent.getStyleClass().remove("JFX-button-StudentRegistration-active");
-        btnRegister.getStyleClass().remove("JFX-button-Register-active");
+        btnPayment.getStyleClass().remove("JFX-button-Register-active");
         btnUserSetting.getStyleClass().remove("JFX-button-UserSetting-active");
 
 
@@ -127,7 +131,7 @@ public class adminMainFormController {
                 btnStudent.getStyleClass().add("JFX-button-StudentRegistration-active");
                 break;
             case REGISTER:
-                btnRegister.getStyleClass().add("JFX-button-Register-active");
+                btnPayment.getStyleClass().add("JFX-button-Register-active");
                 break;
             case USER_SETTING:
                 btnUserSetting.getStyleClass().add("JFX-button-UserSetting-active");

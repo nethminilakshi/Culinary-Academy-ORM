@@ -1,4 +1,4 @@
 package lk.ijse.culinaryacademy.dao.custom.impl;
 
-public class StudentRegDetailsDAOImpl {
+public class StudentCoursesDetailsDAOImpl {
 }

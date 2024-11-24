@@ -2,82 +2,76 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
    <children>
-      <JFXButton fx:id="btnAdd" layoutX="36.0" layoutY="570.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #849ef5; -fx-background-radius: 12;" text="Add" textFill="WHITE">
+      <VBox layoutX="30.0" layoutY="109.0" prefHeight="519.0" prefWidth="728.0" style="-fx-background-color: #bfbab6; -fx-background-radius: 15;">
+         <effect>
+            <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
+         </effect>
+      </VBox>
+      <JFXButton fx:id="btnAdd" layoutX="68.0" layoutY="337.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #273c5c; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: black;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <Rectangle arcHeight="28.0" arcWidth="28.0" blendMode="LIGHTEN" fill="WHITE" height="466.0" layoutX="36.0" layoutY="80.0" stroke="#f8f8f8" strokeType="INSIDE" width="728.0">
-         <effect>
-            <DropShadow spread="0.16">
-               <color>
-                  <Color red="0.4736842215061188" green="0.46929824352264404" blue="0.46929824352264404" />
-               </color>
-            </DropShadow>
-         </effect>
-      </Rectangle>
-      <Label layoutX="223.0" layoutY="25.0" prefHeight="47.0" prefWidth="276.0" text="Student Registration">
+      <Label layoutX="223.0" layoutY="13.0" prefHeight="47.0" prefWidth="276.0" text="Student Registration">
          <font>
-            <Font name="Calibri" size="29.0" />
+            <Font name="Constantia" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="68.0" layoutY="100.0" prefHeight="31.0" prefWidth="104.0" text="Student Id :">
+      <Label layoutX="68.0" layoutY="189.0" prefHeight="31.0" prefWidth="104.0" text="Student Id :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtId" blendMode="DARKEN" layoutX="182.0" layoutY="103.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="414.0" layoutY="100.0" prefHeight="31.0" prefWidth="115.0" text="Student Name :">
+      <JFXTextField fx:id="txtId" blendMode="DARKEN" layoutX="182.0" layoutY="192.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #ededeb;" />
+      <Label layoutX="414.0" layoutY="189.0" prefHeight="31.0" prefWidth="115.0" text="Student Name :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtName" blendMode="DARKEN" layoutX="553.0" layoutY="103.0" prefHeight="25.0" prefWidth="180.0" />
-      <Label layoutX="65.0" layoutY="143.0" prefHeight="31.0" prefWidth="104.0" text="NIC :">
+      <JFXTextField fx:id="txtName" blendMode="DARKEN" layoutX="553.0" layoutY="189.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label layoutX="65.0" layoutY="232.0" prefHeight="31.0" prefWidth="104.0" text="NIC :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtNIC" blendMode="DARKEN" layoutX="179.0" layoutY="145.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="414.0" layoutY="142.0" prefHeight="31.0" prefWidth="70.0" text="Address :">
+      <JFXTextField fx:id="txtNIC" blendMode="DARKEN" layoutX="179.0" layoutY="234.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="414.0" layoutY="231.0" prefHeight="31.0" prefWidth="70.0" text="Address :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtAddress" blendMode="DARKEN" layoutX="550.0" layoutY="146.0" prefHeight="25.0" prefWidth="180.0" />
-      <Label layoutX="65.0" layoutY="186.0" prefHeight="31.0" prefWidth="104.0" text="Email :">
+      <JFXTextField fx:id="txtAddress" blendMode="DARKEN" layoutX="550.0" layoutY="232.0" prefHeight="25.0" prefWidth="180.0" />
+      <Label layoutX="65.0" layoutY="275.0" prefHeight="31.0" prefWidth="104.0" text="Email :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtEmail" blendMode="DARKEN" layoutX="183.0" layoutY="185.0" prefHeight="25.0" prefWidth="174.0" />
-      <Label layoutX="412.0" layoutY="185.0" prefHeight="31.0" prefWidth="136.0" text="Contact Number :">
+      <JFXTextField fx:id="txtEmail" blendMode="DARKEN" layoutX="183.0" layoutY="274.0" prefHeight="25.0" prefWidth="174.0" />
+      <Label layoutX="412.0" layoutY="274.0" prefHeight="31.0" prefWidth="136.0" text="Contact Number :">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtContact" blendMode="DARKEN" layoutX="552.0" layoutY="187.0" prefHeight="25.0" prefWidth="180.0" />
-      <Label layoutX="65.0" layoutY="227.0" prefHeight="31.0" prefWidth="104.0" text="Date of Birth :">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <DatePicker fx:id="txtDate" layoutX="182.0" layoutY="230.0" prefHeight="25.0" prefWidth="174.0" />
-      <TableView fx:id="tbleStudents" layoutX="44.0" layoutY="321.0" prefHeight="208.0" prefWidth="709.0" stylesheets="@../assets/a/css/tableStyle.css">
+      <JFXTextField fx:id="txtContact" blendMode="DARKEN" layoutX="552.0" layoutY="273.0" prefHeight="25.0" prefWidth="180.0" />
+      <TableView fx:id="tbleStudents" layoutX="44.0" layoutY="400.0" onMouseClicked="#tbleClickOnAction" prefHeight="208.0" prefWidth="709.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
           <TableColumn fx:id="colStId" prefWidth="71.0" text="St Id" />
           <TableColumn fx:id="colNIC" prefWidth="142.0" text="NIC" />
@@ -94,20 +88,33 @@
             </Lighting>
          </effect>
       </TableView>
-      <JFXButton fx:id="btnUpdate" layoutX="172.0" layoutY="570.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #84f584; -fx-background-radius: 12;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btnUpdate" layoutX="224.0" layoutY="337.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #21541c; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="468.0" layoutY="570.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #eb504d; -fx-background-radius: 12;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="btnDelete" layoutX="475.0" layoutY="337.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #851823; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnClear" layoutX="618.0" layoutY="570.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="123.0" style="-fx-background-color: #f54ce1; -fx-background-radius: 12;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btnClear" layoutX="614.0" layoutY="336.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #857218; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
+      <Line endX="10.0" layoutX="393.0" layoutY="61.0" startX="-108.0" stroke="RED" strokeWidth="3.0" />
+      <TextField fx:id="txtSerachNIC" layoutX="568.0" layoutY="148.0" onAction="#txtSearchOnaction" prefHeight="31.0" prefWidth="158.0" style="-fx-background-radius: 10; -fx-background-color: #dedddc;" text="Search NIC">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <effect>
+            <InnerShadow height="15.14" radius="7.07" width="15.14">
+               <color>
+                  <Color red="0.2631579041481018" green="0.2619395852088928" blue="0.2619395852088928" />
+               </color>
+            </InnerShadow>
+         </effect></TextField>
+      <ImageView fitHeight="85.0" fitWidth="115.0" layoutX="640.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

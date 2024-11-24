@@ -1,4 +1,4 @@
 package lk.ijse.culinaryacademy.bo.custom.impl;
 
-public class RegistrationBOImpl {
+public class PaymentBOImpl {
 }

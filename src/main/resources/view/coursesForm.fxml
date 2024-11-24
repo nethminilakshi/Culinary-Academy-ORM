@@ -7,11 +7,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -22,7 +22,7 @@
             <Font name="Calibri" size="29.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="28.0" arcWidth="28.0" blendMode="LIGHTEN" fill="WHITE" height="466.0" layoutX="49.0" layoutY="82.0" stroke="#f8f8f8" strokeType="INSIDE" width="728.0">
+      <Rectangle arcHeight="28.0" arcWidth="28.0" blendMode="LIGHTEN" fill="WHITE" height="466.0" layoutX="49.0" layoutY="90.0" stroke="#f8f8f8" strokeType="INSIDE" width="728.0">
          <effect>
             <DropShadow spread="0.16">
                <color>
@@ -55,19 +55,13 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtFee" blendMode="DARKEN" layoutX="560.0" layoutY="206.0" prefHeight="25.0" prefWidth="180.0" />
-      <JFXButton fx:id="btnRegister" layoutX="309.0" layoutY="570.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="207.0" style="-fx-background-color: #363636; -fx-background-radius: 12;" text="Add Program" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-      <TextField fx:id="txtProgramName" layoutX="604.0" layoutY="105.0" onAction="#txtSearchOnAction" text="Search Program" />
-      <TableView fx:id="tblPrograms" layoutX="103.0" layoutY="325.0" prefHeight="200.0" prefWidth="621.0" stylesheets="@../assets/a/css/tableStyle.css">
+      <TextField fx:id="txtProgramId" layoutX="604.0" layoutY="105.0" onAction="#txtSearchOnAction" text="Search Program" />
+      <TableView fx:id="tblPrograms" layoutX="103.0" layoutY="325.0" onMouseClicked="#tblOnClickAction" prefHeight="200.0" prefWidth="621.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
           <TableColumn fx:id="colProgramId" prefWidth="84.0" text="programId" />
-          <TableColumn fx:id="colProgramName" prefWidth="157.0" text="Program" />
-            <TableColumn fx:id="colDuration" prefWidth="110.0" text="Duration" />
-            <TableColumn fx:id="colFee" prefWidth="139.0" text="Program Fee(LKR)" />
-            <TableColumn fx:id="colRegFee" prefWidth="130.0" text="Reg Fee(LKR)" />
+          <TableColumn fx:id="colProgramName" prefWidth="272.0" text="Program" />
+            <TableColumn fx:id="colDuration" prefWidth="143.0" text="Duration" />
+            <TableColumn fx:id="colFee" prefWidth="121.0" text="Program Fee(LKR)" />
         </columns>
          <effect>
             <Lighting diffuseConstant="1.27" specularConstant="0.0" specularExponent="40.0" surfaceScale="1.85">
@@ -75,10 +69,31 @@
                   <Shadow />
                </bumpInput>
                <light>
-                  <Light.Distant />
+<!--                  <Light.Distant />-->
                </light>
             </Lighting>
          </effect>
       </TableView>
+      <Line endX="192.0" layoutX="300.0" layoutY="72.0" startX="-108.0" stroke="RED" strokeWidth="3.0" />
+      <JFXButton fx:id="btnAdd" layoutX="79.0" layoutY="582.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #ced11f; -fx-border-color: black; -fx-border-radius: 12; -fx-background-radius: 12;" text="Add " textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnUpdate" layoutX="252.0" layoutY="582.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #d1371f; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnDelete" layoutX="452.0" layoutY="582.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #60d11f; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Delete" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnClear" layoutX="604.0" layoutY="582.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="114.0" style="-fx-background-color: #39a3d4; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
