@@ -48,7 +48,9 @@ public class CourseDAOImpl implements CoursesDAO {
     }
 
     @Override
-    public String autoGenarateId() throws SQLException {
+    public String getLastId() throws Exception {
         return null;
     }
+
+
 }

@@ -16,5 +16,6 @@ public interface CrudDAO<T> extends SuperDAO {
 
     public List<String> getIds() throws SQLException;
     public  int getCount() throws SQLException;
-    public String autoGenarateId() throws SQLException, IOException;
+    String getLastId() throws Exception;
+
 }

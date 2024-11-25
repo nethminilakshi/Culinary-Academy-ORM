@@ -78,13 +78,23 @@ public class CoursesBOImpl implements CoursesBO {
     }
 
     @Override
-    public String getCurrentId() {
+    public Courses searchById(String courseId) {
         return null;
     }
 
     @Override
-    public Courses searchById(String courseId) {
-        return null;
+    public String generateNextStudentId() throws Exception {
+        String lastId = coursesDAO.getLastId();
+        return incrementStudentId(lastId);
+    }
+
+    private String incrementStudentId(String lastId) {
+        if (lastId == null) {
+            return "C-0001";
+        }
+        int id = Integer.parseInt(lastId.split("-")[1]);
+        id++;
+        return String.format("C-%04d", id);
     }
 
 

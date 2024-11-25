@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @Data
 public class StudentTm {
-    private String studunetId;
+    private String studentId;
     private String name;
     private String nic;
     private String email;

@@ -84,13 +84,14 @@ public class studentRegistrationFormController {
 
 
     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
+    StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
 
     private ArrayList<StudentDTO> studentList = new ArrayList<>();
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         autoGenarateId();
 
-        this.studentList = getAllStudents();
+//        this.studentList = getAllStudents();
         setCellValueFactory();
         loadStudentTable();
     }
@@ -105,59 +106,61 @@ public class studentRegistrationFormController {
 
     }
 
-    private ArrayList<StudentDTO> getAllStudents() {
-        ArrayList<StudentDTO> studentList = new ArrayList<>();  // Initialize as empty list
+
+    private void loadStudentTable() {
+        tbleStudents.getItems().clear();
         try {
-            ArrayList<StudentDTO> fetchedList = studentBO.getAllStudents();
-            if (fetchedList != null) {
-                studentList = fetchedList;  // Only assign if not null
+            ArrayList<StudentDTO> allStudent = studentBO.getAllStudents();
+            for (StudentDTO studentDTO : allStudent) {
+                tbleStudents.getItems().add(new StudentTm(
+                        studentDTO.getStudentId(),
+                        studentDTO.getName(),
+                        studentDTO.getNic(),
+                        studentDTO.getEmail(),
+                        studentDTO.getAddress(),
+                        studentDTO.getContact()
+                ));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void autoGenarateId() throws SQLException, IOException {
+
+        try {
+            txtId.setText(studentBO.generateNextStudentId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void btnAddOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
+        StudentDTO student = new StudentDTO(
+                txtId.getText(),
+               txtName.getText(),
+                txtNIC.getText(),
+                txtEmail.getText(),
+                txtAddress.getText(),
+                Integer.parseInt(txtContact.getText())
+        );
+
+        try {
+            if (studentBO.saveStudent(student)) {
+                new Alert(Alert.AlertType.INFORMATION, "Student saved successfully").show();
+              clearFields();
+                autoGenarateId();
+                loadStudentTable();
+
+            }else{
+                new Alert(Alert.AlertType.ERROR, "Failed to save student").show();
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return studentList;
-    }
 
-
-    private void loadStudentTable() {
-        ObservableList<StudentTm> tmList = FXCollections.observableArrayList();
-
-        for (StudentDTO studentDTO : studentList) {
-            StudentTm studentTm = new StudentTm(
-                    studentDTO.getStudentId(),
-                    studentDTO.getName(),
-                    studentDTO.getNic(),
-                    studentDTO.getEmail(),
-                    studentDTO.getAddress(),
-                    studentDTO.getContact()
-            );
-            tmList.add(studentTm);
-        }
-        tbleStudents.setItems(tmList);
-        System.out.println(tmList.toString());
-    }
-
-    private void autoGenarateId() throws SQLException, IOException {
-        txtId.setText(new StudentDAOImpl().autoGenarateId());
-    }
-
-    public void btnAddOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        String studentId = txtId.getText();
-        String name = txtName.getText();
-        String nic = txtNIC.getText();
-        String email = txtEmail.getText();
-        String address = txtAddress.getText();
-        int contact = Integer.parseInt(txtContact.getText());
-
-        boolean isSaved =studentBO.saveStudent(new StudentDTO(studentId,name,nic,email,address,contact));
-
-        if (isSaved) {
-            new Alert(Alert.AlertType.CONFIRMATION, "student saved!").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Try Again!").show();
-        }
-        clearFields();
-        initialize();
 
     }
 
@@ -225,7 +228,7 @@ public class studentRegistrationFormController {
 
     public void tbleClickOnAction(MouseEvent mouseEvent) {
         StudentTm selectedItem = tbleStudents.getSelectionModel().getSelectedItem();
-        txtId.setText(selectedItem.getStudunetId());
+        txtId.setText(selectedItem.getStudentId());
         txtName.setText(selectedItem.getName());
         txtNIC.setText(selectedItem.getNic());
         txtEmail.setText(selectedItem.getEmail());

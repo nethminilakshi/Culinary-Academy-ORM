@@ -102,10 +102,12 @@ public class coursesFormController {
 
     }
 
-    private String generateNewId() throws IOException {
-        String nextId = coursesBO.getCurrentId();
-        txtId.setText(nextId);
-        return nextId;
+    private void generateNewId() throws IOException {
+        try {
+            txtId.setText(coursesBO.generateNextStudentId());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void loadCoursesTable() {

@@ -20,4 +20,7 @@ public interface StudentBO extends SuperBO {
     StudentDTO searchStudent(String nic) throws SQLException;
 
     StudentDTO searchStudentByNIC(String nic);
+
+
+    String generateNextStudentId() throws Exception;
 }

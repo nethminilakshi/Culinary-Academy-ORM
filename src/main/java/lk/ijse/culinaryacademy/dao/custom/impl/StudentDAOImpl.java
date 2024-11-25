@@ -5,6 +5,7 @@ import lk.ijse.culinaryacademy.entity.Students;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -14,12 +15,15 @@ public class StudentDAOImpl implements StudentsDAO {
 
     @Override
     public boolean save(Students dto) throws SQLException, IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        session.save(dto);
-        transaction.commit();
-        session.close();
-        return true;
+        try(Session session = FactoryConfiguration.getInstance().getSession()){
+            Transaction transaction = session.beginTransaction();
+            session.save(dto);
+            transaction.commit();
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -65,14 +69,14 @@ public class StudentDAOImpl implements StudentsDAO {
 
     @Override
     public ArrayList<Students> getAll() throws IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        NativeQuery query = session.createNativeQuery("SELECT * FROM Students");
-        query.addEntity(Students.class);
-        List<Students> resultList = query.getResultList();
-        transaction.commit();
-        session.close();
-        return (ArrayList<Students>) resultList;
+
+        ArrayList<Students> students = new ArrayList<>();
+        try(Session session = FactoryConfiguration.getInstance().getSession()){
+            students = (ArrayList<Students>) session.createQuery("FROM Students").list();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return students;
     }
 
     @Override
@@ -85,25 +89,18 @@ public class StudentDAOImpl implements StudentsDAO {
         return 0;
     }
 
+
     @Override
-    public String autoGenarateId() throws SQLException, IOException {
-        Session session = FactoryConfiguration.getInstance().getSession();
-        Transaction transaction = session.beginTransaction();
-        String nextId = "";
-        Object student = session.createQuery("SELECT s.studentId FROM Students s ORDER BY s.studentId DESC LIMIT 1").uniqueResult();
-        if (student != null) {
-            String courseId = student.toString();
-            String prefix = "S";
-            String[] split = courseId.split(prefix);
-            int idNum = Integer.parseInt(split[1]);
-            nextId = prefix + String.format("%03d", ++idNum);
-
-        } else {
-            return "S001";
+    public String getLastId() throws Exception {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            String hql = "SELECT s.studentId FROM Students s ORDER BY s.studentId DESC";
+            Query<String> query = session.createQuery(hql, String.class);
+            query.setMaxResults(1);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-
-        transaction.commit();
-        session.close();
-        return nextId;
     }
 }
+

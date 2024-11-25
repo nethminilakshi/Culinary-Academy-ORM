@@ -86,4 +86,22 @@ public class StudentBOImpl implements StudentBO {
     public StudentDTO searchStudentByNIC(String nic) {
         return null;
     }
+
+    @Override
+    public String generateNextStudentId() throws Exception {
+        String lastId = studentsDAO.getLastId();
+        return incrementStudentId(lastId);
+    }
+
+
+    private String incrementStudentId(String lastId) {
+        if (lastId == null) {
+            return "STU-0001";
+        }
+        int id = Integer.parseInt(lastId.split("-")[1]);
+        id++;
+        return String.format("STU-%04d", id);
+    }
+
+
 }

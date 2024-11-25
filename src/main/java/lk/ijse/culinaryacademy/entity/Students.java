@@ -13,23 +13,24 @@ import lombok.AllArgsConstructor;
 @Table(name = "students")  // Table name in lowercase for consistency
 public class Students {
     @Id
-    @Column(name = "student_id", nullable = false)
+    @Column(name = "studentId")
+
     private String studentId;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "nic", unique = true, length = 12)
+    @Column(name = "nic", unique = true, length = 20)
     private String nic;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "email", unique = true, length = 100)
     private String email;
 
-    @Column(name = "address")
+    @Column(name = "address", length = 255)
     private String address;
 
-    @Column(name = "contact", length = 15)
-    private int contact;  // Changed to String
+    @Column(name = "contact", length = 20)
+    private int contact;
 
 
 

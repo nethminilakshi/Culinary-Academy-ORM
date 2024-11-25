@@ -19,7 +19,9 @@ public interface CoursesBO extends SuperBO {
 
     CoursesDTO searchCourse(String id) throws SQLException;
 
-    String getCurrentId();
+
 
     Courses searchById(String courseId);
+
+    String generateNextStudentId() throws Exception;
 }
