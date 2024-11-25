@@ -2,6 +2,7 @@ package lk.ijse.culinaryacademy.bo.custom;
 
 import lk.ijse.culinaryacademy.bo.SuperBO;
 import lk.ijse.culinaryacademy.dto.CoursesDTO;
+import lk.ijse.culinaryacademy.entity.Courses;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -19,4 +20,6 @@ public interface CoursesBO extends SuperBO {
     CoursesDTO searchCourse(String id) throws SQLException;
 
     String getCurrentId();
+
+    Courses searchById(String courseId);
 }

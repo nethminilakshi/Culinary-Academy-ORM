@@ -22,7 +22,7 @@ public class StudentBOImpl implements StudentBO {
         ArrayList<Students> students = studentsDAO.getAll();
         ArrayList<StudentDTO> studentDTOS = new ArrayList<>();
 
-        if (studentDTOS != null) {
+        if (students != null && !students.isEmpty()) {  // Check if the list is not null and not empty
             for (Students c : students) {
                 StudentDTO studentDTO = new StudentDTO(
                         c.getStudentId(),
@@ -31,17 +31,17 @@ public class StudentBOImpl implements StudentBO {
                         c.getEmail(),
                         c.getAddress(),
                         c.getContact());
-                studentDTOS.add(studentDTO);
+                studentDTOS.add(studentDTO);  // Add to DTO list
             }
         } else {
-            System.out.println("No courses found or error in retrieving courses.");
+            System.out.println("No students found or error in retrieving students.");
         }
         return studentDTOS;
-
     }
 
+
     @Override
-    public boolean saveStudent(StudentDTO dto) throws SQLException {
+    public boolean saveStudent(StudentDTO dto) throws SQLException, IOException {
         return studentsDAO.save(new Students(
                 dto.getStudentId(),
                 dto.getName(),
@@ -53,12 +53,12 @@ public class StudentBOImpl implements StudentBO {
     }
 
     @Override
-    public boolean deleteStudent(String nic) throws SQLException {
+    public boolean deleteStudent(String nic) throws SQLException, IOException {
         return studentsDAO.delete(nic);
     }
 
     @Override
-    public boolean updateStudent(StudentDTO dto) throws SQLException {
+    public boolean updateStudent(StudentDTO dto) throws SQLException, IOException {
         return studentsDAO.update(new Students(
                 dto.getStudentId(),
                 dto.getName(),
@@ -80,5 +80,10 @@ public class StudentBOImpl implements StudentBO {
                 students.getContact());
 
         return studentDTO;
+    }
+
+    @Override
+    public StudentDTO searchStudentByNIC(String nic) {
+        return null;
     }
 }

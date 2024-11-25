@@ -20,7 +20,7 @@
 
 <AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
    <children>
-      <VBox layoutX="30.0" layoutY="109.0" prefHeight="519.0" prefWidth="728.0" style="-fx-background-color: #bfbab6; -fx-background-radius: 15;">
+      <VBox layoutX="30.0" layoutY="109.0" prefHeight="519.0" prefWidth="728.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
          <effect>
             <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
          </effect>
@@ -71,7 +71,7 @@
          </font>
       </Label>
       <JFXTextField fx:id="txtContact" blendMode="DARKEN" layoutX="552.0" layoutY="273.0" prefHeight="25.0" prefWidth="180.0" />
-      <TableView fx:id="tbleStudents" layoutX="44.0" layoutY="400.0" onMouseClicked="#tbleClickOnAction" prefHeight="208.0" prefWidth="709.0" stylesheets="@../assets/a/css/tableStyle.css">
+      <TableView fx:id="tbleStudents" layoutX="42.0" layoutY="400.0" onMouseClicked="#tbleClickOnAction" prefHeight="208.0" prefWidth="709.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
           <TableColumn fx:id="colStId" prefWidth="71.0" text="St Id" />
           <TableColumn fx:id="colNIC" prefWidth="142.0" text="NIC" />

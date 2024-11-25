@@ -54,7 +54,7 @@
             <ColorAdjust brightness="0.05" contrast="-0.38" hue="-0.05" saturation="1.0" />
          </effect>
       </Text>
-      <ComboBox fx:id="combCourses" layoutX="58.0" layoutY="154.0" prefHeight="31.0" prefWidth="158.0" promptText="Select Course" style="-fx-background-radius: 8; -fx-background-color: #f2f1f0;">
+      <ComboBox fx:id="combCourses" layoutX="58.0" layoutY="154.0" onAction="#combCoursesOnAction" prefHeight="31.0" prefWidth="158.0" promptText="Select Course" style="-fx-background-radius: 8; -fx-background-color: #f2f1f0;">
          <effect>
             <Lighting diffuseConstant="1.32" specularConstant="0.71" specularExponent="40.0" surfaceScale="1.61">
                <bumpInput>

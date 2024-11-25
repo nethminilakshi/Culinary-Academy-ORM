@@ -1,6 +1,7 @@
 package lk.ijse.culinaryacademy.bo;
 
 import lk.ijse.culinaryacademy.bo.custom.impl.CoursesBOImpl;
+import lk.ijse.culinaryacademy.bo.custom.impl.PaymentBOImpl;
 import lk.ijse.culinaryacademy.bo.custom.impl.StudentBOImpl;
 
 public class BOFactory {
@@ -14,7 +15,7 @@ public class BOFactory {
     }
 
     public enum BOType {
-        COURSE,STUDENT,REGISTRATION,STUDENTREGDETAILS
+        COURSE,STUDENT,PAYMENT,STUDENTREGDETAILS
 
     }
     public SuperBO  getBoType(BOType boType) {
@@ -23,8 +24,8 @@ public class BOFactory {
                 return  new CoursesBOImpl();
             case STUDENT:
                 return  new StudentBOImpl();
-//            case REGISTRATION:
-//                return  new RegistrationBOImpl();
+//            case PAYMENT:
+//               return  new PaymentBOImpl();
 //            case STUDENTREGDETAILS:
 //                return  new StudentRegDetailsBOImpl();
             default:

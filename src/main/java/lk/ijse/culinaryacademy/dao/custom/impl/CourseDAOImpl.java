@@ -1,8 +1,8 @@
 package lk.ijse.culinaryacademy.dao.custom.impl;
 
-import lk.ijse.culinaryacademy.Config.FactoryConfiguration;
 import lk.ijse.culinaryacademy.dao.custom.CoursesDAO;
 import lk.ijse.culinaryacademy.entity.Courses;
+import lk.ijse.culinaryacademy.entity.Students;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -11,6 +11,6 @@ public class StudentDTO {
     private String nic;
     private String address;
     private String email;
-    private int contact;
+    private int  contact;
 
 }

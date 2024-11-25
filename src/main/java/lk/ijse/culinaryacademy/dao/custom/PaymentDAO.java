@@ -1,4 +1,7 @@
 package lk.ijse.culinaryacademy.dao.custom;
 
-public interface PaymentDAO {
+import lk.ijse.culinaryacademy.dao.CrudDAO;
+import lk.ijse.culinaryacademy.entity.Payment;
+
+public interface PaymentDAO extends CrudDAO<Payment> {
 }

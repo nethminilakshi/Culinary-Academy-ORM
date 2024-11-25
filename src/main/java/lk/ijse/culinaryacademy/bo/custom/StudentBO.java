@@ -11,12 +11,13 @@ import java.util.ArrayList;
 public interface StudentBO extends SuperBO {
     ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException;
 
-    boolean saveStudent(StudentDTO dto) throws SQLException;
+    boolean saveStudent(StudentDTO dto) throws SQLException, IOException;
 
-    boolean deleteStudent(String nic) throws SQLException;
+    boolean deleteStudent(String nic) throws SQLException, IOException;
 
-    boolean updateStudent(StudentDTO dto) throws SQLException;
+    boolean updateStudent(StudentDTO dto) throws SQLException, IOException;
 
     StudentDTO searchStudent(String nic) throws SQLException;
 
+    StudentDTO searchStudentByNIC(String nic);
 }

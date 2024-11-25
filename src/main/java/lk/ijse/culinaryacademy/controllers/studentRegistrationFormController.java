@@ -85,7 +85,7 @@ public class studentRegistrationFormController {
 
     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
 
-    private List<StudentDTO> studentList = new ArrayList<>();
+    private ArrayList<StudentDTO> studentList = new ArrayList<>();
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         autoGenarateId();
@@ -106,15 +106,18 @@ public class studentRegistrationFormController {
     }
 
     private ArrayList<StudentDTO> getAllStudents() {
-        ArrayList<StudentDTO> studentList = null;
+        ArrayList<StudentDTO> studentList = new ArrayList<>();  // Initialize as empty list
         try {
-            studentList = studentBO.getAllStudents();
+            ArrayList<StudentDTO> fetchedList = studentBO.getAllStudents();
+            if (fetchedList != null) {
+                studentList = fetchedList;  // Only assign if not null
+            }
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return studentList;
-
     }
+
 
     private void loadStudentTable() {
         ObservableList<StudentTm> tmList = FXCollections.observableArrayList();
@@ -134,7 +137,7 @@ public class studentRegistrationFormController {
         System.out.println(tmList.toString());
     }
 
-    private void autoGenarateId() throws SQLException {
+    private void autoGenarateId() throws SQLException, IOException {
         txtId.setText(new StudentDAOImpl().autoGenarateId());
     }
 

@@ -82,5 +82,10 @@ public class CoursesBOImpl implements CoursesBO {
         return null;
     }
 
+    @Override
+    public Courses searchById(String courseId) {
+        return null;
+    }
+
 
 }
