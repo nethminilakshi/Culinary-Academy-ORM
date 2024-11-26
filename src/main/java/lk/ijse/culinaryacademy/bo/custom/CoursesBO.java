@@ -7,9 +7,10 @@ import lk.ijse.culinaryacademy.entity.Courses;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface CoursesBO extends SuperBO {
-    ArrayList<CoursesDTO> getAllCourses() throws SQLException, ClassNotFoundException, IOException;
+//    ArrayList<CoursesDTO> getAllCourses() throws SQLException, ClassNotFoundException, IOException;
 
     boolean saveCourse(CoursesDTO dto) throws IOException, SQLException;
 
@@ -24,4 +25,6 @@ public interface CoursesBO extends SuperBO {
     Courses searchById(String courseId);
 
     String generateNextStudentId() throws Exception;
+
+    List<Courses> getCourseList() throws SQLException, IOException, ClassNotFoundException;
 }

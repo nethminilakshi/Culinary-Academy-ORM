@@ -16,18 +16,24 @@ public class FactoryConfiguration {
 
     private static FactoryConfiguration factoryConfiguration;
     private final SessionFactory sessionFactory;
-    private FactoryConfiguration() throws IOException {
-        Configuration configuration = new Configuration();
-        Properties properties = new Properties();
-        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
-        configuration.setProperties(properties);
-        configuration.addAnnotatedClass(Students.class);
-        configuration.addAnnotatedClass(Courses.class);
-//        configuration.addAnnotatedClass(User.class);
-        configuration.addAnnotatedClass(Payment.class);
-        configuration.addAnnotatedClass(StudentCoursesDetails.class);
-        sessionFactory = configuration.buildSessionFactory();
+    private FactoryConfiguration() {
+        try {
+            Configuration configuration = new Configuration();
+            Properties properties = new Properties();
+            properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
+            configuration.setProperties(properties);
+            configuration.addAnnotatedClass(Students.class);
+            configuration.addAnnotatedClass(Courses.class);
+            configuration.addAnnotatedClass(Payment.class);
+            configuration.addAnnotatedClass(StudentCoursesDetails.class);
+
+            sessionFactory = configuration.buildSessionFactory();
+        } catch (Exception e) {
+            e.printStackTrace();  // Log or print the exception details
+            throw new RuntimeException("Failed to create session factory: " + e.getMessage());
+        }
     }
+
 
     public static FactoryConfiguration getInstance() throws IOException {
         return (factoryConfiguration==null) ? factoryConfiguration=new FactoryConfiguration():factoryConfiguration;

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -116,5 +117,6 @@
             </InnerShadow>
          </effect></TextField>
       <ImageView fitHeight="85.0" fitWidth="115.0" layoutX="640.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ComboBox fx:id="comboUser" layoutX="54.0" layoutY="137.0" onAction="#comboUserOnAction" prefHeight="35.0" prefWidth="181.0" promptText="user" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
    </children>
 </AnchorPane>

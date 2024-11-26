@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import lk.ijse.culinaryacademy.bo.BOFactory;
 import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
 import lk.ijse.culinaryacademy.bo.custom.StudentBO;
+import lk.ijse.culinaryacademy.bo.custom.UserBO;
 import lk.ijse.culinaryacademy.bo.custom.impl.StudentBOImpl;
 import lk.ijse.culinaryacademy.dao.DAOFactory;
 import lk.ijse.culinaryacademy.dao.custom.StudentsDAO;
@@ -82,9 +83,11 @@ public class studentRegistrationFormController {
     @FXML
     private TextField txtSerachNIC;
 
-
+    @FXML
+    private ComboBox<?> comboUser;
     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
     StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
+    UserBO userBo = (UserBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.USER);
 
     private ArrayList<StudentDTO> studentList = new ArrayList<>();
 
@@ -226,6 +229,11 @@ public class studentRegistrationFormController {
     }
 
 
+    @FXML
+    void comboUserOnAction(ActionEvent event) {
+        String userId = String.valueOf(comboUser.getValue());
+       userBo .getUser(userId);
+    }
     public void tbleClickOnAction(MouseEvent mouseEvent) {
         StudentTm selectedItem = tbleStudents.getSelectionModel().getSelectedItem();
         txtId.setText(selectedItem.getStudentId());
@@ -235,4 +243,5 @@ public class studentRegistrationFormController {
         txtAddress.setText(selectedItem.getAddress());
         txtContact.setText(String.valueOf(selectedItem.getContact()));
     }
+
 }

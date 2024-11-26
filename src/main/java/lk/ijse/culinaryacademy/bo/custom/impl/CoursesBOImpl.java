@@ -14,27 +14,27 @@ import java.util.List;
 public class CoursesBOImpl implements CoursesBO {
     CoursesDAO coursesDAO = (CoursesDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.COURSE);
 
-    @Override
-    public ArrayList<CoursesDTO> getAllCourses() throws SQLException, ClassNotFoundException, IOException {
-
-        ArrayList<Courses> courses = coursesDAO.getAll();
-        ArrayList<CoursesDTO> coursesDTOS = new ArrayList<>();
-
-        if (courses != null) {
-            for (Courses c : courses) {
-                CoursesDTO coursesDTO = new CoursesDTO(
-                        c.getCourseId(),
-                        c.getCourseName(),
-                        c.getDuration(),
-                        c.getCourseFee());
-                coursesDTOS.add(coursesDTO);
-            }
-        } else {
-            System.out.println("No courses found or error in retrieving courses.");
-        }
-        return coursesDTOS;
-
-    }
+//    @Override
+//    public ArrayList<CoursesDTO> getAllCourses() throws SQLException, ClassNotFoundException, IOException {
+//
+//        ArrayList<Courses> courses = coursesDAO.getAll();
+//        ArrayList<CoursesDTO> coursesDTOS = new ArrayList<>();
+//
+//        if (courses != null) {
+//            for (Courses c : courses) {
+//                CoursesDTO coursesDTO = new CoursesDTO(
+//                        c.getCourseId(),
+//                        c.getCourseName(),
+//                        c.getDuration(),
+//                        c.getCourseFee());
+//                coursesDTOS.add(coursesDTO);
+//            }
+//        } else {
+//            System.out.println("No courses found or error in retrieving courses.");
+//        }
+//        return coursesDTOS;
+//
+//    }
 
     @Override
     public boolean saveCourse(CoursesDTO dto) throws IOException, SQLException {
@@ -86,6 +86,22 @@ public class CoursesBOImpl implements CoursesBO {
     public String generateNextStudentId() throws Exception {
         String lastId = coursesDAO.getLastId();
         return incrementStudentId(lastId);
+    }
+
+    @Override
+    public List<Courses> getCourseList() throws SQLException, IOException, ClassNotFoundException {
+        List<Courses> courseList = new ArrayList<>();
+        List<Courses> courses = coursesDAO.getAll();
+        for (Courses course : courses) {
+            courseList.add(new Courses(
+                    course.getCourseId(),
+                    course.getCourseName(),
+                    course.getDuration(),
+                    course.getCourseFee()
+
+            ));
+        }
+        return courseList;
     }
 
     private String incrementStudentId(String lastId) {

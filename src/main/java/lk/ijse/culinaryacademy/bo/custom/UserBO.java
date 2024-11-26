@@ -1,4 +1,7 @@
 package lk.ijse.culinaryacademy.bo.custom;
 
-public interface UserBO {
+import lk.ijse.culinaryacademy.bo.SuperBO;
+
+public interface UserBO extends SuperBO {
+    void getUser(String userId);
 }

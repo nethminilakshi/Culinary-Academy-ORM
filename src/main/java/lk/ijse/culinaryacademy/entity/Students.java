@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.List;
+
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,8 +35,10 @@ public class Students {
     private int contact;
 
 
-
-
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentCoursesDetails> studentCourses;
+    @ManyToOne
+    private User user;
 
 //@OneToMany(fetch = FetchType.EAGER, mappedBy = "students", cascade = CascadeType.ALL, orphanRemoval = true)
 //    private List<StudentRegDetails> studentCourses;}

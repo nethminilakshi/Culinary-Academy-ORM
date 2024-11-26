@@ -5,6 +5,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -26,5 +27,6 @@ public class StudentCoursesDetails {
     @JoinColumn(name = "courseId")
     private Courses course;
 
-
+    @OneToMany(mappedBy = "StudentRegDetails", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 }

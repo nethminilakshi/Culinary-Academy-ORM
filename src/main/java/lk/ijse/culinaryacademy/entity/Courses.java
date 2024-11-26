@@ -12,16 +12,16 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "Courses")
-    public class Courses{
-@Id
-private String courseId;
-private String courseName;
-private String duration;
-private double courseFee;
+
+public class Courses {
+    @Id
+    private String courseId;
+    private String courseName;
+    private String duration;
+    private double courseFee;
 
 //@OneToMany(mappedBy = "students", cascade = CascadeType.ALL)
 //private List<StudentRegDetails> studentRegDetails;
-
 
 
 }
