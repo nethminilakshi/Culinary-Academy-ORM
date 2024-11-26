@@ -1,10 +1,7 @@
 package lk.ijse.culinaryacademy.Config;
 
 
-import lk.ijse.culinaryacademy.entity.Courses;
-import lk.ijse.culinaryacademy.entity.Payment;
-import lk.ijse.culinaryacademy.entity.StudentCoursesDetails;
-import lk.ijse.culinaryacademy.entity.Students;
+import lk.ijse.culinaryacademy.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -25,6 +22,7 @@ public class FactoryConfiguration {
             configuration.addAnnotatedClass(Students.class);
             configuration.addAnnotatedClass(Courses.class);
             configuration.addAnnotatedClass(Payment.class);
+            configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(StudentCoursesDetails.class);
 
             sessionFactory = configuration.buildSessionFactory();

@@ -14,10 +14,9 @@ import lombok.NoArgsConstructor;
     @Table(name = "user")
     public class User {
         @Id
-        private String user_id;
+        private String userId;
         private String username;
-        private String password;
-        private String user_email;
-        private String user_phone;
-        private String user_role;
+        private String confirmPassword;
+        private String userRole;
+        private String contact;
 }

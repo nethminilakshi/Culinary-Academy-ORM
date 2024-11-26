@@ -30,7 +30,8 @@ public class StudentBOImpl implements StudentBO {
                         c.getNic(),
                         c.getEmail(),
                         c.getAddress(),
-                        c.getContact());
+                        c.getContact(),
+                        null);
                 studentDTOS.add(studentDTO);  // Add to DTO list
             }
         } else {
@@ -48,7 +49,9 @@ public class StudentBOImpl implements StudentBO {
                 dto.getNic(),
                 dto.getEmail(),
                 dto.getAddress(),
-                dto.getContact()));
+                dto.getContact(),
+                null,
+                dto.getUser()));
 
     }
 
@@ -65,7 +68,9 @@ public class StudentBOImpl implements StudentBO {
                 dto.getNic(),
                 dto.getEmail(),
                 dto.getAddress(),
-                dto.getContact()));
+                dto.getContact(),
+               null,
+               dto.getUser()));
     }
 
     @Override
@@ -77,7 +82,9 @@ public class StudentBOImpl implements StudentBO {
                 students.getNic(),
                 students.getEmail(),
                 students.getAddress(),
-                students.getContact());
+                students.getContact(),
+                null
+                );
 
         return studentDTO;
     }

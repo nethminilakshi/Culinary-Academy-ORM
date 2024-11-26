@@ -1,5 +1,6 @@
 package lk.ijse.culinaryacademy.dto;
 
+import lk.ijse.culinaryacademy.entity.User;
 import lombok.*;
 
 @AllArgsConstructor
@@ -12,5 +13,6 @@ public class StudentDTO {
     private String address;
     private String email;
     private int  contact;
+    private User user;
 
 }

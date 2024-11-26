@@ -119,17 +119,17 @@ public class paymentFormController {
 public void initialize() {
     setCellValueFactory();
     setDate();
-    autoGenarateId();
+//    autoGenarateId();
 }
 
-    private void autoGenarateId() {
-        try {
-            txtPayId.setText(paymentBO.generateNextPaymentId());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-    }
+//    private void autoGenarateId() {
+//        try {
+//            txtPayId.setText(paymentBO.generateNextPaymentId());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//    }
 
     private void setDate() {
         LocalDate now = LocalDate.now();
@@ -209,26 +209,26 @@ public void initialize() {
     @FXML
     void btnRegisterOnAction(ActionEvent event) {
 
-        paymentTm selectedPayment = tblPayment.getSelectionModel().getSelectedItem();
-
-        if (selectedPayment == null) {
-            new Alert(Alert.AlertType.WARNING, "Please select a payment to save").show();
-            return;
-        }
+//        paymentTm selectedPayment = tblPayment.getSelectionModel().getSelectedItem();
+//
+//        if (selectedPayment == null) {
+//            new Alert(Alert.AlertType.WARNING, "Please select a payment to save").show();
+//            return;
+//        }
 
 //       StudentCoursesDetails studentCourse = StudentsCoursesDetailsDAO.getStudentCourseById(Long.valueOf(t.getText()));
 
-        PaymentDTO paymentDto = new PaymentDTO();
-        paymentDto.setPaymentID(txtPayId.getText());
-//        paymentDto.setStatus(txtStatus.getText());
-        paymentDto.setBalancePayment(selectedPayment.getBalancePayment()); // Use value from the selected item
-        paymentDto.setAdvancePayment(Double.parseDouble(txtAdvancedAPay.getText()));
-        paymentDto.setPaymentDate(txtDate.getText());
-//        paymentDto.setStudentCoursesDetails(s);
-
-        paymentBO.savePayment(paymentDto);
-
-        new Alert(Alert.AlertType.INFORMATION, "Payment saved successfully").show();
+//        PaymentDTO paymentDto = new PaymentDTO();
+//        paymentDto.setPaymentID(txtPayId.getText());
+////        paymentDto.setStatus(txtStatus.getText());
+//        paymentDto.setBalancePayment(selectedPayment.getBalancePayment()); // Use value from the selected item
+//        paymentDto.setAdvancePayment(Double.parseDouble(txtAdvancedAPay.getText()));
+//        paymentDto.setPaymentDate(txtDate.getText());
+////        paymentDto.setStudentCoursesDetails(s);
+//
+//        paymentBO.savePayment(paymentDto);
+//
+//        new Alert(Alert.AlertType.INFORMATION, "Payment saved successfully").show();
     }
 
     @FXML

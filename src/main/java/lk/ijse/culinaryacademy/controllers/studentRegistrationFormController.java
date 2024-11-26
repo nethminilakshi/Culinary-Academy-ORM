@@ -12,19 +12,18 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.culinaryacademy.bo.BOFactory;
-import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
 import lk.ijse.culinaryacademy.bo.custom.StudentBO;
 import lk.ijse.culinaryacademy.bo.custom.UserBO;
-import lk.ijse.culinaryacademy.bo.custom.impl.StudentBOImpl;
 import lk.ijse.culinaryacademy.dao.DAOFactory;
 import lk.ijse.culinaryacademy.dao.custom.StudentsDAO;
-import lk.ijse.culinaryacademy.dao.custom.impl.StudentDAOImpl;
-import lk.ijse.culinaryacademy.dto.CoursesDTO;
+import lk.ijse.culinaryacademy.dao.custom.UserDAO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
 import lk.ijse.culinaryacademy.entity.Students;
+import lk.ijse.culinaryacademy.entity.User;
 import lk.ijse.culinaryacademy.tm.StudentTm;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -84,19 +83,28 @@ public class studentRegistrationFormController {
     private TextField txtSerachNIC;
 
     @FXML
-    private ComboBox<?> comboUser;
+    private ComboBox<String> comboUser;
     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
-    StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
+    StudentsDAO studentDao = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
+    UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.USER);
     UserBO userBo = (UserBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.USER);
 
     private ArrayList<StudentDTO> studentList = new ArrayList<>();
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         autoGenarateId();
-
-//        this.studentList = getAllStudents();
         setCellValueFactory();
         loadStudentTable();
+        setUserId();
+    }
+
+    private void setUserId() {
+        List<String> userIds = userDAO.getUser();
+        ObservableList<String> users = FXCollections.observableArrayList();
+        for (String userId : userIds) {
+            users.add(userId);
+        }
+        comboUser.setItems(users);
     }
 
     private void setCellValueFactory() {
@@ -141,21 +149,22 @@ public class studentRegistrationFormController {
     }
 
     public void btnAddOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        StudentDTO student = new StudentDTO(
-                txtId.getText(),
-               txtName.getText(),
-                txtNIC.getText(),
-                txtEmail.getText(),
-                txtAddress.getText(),
-                Integer.parseInt(txtContact.getText())
-        );
+
+            User user = userDAO.getUserById(comboUser.getValue());
+
+            StudentDTO studentDto = new StudentDTO();
+            studentDto.setStudentId(txtId.getText());
+            studentDto.setName(txtName.getText());
+            studentDto.setNic(txtNIC.getText());
+        studentDto.setEmail(txtContact.getText());
+            studentDto.setAddress(txtAddress.getText());
+           studentDto.setContact(Integer.parseInt(txtContact.getText()));
+
+            studentDto.setUser(user);
 
         try {
-            if (studentBO.saveStudent(student)) {
+            if (studentBO.saveStudent(studentDto)) {
                 new Alert(Alert.AlertType.INFORMATION, "Student saved successfully").show();
-              clearFields();
-                autoGenarateId();
-                loadStudentTable();
 
             }else{
                 new Alert(Alert.AlertType.ERROR, "Failed to save student").show();
@@ -163,9 +172,14 @@ public class studentRegistrationFormController {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+clearFields();
+        initialize();
+
+        }
 
 
-    }
+
+
 
 
     public void btnClearOnAction(ActionEvent actionEvent) {
@@ -192,8 +206,10 @@ public class studentRegistrationFormController {
         String email = txtEmail.getText();
         String address = txtAddress.getText();
         int contact = Integer.parseInt(txtContact.getText());
+        User user = userDAO.getUserById(comboUser.getValue());
 
-        boolean isUpdated =studentBO.updateStudent(new StudentDTO(studentId, name, nic, email, address, contact));
+
+        boolean isUpdated =studentBO.updateStudent(new StudentDTO(studentId, name, nic, email, address, contact,user));
 
         if (isUpdated) {
             new Alert(Alert.AlertType.CONFIRMATION, "student updated!").show();
