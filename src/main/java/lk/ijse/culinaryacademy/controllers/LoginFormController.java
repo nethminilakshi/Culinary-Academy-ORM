@@ -1,13 +1,12 @@
 package lk.ijse.culinaryacademy.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 
-public class adminLoginFormController {
+public class LoginFormController {
 
     @FXML
     private AnchorPane pane;
