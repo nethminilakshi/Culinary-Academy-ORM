@@ -10,9 +10,9 @@ public class StudentDTO {
     private String studentId;
     private String name;
     private String nic;
-    private String address;
     private String email;
-    private int  contact;
+    private String address;
+    private String contact;
     private User user;
 
 }

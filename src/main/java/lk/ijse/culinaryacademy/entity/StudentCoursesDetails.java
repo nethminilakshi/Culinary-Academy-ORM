@@ -19,14 +19,5 @@ public class StudentCoursesDetails {
     private int studentCourseId;
     private Date registrationDate;
 
-  @ManyToOne
-    @JoinColumn(name = "studentId")
-    private Students student;
 
-    @ManyToOne
-    @JoinColumn(name = "courseId")
-    private Courses course;
-
-    @OneToMany(mappedBy = "StudentRegDetails", cascade = CascadeType.ALL)
-    private List<Payment> payments;
 }

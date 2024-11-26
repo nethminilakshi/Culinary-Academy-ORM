@@ -8,7 +8,7 @@ import lombok.*;
 public class UserDTO {
     private String userId;
     private String username;
-    private String confirmPassword;
+    private String password;
     private String userRole;
     private String contact;
 }

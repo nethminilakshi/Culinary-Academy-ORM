@@ -34,15 +34,7 @@ public class StudentCoursesDetailsDAOImpl implements StudentsCoursesDetailsDAO {
         return null;
     }
 
-    @Override
-    public List<String> getIds() throws SQLException {
-        return null;
-    }
 
-    @Override
-    public int getCount() throws SQLException {
-        return 0;
-    }
 
     @Override
     public String getLastId() throws Exception {

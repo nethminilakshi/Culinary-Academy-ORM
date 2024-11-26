@@ -1,7 +1,6 @@
 package lk.ijse.culinaryacademy.bo.custom;
 
 import lk.ijse.culinaryacademy.bo.SuperBO;
-import lk.ijse.culinaryacademy.dto.CoursesDTO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
 
 import java.io.IOException;
@@ -9,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface StudentBO extends SuperBO {
-    ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException;
 
     boolean saveStudent(StudentDTO dto) throws SQLException, IOException;
 
@@ -19,8 +17,9 @@ public interface StudentBO extends SuperBO {
 
     StudentDTO searchStudent(String nic) throws SQLException;
 
-    StudentDTO searchStudentByNIC(String nic);
-
+    ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException;
 
     String generateNextStudentId() throws Exception;
+
+    boolean checkStudent(String nic);
 }

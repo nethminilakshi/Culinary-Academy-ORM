@@ -59,12 +59,6 @@
          </font>
       </Label>
       <ChoiceBox fx:id="choiceJobRole" layoutX="185.0" layoutY="339.0" prefHeight="25.0" prefWidth="160.0" />
-      <Label layoutX="402.0" layoutY="275.0" prefHeight="31.0" prefWidth="140.0" text="Confim Password:">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtConfoPassword" blendMode="DARKEN" layoutX="546.0" layoutY="278.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: #ededeb;" />
       <JFXButton fx:id="btnRegister" layoutX="329.0" layoutY="447.0" onAction="#btnRegisterOnAction" prefHeight="38.0" prefWidth="140.0" style="-fx-background-color: black; -fx-background-radius: 15; -fx-border-color: black; -fx-border-radius: 15;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />

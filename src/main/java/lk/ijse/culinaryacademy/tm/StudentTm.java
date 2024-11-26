@@ -12,7 +12,7 @@ public class StudentTm {
     private String nic;
     private String email;
     private String address;
-    private int contact;
+    private String contact;
 
 
 }

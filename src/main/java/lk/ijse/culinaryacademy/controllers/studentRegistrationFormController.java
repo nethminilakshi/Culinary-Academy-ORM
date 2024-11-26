@@ -18,7 +18,7 @@ import lk.ijse.culinaryacademy.dao.DAOFactory;
 import lk.ijse.culinaryacademy.dao.custom.StudentsDAO;
 import lk.ijse.culinaryacademy.dao.custom.UserDAO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
-import lk.ijse.culinaryacademy.entity.Students;
+import lk.ijse.culinaryacademy.entity.Payment;
 import lk.ijse.culinaryacademy.entity.User;
 import lk.ijse.culinaryacademy.tm.StudentTm;
 
@@ -85,40 +85,17 @@ public class studentRegistrationFormController {
     @FXML
     private ComboBox<String> comboUser;
     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
-    StudentsDAO studentDao = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
-    UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.USER);
-    UserBO userBo = (UserBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.USER);
+    private List<StudentDTO> studentList = new ArrayList<>();
 
-    private ArrayList<StudentDTO> studentList = new ArrayList<>();
+    User user = new User();
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
         autoGenarateId();
-        setCellValueFactory();
         loadStudentTable();
-        setUserId();
+        setCellValueFactory();
     }
 
-    private void setUserId() {
-        List<String> userIds = userDAO.getUser();
-        ObservableList<String> users = FXCollections.observableArrayList();
-        for (String userId : userIds) {
-            users.add(userId);
-        }
-        comboUser.setItems(users);
-    }
-
-    private void setCellValueFactory() {
-        colStId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
-        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-
-    }
-
-
-    private void loadStudentTable() {
+    private void loadStudentTable() throws SQLException, IOException, ClassNotFoundException {
         tbleStudents.getItems().clear();
         try {
             ArrayList<StudentDTO> allStudent = studentBO.getAllStudents();
@@ -139,6 +116,19 @@ public class studentRegistrationFormController {
         }
     }
 
+
+    private void setCellValueFactory() {
+        colStId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+        colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
+
+    }
+
+
+
     private void autoGenarateId() throws SQLException, IOException {
 
         try {
@@ -150,35 +140,39 @@ public class studentRegistrationFormController {
 
     public void btnAddOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
 
-            User user = userDAO.getUserById(comboUser.getValue());
+//        String nic = txtSerachNIC.getText().trim();
+//
+//        try {
+//            if (studentBO.checkStudent(nic)) {
+//                new Alert(Alert.AlertType.ERROR, "This student already exists!").show();
+//                return;
+//            }
 
-            StudentDTO studentDto = new StudentDTO();
-            studentDto.setStudentId(txtId.getText());
-            studentDto.setName(txtName.getText());
-            studentDto.setNic(txtNIC.getText());
-        studentDto.setEmail(txtContact.getText());
-            studentDto.setAddress(txtAddress.getText());
-           studentDto.setContact(Integer.parseInt(txtContact.getText()));
+        StudentDTO student = new StudentDTO(
+                txtId.getText().trim(),
+                txtName.getText().trim(),
+                txtNIC.getText().trim(),
+                txtEmail.getText().trim(),
+                txtAddress.getText(),
+                txtContact.getText().trim(),
+                user
+        );
 
-            studentDto.setUser(user);
+        boolean isSaved = studentBO.saveStudent(student);
 
-        try {
-            if (studentBO.saveStudent(studentDto)) {
-                new Alert(Alert.AlertType.INFORMATION, "Student saved successfully").show();
-
-            }else{
-                new Alert(Alert.AlertType.ERROR, "Failed to save student").show();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (isSaved) {
+            new Alert(Alert.AlertType.INFORMATION, "Student saved successfully!").show();
+            clearFields();
+            autoGenarateId();
+            loadStudentTable();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Failed to save student!").show();
         }
-clearFields();
-        initialize();
-
-        }
-
-
-
+    }
+//        } catch (Exception e) {
+//            new Alert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage()).show();
+//            e.printStackTrace();
+//        }
 
 
 
@@ -187,54 +181,75 @@ clearFields();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        String nic = txtSerachNIC.getText();
+        String id = txtId.getText();
 
-        boolean isDeleted = studentBO.deleteStudent(nic);
-
-        if (isDeleted) {
-            new Alert(Alert.AlertType.CONFIRMATION, "student deleted!").show();
+        try {
+            boolean isDeleted = studentBO.deleteStudent(id);
+            if (isDeleted) {
+                new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully").show();
+                clearFields();
+                autoGenarateId();
+                loadStudentTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to delete student").show();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        clearFields();
-        initialize();
     }
 
-
     public void btnUpdateOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        String studentId = txtId.getText();
-        String name = txtName.getText();
-        String nic = txtNIC.getText();
-        String email = txtEmail.getText();
-        String address = txtAddress.getText();
-        int contact = Integer.parseInt(txtContact.getText());
-        User user = userDAO.getUserById(comboUser.getValue());
+        StudentDTO studentDTO = new StudentDTO(
+                txtId.getText(),
+                txtName.getText(),
+                txtNIC.getText(),
+                txtEmail.getText(),
+                txtAddress.getText(),
+                txtContact.getText(),
+                user);
 
-
-        boolean isUpdated =studentBO.updateStudent(new StudentDTO(studentId, name, nic, email, address, contact,user));
-
-        if (isUpdated) {
-            new Alert(Alert.AlertType.CONFIRMATION, "student updated!").show();
+        try {
+            if (studentBO.updateStudent(studentDTO)) {
+                new Alert(Alert.AlertType.INFORMATION, "Student updated successfully").show();
+                clearFields();
+                autoGenarateId();
+                loadStudentTable();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Failed to update student").show();
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        clearFields();
-        initialize();
     }
 
     @FXML
     void txtSearchOnaction(ActionEvent event) throws SQLException {
-        String nic = txtNIC.getText();
+        String nic = txtSerachNIC.getText();
 
-        StudentDTO studentDTO = studentBO.searchStudent(nic);
+        if (nic == null || nic.trim().isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid student NIC.").show();
+            return;
+        }
 
-        if (studentDTO != null) {
-            txtId.setText(studentDTO.getStudentId());
-            txtName.setText(studentDTO.getName());
-            txtNIC.setText(studentDTO.getNic());
-            txtEmail.setText(studentDTO.getEmail());
-            txtAddress.setText(studentDTO.getAddress());
-            txtContact.setText(String.valueOf(studentDTO.getContact()));
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "Not Found Student").show();
+        try {
+            StudentDTO student = studentBO.searchStudent(nic);
+
+            if (student != null) {
+                txtId.setText(student.getStudentId());
+                txtName.setText(student.getName());
+                txtNIC.setText(student.getNic());
+                txtEmail.setText(student.getEmail());
+                txtAddress.setText(student.getAddress());
+                txtContact.setText(student.getContact());
+            } else {
+                new Alert(Alert.AlertType.WARNING, "No student found with NIC: " + nic).show();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "An error occurred while searching for the student. Please try again.").show();
         }
     }
+
     private void clearFields() {
         txtId.setText("");
         txtName.setText("");
@@ -245,11 +260,6 @@ clearFields();
     }
 
 
-    @FXML
-    void comboUserOnAction(ActionEvent event) {
-        String userId = String.valueOf(comboUser.getValue());
-       userBo .getUser(userId);
-    }
     public void tbleClickOnAction(MouseEvent mouseEvent) {
         StudentTm selectedItem = tbleStudents.getSelectionModel().getSelectedItem();
         txtId.setText(selectedItem.getStudentId());

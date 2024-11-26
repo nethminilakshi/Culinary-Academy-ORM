@@ -9,5 +9,5 @@ public class CoursesDTO {
     private String courseId;
     private String courseName;
     private String duration;
-    private double courseFee;
+    private String courseFee;
 }

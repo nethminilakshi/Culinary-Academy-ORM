@@ -1,12 +1,12 @@
 package lk.ijse.culinaryacademy.dao.custom;
 
 import lk.ijse.culinaryacademy.dao.CrudDAO;
-import lk.ijse.culinaryacademy.entity.Students;
+import lk.ijse.culinaryacademy.entity.Student;
 
-import java.io.IOException;
-
-public interface StudentsDAO extends CrudDAO<Students> {
+public interface StudentsDAO extends CrudDAO<Student> {
 
 
+    boolean checkStudent(String nic);
 
+    Student searchByNIC(String nic);
 }

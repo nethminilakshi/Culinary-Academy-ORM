@@ -1,22 +1,34 @@
 package lk.ijse.culinaryacademy.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-    @NoArgsConstructor
+import java.util.List;
+
+@NoArgsConstructor
     @AllArgsConstructor
     @Data
     @Entity
-    @Table(name = "user")
+    @Table(name = "users")
     public class User {
         @Id
+        @Column(name = "user_id")
         private String userId;
+
+        @Column(name = "username")
         private String username;
-        private String confirmPassword;
+
+        @Column(name = "password")
+        private String password;
+
+        @Column(name = "user_role")
         private String userRole;
+
+        @Column(name = "contact")
         private String contact;
+
+    @OneToMany(mappedBy = "user")
+    private List<Student> student;
 }

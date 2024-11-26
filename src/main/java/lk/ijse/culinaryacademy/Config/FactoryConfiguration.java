@@ -19,8 +19,8 @@ public class FactoryConfiguration {
             Properties properties = new Properties();
             properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("hibernate.properties"));
             configuration.setProperties(properties);
-            configuration.addAnnotatedClass(Students.class);
-            configuration.addAnnotatedClass(Courses.class);
+            configuration.addAnnotatedClass(Student.class);
+            configuration.addAnnotatedClass(Course.class);
             configuration.addAnnotatedClass(Payment.class);
             configuration.addAnnotatedClass(User.class);
             configuration.addAnnotatedClass(StudentCoursesDetails.class);

@@ -1,7 +1,5 @@
 package lk.ijse.culinaryacademy.dao;
 
-import lk.ijse.culinaryacademy.entity.Students;
-
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,8 +12,6 @@ public interface CrudDAO<T> extends SuperDAO {
     public  boolean delete(String contact) throws SQLException, IOException;
     public ArrayList<T> getAll() throws SQLException, ClassNotFoundException, IOException;
 
-    public List<String> getIds() throws SQLException;
-    public  int getCount() throws SQLException;
     String getLastId() throws Exception;
 
 }

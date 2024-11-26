@@ -10,14 +10,29 @@ import lombok.*;
 @Table(name = "payment")
 public class Payment {
     @Id
+   @Column(name = "paymentId")
     private String paymentId;
+
+    @Column(name = "fee")
     private double advancePayment;
-    private double balancePayment;
+
+    @Column(name = "studentId")
+    private String studentId;
+
+    @Column(name = "courseId")
+    private String courseId;
+
+    @Column(name = "paymentDate")
     private String paymentDate;
 
 
-@ManyToOne
-    @JoinColumn(name = "studentCourseId")
-    private StudentCoursesDetails studentCoursesDetails;
+
+
+
+
+//
+//@ManyToOne
+//    @JoinColumn(name = "studentCourseId")
+//    private StudentCoursesDetails studentCoursesDetails;
 
 }

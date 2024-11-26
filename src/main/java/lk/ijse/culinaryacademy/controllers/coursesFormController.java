@@ -1,285 +1,271 @@
-package lk.ijse.culinaryacademy.controllers;
-
-
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import lk.ijse.culinaryacademy.bo.BOFactory;
-import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
-import lk.ijse.culinaryacademy.dto.CoursesDTO;
-import lk.ijse.culinaryacademy.entity.Courses;
-import lk.ijse.culinaryacademy.tm.CoursesTm;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-public class coursesFormController {
-    @FXML
-    private JFXButton btnAdd;
-
-    @FXML
-    private JFXButton btnClear;
-
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
-    private JFXButton btnUpdate;
-
-    @FXML
-    private TableColumn<?, ?> colDuration;
-
-    @FXML
-    private TableColumn<?, ?> colFee;
-
-    @FXML
-    private TableColumn<?, ?> colProgramId;
-
-    @FXML
-    private TableColumn<?, ?> colProgramName;
-
-    @FXML
-    private AnchorPane programPane;
-
-    @FXML
-    private TableView<CoursesTm> tblPrograms;
-
-    @FXML
-    private JFXTextField txtDuration;
-
-    @FXML
-    private JFXTextField txtFee;
-
-    @FXML
-    private JFXTextField txtId;
-
-    @FXML
-    private JFXTextField txtName;
-
-    @FXML
-    private TextField txtProgramId;
-
-    ObservableList<CoursesTm> courseObservableList = FXCollections.observableArrayList();
-//    private List<CoursesDTO> coursesList = new ArrayList<>();
-
-    CoursesBO coursesBO = (CoursesBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.COURSE);
-
-
-    public void initialize() throws IOException, SQLException, ClassNotFoundException {
-
-        generateNewId();
-        setTable();
-        selectTableRow();
-//        loadCoursesTable();
-        setCellValueFactory();
-        selectCourses();
-    }
-
-    private void selectCourses() {
-        FilteredList<CoursesTm> filterData = new FilteredList<>(courseObservableList, e -> true);
-
-       txtProgramId .textProperty().addListener((observableValue, oldValue, newValue) -> {
-            filterData.setPredicate(course -> {
-                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
-                    return true;
-                }
-
-                String searchKeyword = newValue.toLowerCase();
-                if (course.getCourseId().toLowerCase().contains(searchKeyword)) {
-                    return true;
-                } else if (course.getCourseName().toLowerCase().contains(searchKeyword)) {
-                    return true;
-                }
-                return false;
-            });
-        });
-
-        SortedList<CoursesTm> courseTmSortedList = new SortedList<>(filterData);
-        courseTmSortedList.comparatorProperty().bind(tblPrograms.comparatorProperty());
-        tblPrograms.setItems(courseTmSortedList);
-
-    }
-
-    private void selectTableRow() {
-        tblPrograms.setOnMouseClicked(mouseEvent -> {
-            int row = tblPrograms.getSelectionModel().getSelectedIndex();
-            CoursesTm courseTm = tblPrograms.getItems().get(row);
-            txtId.setText(courseTm.getCourseId());
-            txtName.setText(courseTm.getCourseName());
-            txtFee.setText(String.valueOf(courseTm.getCourseFee()));
-            txtDuration.setText(courseTm.getDuration());
-        });
-    }
-
-    private void setTable() throws SQLException, IOException, ClassNotFoundException {
-        courseObservableList.clear();
-        List<Courses> courseList = coursesBO.getCourseList();
-        for (Courses course : courseList) {
-            CoursesTm courseTm =  new CoursesTm(
-                    course.getCourseId(),
-                    course.getCourseName(),
-                    course.getDuration(),
-                    course.getCourseFee());
-            courseObservableList.add(courseTm);
-        }
-        tblPrograms.setItems(courseObservableList);
-
-    }
-
-    private void setCellValueFactory() {
-        colProgramId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
-        colProgramName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
-        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        colFee.setCellValueFactory(new PropertyValueFactory<>("courseFee"));
-    }
-
-//    private ArrayList<CoursesDTO> getAllCourses() {
-//        ArrayList<CoursesDTO> coursesList = null;
+//package lk.ijse.culinaryacademy.controllers;
+//
+//
+//import com.jfoenix.controls.JFXButton;
+//import com.jfoenix.controls.JFXTextField;
+//import javafx.collections.FXCollections;
+//import javafx.collections.ObservableList;
+//import javafx.event.ActionEvent;
+//import javafx.fxml.FXML;
+//import javafx.scene.control.*;
+//import javafx.scene.control.cell.PropertyValueFactory;
+//import javafx.scene.input.MouseEvent;
+//import javafx.scene.layout.AnchorPane;
+//import lk.ijse.culinaryacademy.bo.BOFactory;
+//import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
+//import lk.ijse.culinaryacademy.dto.CoursesDTO;
+//import lk.ijse.culinaryacademy.tm.CoursesTm;
+//
+//import java.io.IOException;
+//import java.sql.SQLException;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class coursesFormController {
+//    @FXML
+//    private JFXButton btnAdd;
+//
+//    @FXML
+//    private JFXButton btnClear;
+//
+//    @FXML
+//    private JFXButton btnDelete;
+//
+//    @FXML
+//    private JFXButton btnUpdate;
+//
+//    @FXML
+//    private TableColumn<?, ?> colDuration;
+//
+//    @FXML
+//    private TableColumn<?, ?> colFee;
+//
+//    @FXML
+//    private TableColumn<?, ?> colProgramId;
+//
+//    @FXML
+//    private TableColumn<?, ?> colProgramName;
+//
+//    @FXML
+//    private AnchorPane programPane;
+//
+//    @FXML
+//    private TableView<CoursesTm> tblPrograms;
+//
+//    @FXML
+//    private JFXTextField txtDuration;
+//
+//    @FXML
+//    private JFXTextField txtFee;
+//
+//    @FXML
+//    private JFXTextField txtId;
+//
+//    @FXML
+//    private JFXTextField txtName;
+//
+//    @FXML
+//    private TextField txtProgramId;
+//
+//    ObservableList<CoursesTm> courseObservableList = FXCollections.observableArrayList();
+//   private List<CoursesDTO> coursesList = new ArrayList<>();
+//
+//    CoursesBO coursesBO = (CoursesBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.COURSE);
+//
+//
+//    public void initialize() throws IOException, SQLException, ClassNotFoundException {
+//        loadNextCourseId();
+////        loadCoordinatorIds();
+//        this.coursesList = (List<CoursesDTO>) getAllCourses();
+//        loadCourseTable();
+//        setCellValueFactory();
+//
+//    }
+//
+//    @FXML
+//    void btnAddOnAction(ActionEvent event) throws Exception {
+//        String courseId = txtId.getText();
+//        String courseName = txtName.getText();
+//        String duration = txtDuration.getText();
+//        String fee = txtFee.getText();
+//
+//
+//        CoursesDTO dto = new CoursesDTO(courseId, courseName, duration, fee);
+//
+//        String errorMessage = isValid();
+//
+//        if (errorMessage != null) {
+//            new Alert(Alert.AlertType.ERROR, errorMessage).show();
+//            return;
+//        }
+//
 //        try {
-//            coursesList = coursesBO.getAllCourses();
+//            boolean isAdded = coursesBO.saveCourse(dto);
+//
+//            if (isAdded) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Course Added Successfully.").show();
+//                clearFields();
+//                refreshTable();
+//                loadNextCourseId();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//    }
+//@FXML
+//    void btnUpdateOnAction(ActionEvent event) throws Exception {
+//        String courseId = txtId.getText();
+//        String courseName = txtName.getText();
+//        String duration = txtDuration.getText();
+//        String fee = txtFee.getText();
+//
+//
+//
+//        CoursesDTO dto = new CoursesDTO(courseId, courseName,duration, fee);
+//
+//        String errorMessage = isValid();
+//
+//        if (errorMessage != null) {
+//            new Alert(Alert.AlertType.ERROR, errorMessage).show();
+//            return;
+//        }
+//
+//        try {
+//            boolean isUpdated = coursesBO.updateCourses(dto);
+//
+//            if (isUpdated) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Course Updated Successfully.").show();
+//                clearFields();
+//                refreshTable();
+//                loadNextCourseId();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//    }
+//@FXML
+//    void btnDeleteOnAction(ActionEvent event) throws Exception {
+//        String courseId = txtId.getText();
+//
+//        try {
+//            boolean isDeleted = coursesBO.deleteCourses(courseId);
+//
+//            if (isDeleted) {
+//                new Alert(Alert.AlertType.CONFIRMATION, "Course Deleted Successfully.").show();
+//                clearFields();
+//                refreshTable();
+//                loadNextCourseId();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//    }
+//    @FXML
+//    void btnClearOnAction(ActionEvent event) {
+//        clearFields();
+//    }
+//
+//    private void clearFields() {
+//        txtId.setText("");
+//        txtName.setText("");
+//        txtDuration.setText("");
+//        txtFee.setText("");
+//
+//    }
+//
+//    private String isValid() {
+//        return null;
+//    }
+//
+//    private void refreshTable() {
+//        this.coursesList = getAllCourses();
+//        loadCourseTable();
+//    }
+//
+//    private List<CoursesDTO> getAllCourses() {
+//        List<CoursesDTO> courseList = null;
+//        try {
+//            courseList = coursesBO.getAllCourses();
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
-//        return coursesList;
-//
+//        return courseList;
 //    }
-
-    private void generateNewId() throws IOException {
-        try {
-            txtId.setText(coursesBO.generateNextStudentId());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-//    private void loadCoursesTable() {
+//    @FXML
+//    private void txtSearchOnAction(ActionEvent event) throws Exception {
+//        String courseId = txtProgramId.getText();
+//
+//        try {
+//            CoursesDTO dto = coursesBO.searchCourse(courseId);
+//
+//            if (dto != null) {
+//                txtId.setText(dto.getCourseId());
+//                txtName.setText(dto.getCourseName());
+//                txtDuration.setText(String.valueOf(dto.getDuration()));
+//                txtFee.setText(String.valueOf(dto.getCourseFee()));
+//
+//            } else {
+//                new Alert(Alert.AlertType.INFORMATION, "Course not found.").show();
+//            }
+//        } catch (SQLException e) {
+//            new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
+//        }
+//    }
+//
+//    private void loadCourseTable() {
 //        ObservableList<CoursesTm> tmList = FXCollections.observableArrayList();
-//        for (CoursesDTO coursesDTO : coursesList) {
-//            CoursesTm coursesTm = new CoursesTm(
-//                    coursesDTO.getCourseId(),
-//                    coursesDTO.getCourseName(),
-//                    coursesDTO.getDuration(),
-//                    coursesDTO.getCourseFee()
+//
+//        for (CoursesDTO dto : coursesList) {
+//            CoursesTm courseTm = new CoursesTm(
+//                    dto.getCourseId(),
+//                    dto.getCourseName(),
+//                    dto.getDuration(),
+//                    dto.getCourseFee()
 //
 //            );
-//            tmList.add(coursesTm);
+//
+//            tmList.add(courseTm);
 //        }
+//
 //        tblPrograms.setItems(tmList);
-//        System.out.println(tmList.toString());
+//        tblPrograms.getSelectionModel().getSelectedItem();
+//    }
+//
+//
+//
+//    private void loadNextCourseId() {
+//        String currentId = coursesBO.currentCourseId();
+//        String nextId = nextId(currentId);
+//
+//        txtId.setText(nextId);
 //
 //    }
-
-    @FXML
-    void btnAddOnAction(ActionEvent event) throws ClassNotFoundException, SQLException, IOException {
-        String courseId = txtId.getText();
-        String name = txtName.getText();
-        String duration = txtDuration.getText();
-        double fee = Double.parseDouble(txtFee.getText());
-
-        boolean isAdded = coursesBO.saveCourse(new CoursesDTO(courseId, name, duration, fee));
-        if (isAdded) {
-            new Alert(Alert.AlertType.CONFIRMATION, "Added successfully").show();
-        }
-        else {
-            new Alert(Alert.AlertType.ERROR, "Added failed").show();
-        }
-        clearFields();
-        initialize();
-        generateNewId();
-
-    }
-
-    private void clearFields() {
-        txtId.setText("");
-        txtName.setText("");
-        txtDuration.setText("");
-        txtFee.setText("");
-
-    }
-
-
-    @FXML
-    void btnClearOnAction(ActionEvent event) {
-        clearFields();
-    }
-
-    @FXML
-    void btnDeleteOnAction(ActionEvent event) throws ClassNotFoundException, IOException, SQLException {
-
-        ButtonType yes = new ButtonType("Yes",ButtonBar.ButtonData.OK_DONE);
-        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
-
-        if(result.orElse(no) == yes) {
-            if (coursesBO.deleteCourses(txtId.getText())) {
-                new Alert(Alert.AlertType.CONFIRMATION, "User Deleted Successfully!").show();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "SQL Error").show();
-            }
-        }
-        clearFields();
-        setTable();
-        generateNewId();
-
-    }
-
-    @FXML
-    void btnUpdateOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-
-        String courseId = txtId.getText();
-        String name = txtName.getText();
-        String duration = txtDuration.getText();
-        Double fee = Double.valueOf(txtFee.getText());
-
-
-        boolean isUpdated =coursesBO.updateCourses(new CoursesDTO(courseId, name, duration, fee));
-
-        if (isUpdated) {
-            new Alert(Alert.AlertType.CONFIRMATION, "customer updated!").show();
-        }
-        clearFields();
-        initialize();
-
-    }
-
-    @FXML
-    void txtSearchOnAction(ActionEvent event) throws SQLException {
-        String courseId = txtProgramId.getText();
-
-        CoursesDTO coursesDTO = coursesBO.searchCourse(courseId);
-
-        if (coursesDTO != null) {
-            txtId.setText(coursesDTO.getCourseId());
-            txtName.setText(coursesDTO.getCourseName());
-            txtDuration.setText(coursesDTO.getDuration());
-            txtFee.setText(String.valueOf(coursesDTO.getCourseFee()));
-
-        } else {
-            new Alert(Alert.AlertType.INFORMATION, "Not Found Customer").show();
-        }
-    }
-
-    public void tblOnClickAction(MouseEvent mouseEvent) {
-        CoursesTm selectedItem = tblPrograms.getSelectionModel().getSelectedItem();
-        txtId.setText(selectedItem.getCourseId());
-        txtName.setText(selectedItem.getCourseName());
-        txtDuration.setText(selectedItem.getDuration());
-        txtFee.setText(String.valueOf(selectedItem.getCourseFee()));
-
-
-    }
-
-
-}
+//
+//    private String nextId(String currentId) {
+//        return "C001";
+//    }
+//
+//    private void setCellValueFactory() {
+//        colProgramId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
+//        colProgramName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
+//        colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
+//        colFee.setCellValueFactory(new PropertyValueFactory<>("courseFee"));
+//    }
+//
+//
+//
+//
+//
+//
+//    public void tblOnClickAction(MouseEvent mouseEvent) {
+//        CoursesTm selectedItem = tblPrograms.getSelectionModel().getSelectedItem();
+//        txtId.setText(selectedItem.getCourseId());
+//        txtName.setText(selectedItem.getCourseName());
+//        txtDuration.setText(selectedItem.getDuration());
+//        txtFee.setText(String.valueOf(selectedItem.getCourseFee()));
+//
+//
+//    }
+//
+//
+//}

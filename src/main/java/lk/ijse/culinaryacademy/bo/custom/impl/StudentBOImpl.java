@@ -3,56 +3,32 @@ package lk.ijse.culinaryacademy.bo.custom.impl;
 import lk.ijse.culinaryacademy.bo.custom.StudentBO;
 import lk.ijse.culinaryacademy.dao.DAOFactory;
 import lk.ijse.culinaryacademy.dao.custom.StudentsDAO;
-import lk.ijse.culinaryacademy.dto.CoursesDTO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
-import lk.ijse.culinaryacademy.entity.Courses;
-import lk.ijse.culinaryacademy.entity.Students;
+import lk.ijse.culinaryacademy.entity.Student;
+import lk.ijse.culinaryacademy.entity.User;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
 
     StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
-
-    @Override
-    public ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException {
-
-        ArrayList<Students> students = studentsDAO.getAll();
-        ArrayList<StudentDTO> studentDTOS = new ArrayList<>();
-
-        if (students != null && !students.isEmpty()) {  // Check if the list is not null and not empty
-            for (Students c : students) {
-                StudentDTO studentDTO = new StudentDTO(
-                        c.getStudentId(),
-                        c.getName(),
-                        c.getNic(),
-                        c.getEmail(),
-                        c.getAddress(),
-                        c.getContact(),
-                        null);
-                studentDTOS.add(studentDTO);  // Add to DTO list
-            }
-        } else {
-            System.out.println("No students found or error in retrieving students.");
-        }
-        return studentDTOS;
-    }
-
+    private User user;
 
     @Override
     public boolean saveStudent(StudentDTO dto) throws SQLException, IOException {
-        return studentsDAO.save(new Students(
+        Student student = new Student(
                 dto.getStudentId(),
                 dto.getName(),
                 dto.getNic(),
                 dto.getEmail(),
                 dto.getAddress(),
                 dto.getContact(),
-                null,
-                dto.getUser()));
-
+                user
+        );
+        return studentsDAO.save(student);
     }
 
     @Override
@@ -62,36 +38,46 @@ public class StudentBOImpl implements StudentBO {
 
     @Override
     public boolean updateStudent(StudentDTO dto) throws SQLException, IOException {
-        return studentsDAO.update(new Students(
+        return studentsDAO.update(new Student(
                 dto.getStudentId(),
                 dto.getName(),
                 dto.getNic(),
                 dto.getEmail(),
                 dto.getAddress(),
                 dto.getContact(),
-               null,
-               dto.getUser()));
+                user));
     }
 
     @Override
     public StudentDTO searchStudent(String nic) throws SQLException {
-        Students students =studentsDAO.search(nic);
-        StudentDTO studentDTO = new StudentDTO(
-                students.getStudentId(),
-                students.getName(),
-                students.getNic(),
-                students.getEmail(),
-                students.getAddress(),
-                students.getContact(),
-                null
-                );
-
-        return studentDTO;
+        Student student = studentsDAO.searchByNIC(nic);
+        return new StudentDTO(
+                student.getStudentId(),
+                student.getName(),
+                student.getNic(),
+                student.getEmail(),
+                student.getAddress(),
+                student.getContact(),
+                user
+        );
     }
 
     @Override
-    public StudentDTO searchStudentByNIC(String nic) {
-        return null;
+    public ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException {
+        ArrayList<StudentDTO> studentDTOS = new ArrayList<>();
+        ArrayList<Student> students = studentsDAO.getAll();
+        for (Student student : students) {
+            studentDTOS.add(new StudentDTO(
+                    student.getStudentId(),
+                    student.getName(),
+                    student.getNic(),
+                    student.getEmail(),
+                    student.getAddress(),
+                    student.getContact(),
+                    user
+            ));
+        }
+        return studentDTOS;
     }
 
     @Override
@@ -100,15 +86,17 @@ public class StudentBOImpl implements StudentBO {
         return incrementStudentId(lastId);
     }
 
-
     private String incrementStudentId(String lastId) {
         if (lastId == null) {
-            return "STU-0001";
+            return "ST-0001";
         }
         int id = Integer.parseInt(lastId.split("-")[1]);
         id++;
-        return String.format("STU-%04d", id);
+        return String.format("ST-%04d", id);
     }
 
-
+    @Override
+    public boolean checkStudent(String nic) {
+        return studentsDAO.checkStudent(nic);
+    }
 }

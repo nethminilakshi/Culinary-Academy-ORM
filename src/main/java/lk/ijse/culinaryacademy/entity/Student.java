@@ -12,10 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "students")  // Table name in lowercase for consistency
-public class Students {
+@Table(name = "student")  // Table name in lowercase for consistency
+public class Student {
     @Id
-    @Column(name = "studentId")
+    @Column(name = "student_id" , length = 100)
 
     private String studentId;
 
@@ -32,16 +32,13 @@ public class Students {
     private String address;
 
     @Column(name = "contact", length = 20)
-    private int contact;
+    private String contact;
+
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "user_id")
+private User user;
 
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<StudentCoursesDetails> studentCourses;
-    @ManyToOne
-    private User user;
-
-//@OneToMany(fetch = FetchType.EAGER, mappedBy = "students", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<StudentRegDetails> studentCourses;}
 
 }
 
