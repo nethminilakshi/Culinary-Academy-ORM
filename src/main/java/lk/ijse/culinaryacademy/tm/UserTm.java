@@ -1,13 +1,11 @@
 package lk.ijse.culinaryacademy.tm;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
 import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class User {
+public class UserTm {
 
     private String userId;
     private String userName;
