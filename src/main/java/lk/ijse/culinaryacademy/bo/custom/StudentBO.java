@@ -16,4 +16,6 @@ public interface StudentBO extends SuperBO {
     boolean save(StudentDTO studentDto) throws SQLException, IOException;
 
     boolean update(StudentDTO studentDto) throws SQLException, IOException;
+
+
 }

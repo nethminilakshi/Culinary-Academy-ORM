@@ -15,4 +15,6 @@ public interface StudentsDAO extends CrudDAO<Student> {
     boolean isStudentRegisteredForCourse(String studentId, String courseId) throws IOException;
 
     void saveStudentCourseDetails(StudentCoursesDetails studentCourse) throws IOException;
+
+
 }

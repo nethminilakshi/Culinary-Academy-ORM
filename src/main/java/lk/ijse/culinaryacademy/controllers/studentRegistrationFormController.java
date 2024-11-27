@@ -185,14 +185,6 @@ public class studentRegistrationFormController {
         txtNIC.clear();
     }
 
-//    private void setUserId() {
-//        List<String> userIds = userDao.getUserId();
-//        ObservableList<String> users = FXCollections.observableArrayList();
-//        for (String userId : userIds) {
-//            users.add(userId);
-//        }
-//        comboUser.setItems(users);
-//    }
 
     public void setCourseId() {
         ObservableList<String> id = FXCollections.observableArrayList();
@@ -317,7 +309,7 @@ public class studentRegistrationFormController {
 
 
 
-    private void filterStudent() {
+    private void filterStudent() throws IOException {
         FilteredList<StudentTm> filterData = new FilteredList<>(studentTmObservableList, e -> true);
 
         txtSerachNIC.textProperty().addListener((observableValue, oldValue, newValue) -> {
@@ -329,18 +321,38 @@ public class studentRegistrationFormController {
                 String searchKeyword = newValue.toLowerCase();
                 if (student.getNIC().toLowerCase().contains(searchKeyword)) {
                     return true;
-                } else if (student.getContact().toLowerCase().contains(searchKeyword)) {
-                    return true;
-                } else if (student.getName().toLowerCase().contains(searchKeyword)) {
-                    return true;
                 }
-                return false;
+                String searchKeywords = newValue.toLowerCase();
+
+                return student.getNIC().toLowerCase().contains(searchKeywords)
+                        || student.getStudentId().toLowerCase().contains(searchKeywords)
+                        || student.getName().toLowerCase().contains(searchKeywords)
+                || student.getAddress().toLowerCase().contains(searchKeywords)
+                || student.getContact().toLowerCase().contains(searchKeywords);
+
             });
         });
+
 
         SortedList<StudentTm> studentTmSortedList = new SortedList<>(filterData);
         studentTmSortedList.comparatorProperty().bind(tbleStudents.comparatorProperty());
         tbleStudents.setItems(studentTmSortedList);
+
+//        String nic = txtSerachNIC.getText();
+//
+//        StudentDTO studentDTO = studentBO.searchStudent(nic);
+//
+//        if (studentDTO != null) {
+//            txtId.setText(studentDTO.getStudentId());
+//            txtName.setText(studentDTO.getName());
+//            txtAddress.setText(studentDTO.getAddress());
+//            txtContact.setText(studentDTO.getContact());
+//            txtNIC.setText(studentDTO.getNIC());
+//
+//        } else {
+//            new Alert(Alert.AlertType.INFORMATION, "Not Found Customer").show();
+//        }
+
     }
 
 

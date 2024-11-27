@@ -7,11 +7,12 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 public class PaymentDTO {
-    private String paymentID;
-    private double advancePayment;
-    private double balancePayment;
-    private String paymentDate;
-    private StudentCoursesDetails studentCoursesDetails;
 
+    private String paymentId;
+    private String paymentDate;
+    private double payAmount;
+    private String status;
+    private double balance;
+    private StudentCoursesDetails student_course;
 
 }

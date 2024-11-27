@@ -18,8 +18,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="804.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
+<AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="904.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
    <children>
+      <VBox layoutX="15.0" layoutY="77.0" prefHeight="562.0" prefWidth="855.0" style="-fx-background-color: white; -fx-background-radius: 8;" styleClass="mainVBox" stylesheets="@../assets/a/css/pageStyle.css" />
       <VBox layoutX="30.0" layoutY="109.0" prefHeight="519.0" prefWidth="728.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
          <effect>
             <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
@@ -80,14 +81,14 @@
             </InnerShadow>
          </effect></TextField>
       <ImageView fitHeight="85.0" fitWidth="115.0" layoutX="640.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="txtId" layoutX="137.0" layoutY="143.0" onAction="#txtIdOnAction" onKeyReleased="#txtStudentIdOnKeyReleased" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Student Id" />
-      <TextField fx:id="txtAddress" layoutX="137.0" layoutY="242.0" onAction="#txtAddressOnAction" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Address" />
-      <TextField fx:id="txtContact" layoutX="137.0" layoutY="288.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Contact" />
-      <TextField fx:id="txtName" layoutX="137.0" layoutY="192.0" onAction="#txtNameOnAction" onKeyReleased="#txtStudentNameOnKeyReleased" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Student Name" />
+      <TextField fx:id="txtId" layoutX="137.0" layoutY="143.0" onAction="#txtIdOnAction" onKeyReleased="#txtStudentIdOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Id" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtAddress" layoutX="137.0" layoutY="242.0" onAction="#txtAddressOnAction" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Address" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtContact" layoutX="137.0" layoutY="288.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Contact" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtName" layoutX="137.0" layoutY="192.0" onAction="#txtNameOnAction" onKeyReleased="#txtStudentNameOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Name" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
       <ComboBox fx:id="comboCourse" layoutX="414.0" layoutY="189.0" onAction="#comboCourseOnAction" prefHeight="31.0" prefWidth="210.0" promptText="course" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtcourseName" layoutX="414.0" layoutY="241.0" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 8; -fx-background-radius: 8;" text="Course Name" />
-      <TextField fx:id="txtDuration" layoutX="414.0" layoutY="289.0" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Duration" />
-      <TextField fx:id="txtFree" layoutX="413.0" layoutY="336.0" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="Course Fee" />
-      <TextField fx:id="txtNIC" layoutX="138.0" layoutY="333.0" onAction="#txtNICOnAction" onKeyReleased="#txtDateOnKeyReleased" prefHeight="31.0" prefWidth="210.0" style="-fx-border-radius: 5; -fx-background-radius: 5;" text="NIC" />
+      <TextField fx:id="txtcourseName" layoutX="414.0" layoutY="241.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Name" style="-fx-border-radius: 8; -fx-background-radius: 8;" />
+      <TextField fx:id="txtDuration" layoutX="414.0" layoutY="289.0" prefHeight="31.0" prefWidth="210.0" promptText="Duration" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtFree" layoutX="413.0" layoutY="336.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Fee" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtNIC" layoutX="138.0" layoutY="333.0" onAction="#txtNICOnAction" onKeyReleased="#txtDateOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="NIC" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
    </children>
 </AnchorPane>

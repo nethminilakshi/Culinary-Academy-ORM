@@ -8,9 +8,11 @@ import lombok.*;
 @Data
 public class paymentTm {
     private String paymentId;
-    private String advancePayment;
-    private String paymentDate;
+    private String status;
+    private double upfrontAmount;
+    private double balance;
     private String studentId;
     private String courseId;
+    private Long student_course_id;
     private Button btnRemove;
 }

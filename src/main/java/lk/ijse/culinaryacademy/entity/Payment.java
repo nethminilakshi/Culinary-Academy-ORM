@@ -12,18 +12,14 @@ public class Payment {
     @Id
 
     private String paymentId;
-
-
-    private double advancePayment;
-
-
-    private String studentId;
-
-
-    private String courseId;
-
-
     private String paymentDate;
+    private double payAmount;
+    private String status;
+    private double upfrontAmount;
+    private double balance;
 
+    @ManyToOne
+    @JoinColumn(name = "student_course_id")
+    private StudentCoursesDetails StudentCourseDetails;
 
 }

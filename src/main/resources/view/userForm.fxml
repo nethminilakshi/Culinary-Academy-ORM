@@ -10,8 +10,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="userPane" prefHeight="650.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.userFormController">
+<AnchorPane fx:id="userPane" prefHeight="650.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.userFormController">
    <children>
       <Label layoutX="277.0" layoutY="27.0" prefHeight="47.0" prefWidth="184.0" text="User Form">
          <font>

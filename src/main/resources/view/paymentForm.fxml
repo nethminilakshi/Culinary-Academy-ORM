@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -10,7 +8,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -21,9 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<?import javafx.scene.effect.Light?>
-<AnchorPane fx:id="paymentPane" prefHeight="650.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.paymentFormController">
+<AnchorPane fx:id="paymentPane" prefHeight="650.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.paymentFormController">
    <children>
       <Label layoutX="230.0" layoutY="20.0" prefHeight="47.0" prefWidth="299.0" text="Payments Management">
          <font>
@@ -31,22 +26,11 @@
          </font>
       </Label>
       <Line endX="20.0" layoutX="416.0" layoutY="70.0" startX="-108.0" stroke="RED" strokeWidth="3.0" />
-      <VBox layoutX="23.0" layoutY="103.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="528.0" prefWidth="728.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
+      <VBox layoutX="47.0" layoutY="103.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="528.0" prefWidth="806.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
          <effect>
             <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
          </effect>
       </VBox>
-      <Label layoutX="55.0" layoutY="378.0" prefHeight="31.0" prefWidth="104.0" text="Payment Id :">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="53.0" layoutY="412.0" prefHeight="31.0" prefWidth="112.0" text="Pay Date :">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtDate" blendMode="DARKEN" layoutX="146.0" layoutY="412.0" prefHeight="25.0" prefWidth="128.0" />
       <Text fill="#272054" layoutX="56.0" layoutY="139.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Courses Details :" wrappingWidth="174.0">
          <font>
             <Font name="Cambria Bold" size="20.0" />
@@ -55,18 +39,18 @@
             <ColorAdjust brightness="0.05" contrast="-0.38" hue="-0.05" saturation="1.0" />
          </effect>
       </Text>
-      <ComboBox fx:id="combCourses" layoutX="58.0" layoutY="154.0" onAction="#combCoursesOnAction" prefHeight="31.0" prefWidth="158.0" promptText="Select Course" style="-fx-background-radius: 8; -fx-background-color: #f2f1f0;">
+      <ComboBox fx:id="comboCourses" layoutX="58.0" layoutY="189.0" onAction="#comboCoursesOnAction" prefHeight="31.0" prefWidth="158.0" promptText="Select Course" style="-fx-background-radius: 8; -fx-background-color: #f2f1f0;">
          <effect>
             <Lighting diffuseConstant="1.32" specularConstant="0.71" specularExponent="40.0" surfaceScale="1.61">
                <bumpInput>
                   <Shadow />
                </bumpInput>
                <light>
-                  <Light>
+                  <Light.Distant>
                      <color>
                         <Color red="0.9868420958518982" green="0.9822733998298645" blue="0.9822733998298645" />
                      </color>
-                  </Light>
+                  </Light.Distant>
                </light>
             </Lighting>
          </effect>
@@ -79,84 +63,52 @@
             <ColorAdjust brightness="0.05" contrast="-0.38" hue="0.01" saturation="1.0" />
          </effect>
       </Text>
-      <TextField fx:id="txtSearchNIC" layoutX="263.0" layoutY="250.0" prefHeight="31.0" prefWidth="453.0" style="-fx-background-radius: 6; -fx-background-color: #f2f1f0;" text="Search NIC">
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
+      <TextField fx:id="txtStuCouDetail" editable="false" layoutX="259.0" layoutY="156.0" opacity="0.84" prefHeight="31.0" prefWidth="128.0" promptText="Student -Course Id" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
-            <InnerShadow height="15.14" radius="7.07" width="15.14">
-               <color>
-                  <Color red="0.2631579041481018" green="0.2619395852088928" blue="0.2619395852088928" />
-               </color>
-            </InnerShadow>
-         </effect>
-      </TextField>
-      <JFXButton fx:id="btnSearch" layoutX="60.0" layoutY="249.0" onAction="#btnSearchStudentOnAction" prefHeight="32.0" prefWidth="104.0" style="-fx-background-color: #2e2e29; -fx-background-radius: 4; -fx-border-radius: 12; -fx-text-fill: #9878eb;" text="Search" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-      <TextField fx:id="txtCourseId" editable="false" layoutX="259.0" layoutY="156.0" opacity="0.84" prefHeight="31.0" prefWidth="128.0" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;" text="Course Id">
-         <effect>
-            <Lighting diffuseConstant="1.69" specularConstant="0.0">
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
             </Lighting>
          </effect>
       </TextField>
-      <TextField fx:id="txtDuration" editable="false" layoutX="404.0" layoutY="157.0" opacity="0.84" prefHeight="31.0" prefWidth="152.0" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;" text="Course Duration">
+      <TextField fx:id="txtDuration" editable="false" layoutX="404.0" layoutY="157.0" opacity="0.84" prefHeight="31.0" prefWidth="152.0" promptText="Course Duration" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
-            <Lighting diffuseConstant="1.69">
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
             </Lighting>
          </effect>
       </TextField>
-      <TextField fx:id="txtCoursefee" editable="false" layoutX="566.0" layoutY="157.0" opacity="0.84" prefHeight="31.0" prefWidth="152.0" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;" text="Course Fee">
+      <TextField fx:id="txtCoursefee" editable="false" layoutX="566.0" layoutY="157.0" opacity="0.84" prefHeight="31.0" prefWidth="152.0" promptText="Course Fee" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
-            <Lighting diffuseConstant="1.69">
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
             </Lighting>
          </effect>
       </TextField>
-      <TextField fx:id="txtStudentId" editable="false" layoutX="263.0" layoutY="301.0" opacity="0.84" prefHeight="31.0" prefWidth="152.0" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;" text="Student Id">
+      <TextField fx:id="txtStudentId" editable="false" layoutX="263.0" layoutY="261.0" opacity="0.84" prefHeight="31.0" prefWidth="199.0" promptText="Student Id" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
-            <Lighting diffuseConstant="1.69" specularConstant="0.0">
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
             </Lighting>
          </effect>
       </TextField>
-      <TextField fx:id="txtStudentName" editable="false" layoutX="487.0" layoutY="301.0" opacity="0.84" prefHeight="31.0" prefWidth="228.0" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;" text="Student Name">
+      <TextField fx:id="txtStudentName" editable="false" layoutX="516.0" layoutY="261.0" opacity="0.84" prefHeight="31.0" prefWidth="199.0" promptText="Student Name" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
-            <Lighting diffuseConstant="1.69" specularConstant="0.0">
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>
                   <Shadow />
                </bumpInput>
-               <light>
-                  <Light.Distant />
-               </light>
             </Lighting>
          </effect>
       </TextField>
-      <Text fill="#272054" layoutX="55.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Details :" wrappingWidth="174.0">
+      <Text fill="#272054" layoutX="55.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payment Details :" wrappingWidth="174.0">
          <font>
             <Font name="Cambria Bold" size="20.0" />
          </font>
@@ -164,33 +116,21 @@
             <ColorAdjust brightness="0.05" contrast="-0.38" hue="0.01" saturation="1.0" />
          </effect>
       </Text>
-      <Label layoutX="289.0" layoutY="378.0" prefHeight="31.0" prefWidth="120.0" text="Advanced Pay:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="539.0" layoutY="378.0" prefHeight="31.0" prefWidth="67.0" text="Balance :">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="txtPayId" blendMode="DARKEN" layoutX="148.0" layoutY="380.0" prefHeight="25.0" prefWidth="128.0" />
-      <JFXTextField fx:id="txtAdvancedAPay" blendMode="DARKEN" layoutX="395.0" layoutY="380.0" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: white;" />
-      <JFXTextField fx:id="txtBalance" blendMode="DARKEN" layoutX="603.0" layoutY="381.0" prefHeight="25.0" prefWidth="112.0" />
-      <JFXButton fx:id="btnAddToCart" layoutX="630.0" layoutY="417.0" onAction="#btnAddToCartOnAction" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #38261c; -fx-background-radius: 6; -fx-border-radius: 12; -fx-text-fill: #68b340;" text="Add " textFill="WHITE">
+      <JFXButton fx:id="btnConfirm" layoutX="631.0" layoutY="405.0" onAction="#btnConfirmOnAction" prefHeight="30.0" prefWidth="85.0" style="-fx-background-color: #38261c; -fx-background-radius: 6; -fx-border-radius: 12; -fx-text-fill: #68b340;" text="Add " textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
       <TableView fx:id="tblPayment" layoutX="54.0" layoutY="457.0" prefHeight="119.0" prefWidth="677.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
-          <TableColumn fx:id="colPaymentId" prefWidth="75.0" text="PaymentId" />
-          <TableColumn fx:id="colCourseId" prefWidth="96.0" text="CourseId" />
-            <TableColumn fx:id="colStId" prefWidth="100.0" text="StudentId" />
-            <TableColumn fx:id="colCoursefee" prefWidth="117.0" text="Course Fee (LKR)" />
-            <TableColumn fx:id="colAdvancedFee" prefWidth="103.0" text="Advanced (LKR)" />
-            <TableColumn fx:id="colBalance" prefWidth="102.0" text="Balance" />
-            <TableColumn fx:id="colAction" prefWidth="102.0" text="Action" />
+          <TableColumn fx:id="colId" prefWidth="55.0" text="Id" />
+          <TableColumn fx:id="colUpfrontPay" prefWidth="92.0" text="upFront Pay" />
+            <TableColumn fx:id="colBalancePay" prefWidth="89.0" text="Balance" />
+            <TableColumn fx:id="colCourseId" prefWidth="62.0" text="Course Id" />
+            <TableColumn fx:id="colStudentId" prefWidth="66.0" text="Student Id" />
+            <TableColumn fx:id="colStatus" text="Status" />
+            <TableColumn fx:id="colStudentCourseDetailId" prefWidth="117.0" text="Stu_Couse_Id" />
+            <TableColumn fx:id="colBtnRemove" prefWidth="117.0" text="Action" />
         </columns>
          <effect>
             <Lighting diffuseConstant="1.27" specularConstant="0.0" specularExponent="40.0" surfaceScale="1.85">
@@ -203,10 +143,62 @@
             </Lighting>
          </effect>
       </TableView>
-      <JFXButton fx:id="btnRegister" layoutX="311.0" layoutY="589.0" onAction="#btnRegisterOnAction" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #454443; -fx-background-radius: 12; -fx-border-radius: 12; -fx-text-fill: #8c911d;" text="Register" textFill="WHITE">
+      <JFXButton fx:id="btnSave" layoutX="311.0" layoutY="589.0" onAction="#btnSaveOnAction" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #454443; -fx-background-radius: 12; -fx-border-radius: 12; -fx-text-fill: #8c911d;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
+      <ComboBox fx:id="comboStudent" layoutX="58.0" layoutY="264.0" onAction="#comboStudentOnAction" prefHeight="31.0" prefWidth="158.0" promptText="Select Student" style="-fx-background-radius: 8; -fx-background-color: #f2f1f0;">
+         <effect>
+            <Lighting diffuseConstant="1.32" specularConstant="0.71" specularExponent="40.0" surfaceScale="1.61">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="0.9868420958518982" green="0.9822733998298645" blue="0.9822733998298645" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </ComboBox>
+      <TextField fx:id="txtId" editable="false" layoutX="53.0" layoutY="355.0" onAction="#txtIdOnAction" opacity="0.84" prefHeight="31.0" prefWidth="167.0" promptText="Payment Id" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
+         <effect>
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </TextField>
+      <TextField fx:id="txtPayAmount" layoutX="255.0" layoutY="356.0" onAction="#txtPayAmountOnAction" opacity="0.84" prefHeight="31.0" prefWidth="199.0" promptText="Pay Amount" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
+         <effect>
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </TextField>
+      <TextField fx:id="txtDate" editable="false" layoutX="517.0" layoutY="355.0" onAction="#txtDateOnAction" opacity="0.84" prefHeight="31.0" prefWidth="185.0" promptText="Date" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
+         <effect>
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </TextField>
+      <TextField fx:id="txtStatus" layoutX="53.0" layoutY="408.0" onAction="#txtStatusOnAction" opacity="0.84" prefHeight="31.0" prefWidth="167.0" promptText="Stuatus" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
+         <effect>
+            <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+            </Lighting>
+         </effect>
+      </TextField>
    </children>
 </AnchorPane>

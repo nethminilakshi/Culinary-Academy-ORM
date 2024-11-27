@@ -5,3 +5,8 @@
     -fx-background-radius: 15 15 15 15;
     /*-fx-effect: dropshadow(gaussian, white, 10, 0.5, 0, 0);*/
 }
+
+.mainVBox {
+    -fx-background-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0, 0);
+}

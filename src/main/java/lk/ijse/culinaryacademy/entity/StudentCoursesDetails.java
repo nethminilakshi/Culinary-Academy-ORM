@@ -27,5 +27,6 @@ public class StudentCoursesDetails {
     @JoinColumn(name = "course_id")
     private Course course;
 
-
+    @OneToMany(mappedBy = "StudentCourseDetails", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 }
