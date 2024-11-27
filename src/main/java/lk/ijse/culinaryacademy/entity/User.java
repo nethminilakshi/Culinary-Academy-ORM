@@ -29,6 +29,4 @@ import java.util.List;
         @Column(name = "contact")
         private String contact;
 
-    @OneToMany(mappedBy = "user")
-    private List<Student> student;
 }

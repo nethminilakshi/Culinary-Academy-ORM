@@ -16,8 +16,16 @@ import java.util.List;
 public class StudentCoursesDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int studentCourseId;
-    private Date registrationDate;
+    private Long student_course_id;
+    private Date registration_date;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id")
+    private Student student;
+
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private Course course;
 
 
 }

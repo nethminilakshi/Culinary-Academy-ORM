@@ -1,25 +1,28 @@
 package lk.ijse.culinaryacademy.controllers;
 
-
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.culinaryacademy.bo.BOFactory;
+import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
 import lk.ijse.culinaryacademy.bo.custom.StudentBO;
-import lk.ijse.culinaryacademy.bo.custom.UserBO;
 import lk.ijse.culinaryacademy.dao.DAOFactory;
+import lk.ijse.culinaryacademy.dao.custom.CoursesDAO;
 import lk.ijse.culinaryacademy.dao.custom.StudentsDAO;
-import lk.ijse.culinaryacademy.dao.custom.UserDAO;
+import lk.ijse.culinaryacademy.dto.CoursesDTO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
-import lk.ijse.culinaryacademy.entity.Payment;
-import lk.ijse.culinaryacademy.entity.User;
+import lk.ijse.culinaryacademy.entity.Course;
+import lk.ijse.culinaryacademy.entity.Student;
+import lk.ijse.culinaryacademy.entity.StudentCoursesDetails;
 import lk.ijse.culinaryacademy.tm.StudentTm;
 
 import java.io.IOException;
@@ -27,30 +30,42 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 public class studentRegistrationFormController {
 
     @FXML
-    private JFXButton btnRegister;
+    private JFXButton btnAdd;
 
     @FXML
-    private TableColumn<?, String> colAddress;
+    private JFXButton btnClear;
 
     @FXML
-    private TableColumn<?, Integer> colContact;
+    private JFXButton btnDelete;
 
     @FXML
-    private TableColumn<?, String> colEmail;
+    private JFXButton btnUpdate;
 
     @FXML
-    private TableColumn<?, Integer> colNIC;
+    private TableColumn<?, ?> colAddress;
 
     @FXML
-    private TableColumn<?, String> colName;
+    private TableColumn<?, ?> colContact;
 
     @FXML
-    private TableColumn<?, String> colStId;
+    private TableColumn<?, ?> colEmail;
+
+    @FXML
+    private TableColumn<?, ?> colNIC;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colStId;
+
+    @FXML
+    private ComboBox<String> comboCourse;
 
     @FXML
     private AnchorPane studentRegPane;
@@ -59,215 +74,340 @@ public class studentRegistrationFormController {
     private TableView<StudentTm> tbleStudents;
 
     @FXML
-    private JFXTextField txtAddress;
+    private TextField txtAddress;
 
     @FXML
-    private JFXTextField txtContact;
+    private TextField txtContact;
 
     @FXML
-    private DatePicker txtDate;
+    private TextField txtDuration;
 
     @FXML
-    private JFXTextField txtEmail;
+    private TextField txtFree;
 
     @FXML
-    private JFXTextField txtId;
+    private TextField txtId;
 
     @FXML
-    private JFXTextField txtNIC;
+    private TextField txtNIC;
 
     @FXML
-    private JFXTextField txtName;
+    private TextField txtName;
 
     @FXML
     private TextField txtSerachNIC;
 
     @FXML
-    private ComboBox<String> comboUser;
-    StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
-    private List<StudentDTO> studentList = new ArrayList<>();
+    private TextField txtcourseName;
 
-    User user = new User();
+     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
+    CoursesBO coursesBO = (CoursesBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.COURSE);
+    CoursesDAO coursesDAO = (CoursesDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.COURSE);
+    StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
+    ObservableList<StudentTm> studentTmObservableList = FXCollections.observableArrayList();
+    ArrayList<Course> courseArrayList = new ArrayList<>();
+    ArrayList<Student> studentArrayList = new ArrayList<>();
 
     public void initialize() throws IOException, SQLException, ClassNotFoundException {
-        autoGenarateId();
-        loadStudentTable();
+        generateNewId();
+        getAllCourses();
+        setCourseId();
+        getAllStudents();
         setCellValueFactory();
+        setTable();
+        filterStudent();
+        selectTableRow();
     }
 
-    private void loadStudentTable() throws SQLException, IOException, ClassNotFoundException {
-        tbleStudents.getItems().clear();
-        try {
-            ArrayList<StudentDTO> allStudent = studentBO.getAllStudents();
-            for (StudentDTO studentDTO : allStudent) {
-                tbleStudents.getItems().add(new StudentTm(
-                        studentDTO.getStudentId(),
-                        studentDTO.getName(),
-                        studentDTO.getNic(),
-                        studentDTO.getEmail(),
-                        studentDTO.getAddress(),
-                        studentDTO.getContact()
-                ));
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    private void getAllStudents() throws IOException, SQLException, ClassNotFoundException {
+        List<Student> studentList = studentBO.getStudentList();
+        studentArrayList = (ArrayList<Student>) studentList;
+    }
+
+    private void getAllCourses() throws IOException, SQLException, ClassNotFoundException {
+        List<Course> courseList = coursesBO.getCourseList();
+        courseArrayList = (ArrayList<Course>) courseList;
     }
 
 
     private void setCellValueFactory() {
         colStId.setCellValueFactory(new PropertyValueFactory<>("studentId"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        colNIC.setCellValueFactory(new PropertyValueFactory<>("nic"));
-        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("contact"));
-
+        colNIC.setCellValueFactory(new PropertyValueFactory<>("NIC"));
     }
 
-
-
-    private void autoGenarateId() throws SQLException, IOException {
-
-        try {
-            txtId.setText(studentBO.generateNextStudentId());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+    private void setTable() throws IOException, SQLException, ClassNotFoundException {
+        studentTmObservableList.clear();
+        List<Student> studentList = studentBO.getStudentList();
+        for (Student student : studentList) {
+            StudentTm studentTm = new StudentTm(
+                    student.getStudentId(),
+                    student.getName(),
+                    student.getAddress(),
+                    student.getContact(),
+                    student.getNIC()
+            );
+            studentTmObservableList.add(studentTm);
         }
+        tbleStudents.setItems(studentTmObservableList);
     }
 
-    public void btnAddOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-
-//        String nic = txtSerachNIC.getText().trim();
-//
-//        try {
-//            if (studentBO.checkStudent(nic)) {
-//                new Alert(Alert.AlertType.ERROR, "This student already exists!").show();
-//                return;
-//            }
-
-        StudentDTO student = new StudentDTO(
-                txtId.getText().trim(),
-                txtName.getText().trim(),
-                txtNIC.getText().trim(),
-                txtEmail.getText().trim(),
-                txtAddress.getText(),
-                txtContact.getText().trim(),
-                user
-        );
-
-        boolean isSaved = studentBO.saveStudent(student);
-
-        if (isSaved) {
-            new Alert(Alert.AlertType.INFORMATION, "Student saved successfully!").show();
-            clearFields();
-            autoGenarateId();
-            loadStudentTable();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Failed to save student!").show();
-        }
+    private void selectTableRow() {
+        tbleStudents.setOnMouseClicked(mouseEvent -> {
+            int row = tbleStudents.getSelectionModel().getSelectedIndex();
+            StudentTm studentTm = tbleStudents.getItems().get(row);
+            txtId.setText(studentTm.getStudentId());
+            txtName.setText(studentTm.getName());
+            txtAddress.setText(studentTm.getAddress());
+            txtContact.setText(studentTm.getContact());
+            txtNIC.setText(studentTm.getNIC());
+        });
     }
-//        } catch (Exception e) {
-//            new Alert(Alert.AlertType.ERROR, "An error occurred: " + e.getMessage()).show();
-//            e.printStackTrace();
+
+
+    private String generateNewId() throws IOException {
+        String nextId = studentsDAO.getCurrentId();
+        txtId.setText(nextId);
+        return nextId;
+    }
+
+    private void clearFields() {
+
+        txtId.clear();
+        txtName.clear();
+        txtAddress.clear();
+        txtContact.clear();
+        txtSerachNIC.clear();
+        txtFree.clear();
+        txtcourseName.clear();
+        txtNIC.clear();
+    }
+
+//    private void setUserId() {
+//        List<String> userIds = userDao.getUserId();
+//        ObservableList<String> users = FXCollections.observableArrayList();
+//        for (String userId : userIds) {
+//            users.add(userId);
 //        }
+//        comboUser.setItems(users);
+//    }
 
-
-
-    public void btnClearOnAction(ActionEvent actionEvent) {
+    public void setCourseId() {
+        ObservableList<String> id = FXCollections.observableArrayList();
+        for (Course course : courseArrayList) {
+            id.add(course.getCourseId());
+        }
+        comboCourse.setItems(id);
+    }
+    @FXML
+    void btnClearOnAction(ActionEvent event) {
         clearFields();
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        String id = txtId.getText();
+    @FXML
+    void btnDeleteOnAction(ActionEvent event) throws IOException, SQLException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
-        try {
-            boolean isDeleted = studentBO.deleteStudent(id);
-            if (isDeleted) {
-                new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully").show();
-                clearFields();
-                autoGenarateId();
-                loadStudentTable();
+        if (result.orElse(no) == yes) {
+            if (studentBO.delete(txtId.getText())) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Student Deleted Successfully!").show();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to delete student").show();
+                new Alert(Alert.AlertType.ERROR, "SQL Error").show();
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void btnUpdateOnAction(ActionEvent actionEvent) throws IOException, SQLException, ClassNotFoundException {
-        StudentDTO studentDTO = new StudentDTO(
-                txtId.getText(),
-                txtName.getText(),
-                txtNIC.getText(),
-                txtEmail.getText(),
-                txtAddress.getText(),
-                txtContact.getText(),
-                user);
-
-        try {
-            if (studentBO.updateStudent(studentDTO)) {
-                new Alert(Alert.AlertType.INFORMATION, "Student updated successfully").show();
-                clearFields();
-                autoGenarateId();
-                loadStudentTable();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Failed to update student").show();
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
     @FXML
-    void txtSearchOnaction(ActionEvent event) throws SQLException {
-        String nic = txtSerachNIC.getText();
+    void btnAddOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        String studentId = txtId.getText();
+        Student existingStudent = studentsDAO.getStudentById(studentId);
 
-        if (nic == null || nic.trim().isEmpty()) {
-            new Alert(Alert.AlertType.WARNING, "Please enter a valid student NIC.").show();
-            return;
+        // If the student already exists, register them for the new course
+        if (existingStudent != null) {
+            registerStudentForCourse(existingStudent);
+        } else {
+            // Create and save a new student if not found
+//            User user = userDao.getUserById(comboUser.getValue());
+
+            StudentDTO studentDto = new StudentDTO();
+            studentDto.setStudentId(studentId);
+            studentDto.setName(txtName.getText());
+            studentDto.setAddress(txtAddress.getText());
+            studentDto.setContact(txtContact.getText());
+            studentDto.setNIC(txtNIC.getText());
+
+            studentBO.save(studentDto);
+
+            // Retrieve the newly saved student and register them for the course
+            Student newStudent = studentsDAO.getStudentById(studentId);
+            registerStudentForCourse(newStudent);
         }
+        setTable();
+        new Alert(Alert.AlertType.INFORMATION, "Student Added With Course Successfully!").show();
+    }
 
-        try {
-            StudentDTO student = studentBO.searchStudent(nic);
+    private void registerStudentForCourse(Student student) throws IOException, SQLException, ClassNotFoundException {
+        String courseId = comboCourse.getValue();
+        Course selectedCourse = null;
 
-            if (student != null) {
-                txtId.setText(student.getStudentId());
-                txtName.setText(student.getName());
-                txtNIC.setText(student.getNic());
-                txtEmail.setText(student.getEmail());
-                txtAddress.setText(student.getAddress());
-                txtContact.setText(student.getContact());
-            } else {
-                new Alert(Alert.AlertType.WARNING, "No student found with NIC: " + nic).show();
+        // Find the course by ID
+        for (Course course : courseArrayList) {
+            if (course.getCourseId().equals(courseId)) {
+                selectedCourse = course;
+                break;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "An error occurred while searching for the student. Please try again.").show();
+        }
+
+        if (selectedCourse != null) {
+            // Check if the student is already registered for this course
+            if (!studentsDAO.isStudentRegisteredForCourse(student.getStudentId(), courseId)) {
+                StudentCoursesDetails studentCourse = new StudentCoursesDetails();
+                studentCourse.setStudent(student);
+                studentCourse.setCourse(selectedCourse);
+                studentCourse.setRegistration_date(new java.util.Date());
+
+                // Save the student-course relationship
+                studentsDAO.saveStudentCourseDetails(studentCourse);
+            } else {
+                System.out.println("Student is already registered for this course.");
+            }
+        } else {
+            System.out.println("Selected course not found.");
+        }
+        setTable();
+    }
+
+    @FXML
+    void btnUpdateOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        String id = txtId.getText();
+        String name = txtName.getText();
+        String address = txtAddress.getText();
+        String contact = txtContact.getText();
+        String NIC = txtNIC.getText();
+
+        StudentDTO studentDto = new StudentDTO(id, name, address, contact,NIC);
+
+        if (studentBO.update
+                (studentDto)) {
+            new Alert(Alert.AlertType.INFORMATION, "Student Updated Successfully").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Error updating student details").show();
+        }
+
+        setTable();
+        generateNewId();
+
+    }
+
+    @FXML
+    void comboCourseOnAction(ActionEvent event) throws IOException {
+        String courseId =  comboCourse.getValue();
+        CoursesDTO course = coursesBO.getCourse(courseId);
+        if (course != null) {
+            txtcourseName.setText(course.getCourseName());
+            txtDuration.setText(course.getDuration());
+            txtFree.setText(String.valueOf(course.getCourseFee()));
+
         }
     }
 
-    private void clearFields() {
-        txtId.setText("");
-        txtName.setText("");
-        txtNIC.setText("");
-        txtEmail.setText("");
-        txtAddress.setText("");
-        txtContact.setText("");
+
+
+    private void filterStudent() {
+        FilteredList<StudentTm> filterData = new FilteredList<>(studentTmObservableList, e -> true);
+
+        txtSerachNIC.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            filterData.setPredicate(student -> {
+                if (newValue == null || newValue.isEmpty() || newValue.isBlank()) {
+                    return true;
+                }
+
+                String searchKeyword = newValue.toLowerCase();
+                if (student.getNIC().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else if (student.getContact().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                } else if (student.getName().toLowerCase().contains(searchKeyword)) {
+                    return true;
+                }
+                return false;
+            });
+        });
+
+        SortedList<StudentTm> studentTmSortedList = new SortedList<>(filterData);
+        studentTmSortedList.comparatorProperty().bind(tbleStudents.comparatorProperty());
+        tbleStudents.setItems(studentTmSortedList);
     }
 
+
+    @FXML
+    void txtAddressOnAction(ActionEvent event) {
+        txtNIC.requestFocus();
+    }
+    @FXML
+    void txtContactOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void txtNICOnAction(ActionEvent event) {
+        txtName.requestFocus();
+    }
+
+    @FXML
+    void txtIdOnAction(ActionEvent event) {
+        txtAddress.requestFocus();
+    }
+
+    @FXML
+    void txtNameOnAction(ActionEvent event) {
+        txtContact.requestFocus();
+
+    }
+
+    public void txtStudentIdOnKeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtContactOnKeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtStudentNameOnKeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtDateOnKeyReleased(KeyEvent keyEvent) {
+    }
+
+    public void txtSearchOnaction(ActionEvent actionEvent) {
+    }
 
     public void tbleClickOnAction(MouseEvent mouseEvent) {
-        StudentTm selectedItem = tbleStudents.getSelectionModel().getSelectedItem();
-        txtId.setText(selectedItem.getStudentId());
-        txtName.setText(selectedItem.getName());
-        txtNIC.setText(selectedItem.getNic());
-        txtEmail.setText(selectedItem.getEmail());
-        txtAddress.setText(selectedItem.getAddress());
-        txtContact.setText(String.valueOf(selectedItem.getContact()));
     }
 
+//    public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
+//        Regex.setTextColor(TextFieldType.ADDRESS,txtAddress);
+//    }
+//
+//    public void txtDateOnKeyReleased(KeyEvent keyEvent) {
+//    }
+//
+//    public void txtContactOnKeyReleased(KeyEvent keyEvent) {
+//        Regex.setTextColor(TextFieldType.CONTACT, txtContact);
+//    }
+
+//    public void txtStudentNameOnKeyReleased(KeyEvent keyEvent) {
+//        Regex.setTextColor(TextFieldType.NAME, txtName);
+//    }
+//    public boolean isValidated() {
+////        if(!Regex.setTextColor(TextFieldType.NAME,txtName)) return false;
+////        if(!Regex.setTextColor(TextFieldType.ADDRESS,txtAddress)) return false;
+////        if(!Regex.setTextColor(TextFieldType.CONTACT,txtContact)) return false;
+////        return true;
+//    }
 }

@@ -15,18 +15,11 @@ import java.util.List;
 @Table(name = "student")  // Table name in lowercase for consistency
 public class Student {
     @Id
-    @Column(name = "student_id" , length = 100)
-
+    @Column(name = "student_id", length = 100)
     private String studentId;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;
-
-    @Column(name = "nic", unique = true, length = 20)
-    private String nic;
-
-    @Column(name = "email", unique = true, length = 100)
-    private String email;
 
     @Column(name = "address", length = 255)
     private String address;
@@ -34,12 +27,15 @@ public class Student {
     @Column(name = "contact", length = 20)
     private String contact;
 
-@ManyToOne(fetch = FetchType.LAZY)
-@JoinColumn(name = "user_id")
-private User user;
 
+    @Column(name = "nic", unique = true, length = 30)
+    private String NIC;
 
+    @Column(name = "status")
+    private int status;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<StudentCoursesDetails> studentCourses;
 }
 
 

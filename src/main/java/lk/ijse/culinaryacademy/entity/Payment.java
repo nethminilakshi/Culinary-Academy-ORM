@@ -26,13 +26,4 @@ public class Payment {
     private String paymentDate;
 
 
-
-
-
-
-//
-//@ManyToOne
-//    @JoinColumn(name = "studentCourseId")
-//    private StudentCoursesDetails studentCoursesDetails;
-
 }

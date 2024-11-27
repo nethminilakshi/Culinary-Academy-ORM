@@ -1,6 +1,7 @@
 package lk.ijse.culinaryacademy.dao;
 
 
+import lk.ijse.culinaryacademy.dao.custom.impl.CourseDAOImpl;
 import lk.ijse.culinaryacademy.dao.custom.impl.StudentDAOImpl;
 import lk.ijse.culinaryacademy.dao.custom.impl.UsetDAOImpl;
 
@@ -18,8 +19,8 @@ public class DAOFactory {
     }
     public SuperDAO getDAOTypes(DAOTypes daoTypes){
         switch (daoTypes){
-//            case COURSE:
-//                return new CourseDAOImpl();
+           case COURSE:
+                return new CourseDAOImpl();
             case STUDENT:
                 return new StudentDAOImpl();
 //            case PAYMENT:

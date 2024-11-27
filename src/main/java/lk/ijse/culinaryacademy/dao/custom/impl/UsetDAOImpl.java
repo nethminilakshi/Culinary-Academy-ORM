@@ -23,10 +23,7 @@ public class UsetDAOImpl implements UserDAO {
         return false;
     }
 
-    @Override
-    public User search(String id) throws SQLException {
-        return null;
-    }
+
 
     @Override
     public boolean delete(String contact) throws SQLException, IOException {
@@ -38,6 +35,10 @@ public class UsetDAOImpl implements UserDAO {
         return null;
     }
 
+    @Override
+    public User findById(String id) throws IOException {
+        return null;
+    }
 
 
     @Override

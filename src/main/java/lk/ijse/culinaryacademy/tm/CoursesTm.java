@@ -10,5 +10,5 @@ public class CoursesTm {
     private String courseId;
     private String courseName;
     private String duration;
-    private String courseFee;
+    private double courseFee;
 }

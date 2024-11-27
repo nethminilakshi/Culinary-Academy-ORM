@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentCoursesDetailsDAOImpl implements StudentsCoursesDetailsDAO {
+
     @Override
     public boolean save(StudentCoursesDetails dto) throws SQLException, IOException {
         return false;
@@ -20,21 +21,19 @@ public class StudentCoursesDetailsDAOImpl implements StudentsCoursesDetailsDAO {
     }
 
     @Override
-    public StudentCoursesDetails search(String id) throws SQLException {
-        return null;
-    }
-
-    @Override
     public boolean delete(String contact) throws SQLException, IOException {
         return false;
     }
 
     @Override
-    public ArrayList<StudentCoursesDetails> getAll() throws SQLException, ClassNotFoundException, IOException {
+    public List<StudentCoursesDetails> getAll() throws SQLException, ClassNotFoundException, IOException {
         return null;
     }
 
-
+    @Override
+    public StudentCoursesDetails findById(String id) throws IOException {
+        return null;
+    }
 
     @Override
     public String getLastId() throws Exception {

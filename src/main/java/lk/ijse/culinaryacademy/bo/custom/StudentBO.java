@@ -2,24 +2,18 @@ package lk.ijse.culinaryacademy.bo.custom;
 
 import lk.ijse.culinaryacademy.bo.SuperBO;
 import lk.ijse.culinaryacademy.dto.StudentDTO;
+import lk.ijse.culinaryacademy.entity.Student;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.List;
 
 public interface StudentBO extends SuperBO {
+    List<Student> getStudentList() throws SQLException, IOException, ClassNotFoundException;
 
-    boolean saveStudent(StudentDTO dto) throws SQLException, IOException;
+    boolean delete(String text) throws SQLException, IOException;
 
-    boolean deleteStudent(String nic) throws SQLException, IOException;
+    boolean save(StudentDTO studentDto) throws SQLException, IOException;
 
-    boolean updateStudent(StudentDTO dto) throws SQLException, IOException;
-
-    StudentDTO searchStudent(String nic) throws SQLException;
-
-    ArrayList<StudentDTO> getAllStudents() throws SQLException, ClassNotFoundException, IOException;
-
-    String generateNextStudentId() throws Exception;
-
-    boolean checkStudent(String nic);
+    boolean update(StudentDTO studentDto) throws SQLException, IOException;
 }

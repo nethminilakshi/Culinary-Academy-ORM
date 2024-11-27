@@ -26,15 +26,8 @@ public class Course {
     private String duration;
 
     @Column(name = "fee", length = 100)
-    private String fee;
-//
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Registration> registrations;
-//
-//    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    private List<Payment> payment;
-
-
-
+    private double courseFee;
+  @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+  private List<StudentCoursesDetails> studentCourses;
 
 }
