@@ -309,6 +309,7 @@ public class paymentFormController {
                 txtCoursefee.setText(String.valueOf(studentCourse.getCourse().getCourseFee()));
                 txtStuCouDetail.setText(String.valueOf(studentCourse.getStudent_course_id()));
                 txtDuration.setText(studentCourse.getCourse().getDuration());
+                txtStudentId.setText(studentCourse.getStudent().getStudentId());
                 txtStudentName.setText(studentCourse.getStudent().getName());
                 break;
             }

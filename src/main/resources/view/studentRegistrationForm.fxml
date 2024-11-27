@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -17,16 +17,13 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="904.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
+<AnchorPane fx:id="studentRegPane" prefHeight="650.0" prefWidth="904.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.studentRegistrationFormController">
    <children>
-      <VBox layoutX="15.0" layoutY="77.0" prefHeight="562.0" prefWidth="855.0" style="-fx-background-color: white; -fx-background-radius: 8;" styleClass="mainVBox" stylesheets="@../assets/a/css/pageStyle.css" />
-      <VBox layoutX="30.0" layoutY="109.0" prefHeight="519.0" prefWidth="728.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
-         <effect>
-            <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
-         </effect>
-      </VBox>
-      <JFXButton fx:id="btnAdd" layoutX="68.0" layoutY="405.0" onAction="#btnAddOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #273c5c; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: black;" text="Add" textFill="WHITE">
+      <VBox layoutX="15.0" layoutY="77.0" prefHeight="562.0" prefWidth="872.0" style="-fx-background-color: white; -fx-background-radius: 8;" styleClass="mainVBox" stylesheets="@../assets/a/css/pageStyle.css" />
+      <VBox layoutX="30.0" layoutY="90.0" prefHeight="538.0" prefWidth="395.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 15;" />
+      <JFXButton fx:id="btnAdd" layoutX="476.0" layoutY="551.0" onAction="#btnAddOnAction" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #273c5c; -fx-background-radius: 12; -fx-border-radius: 12; -fx-border-color: black;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -36,14 +33,13 @@
             <Font name="Constantia" size="29.0" />
          </font>
       </Label>
-      <TableView fx:id="tbleStudents" layoutX="42.0" layoutY="456.0" onMouseClicked="#tbleClickOnAction" prefHeight="152.0" prefWidth="709.0" stylesheets="@../assets/a/css/tableStyle.css">
+      <TableView fx:id="tbleStudents" layoutX="438.0" layoutY="157.0" onMouseClicked="#tbleClickOnAction" prefHeight="367.0" prefWidth="439.0" stylesheets="@../assets/a/css/tableStyle.css">
         <columns>
-          <TableColumn fx:id="colStId" prefWidth="71.0" text="St Id" />
-          <TableColumn fx:id="colNIC" prefWidth="142.0" text="NIC" />
-            <TableColumn fx:id="colName" prefWidth="134.0" text="Name" />
-            <TableColumn fx:id="colEmail" prefWidth="164.0" text="Email" />
-            <TableColumn fx:id="colAddress" prefWidth="94.0" text="Address" />
-            <TableColumn fx:id="colContact" prefWidth="102.0" text="contact" />
+          <TableColumn fx:id="colStId" prefWidth="55.0" text="St Id" />
+          <TableColumn fx:id="colNIC" prefWidth="119.0" text="NIC" />
+            <TableColumn fx:id="colName" prefWidth="84.0" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="88.0" text="Address" />
+            <TableColumn fx:id="colContact" prefWidth="90.0" text="contact" />
         </columns>
          <effect>
             <Lighting diffuseConstant="1.27" light="$null" specularConstant="0.0" specularExponent="40.0" surfaceScale="1.85">
@@ -53,23 +49,23 @@
             </Lighting>
          </effect>
       </TableView>
-      <JFXButton fx:id="btnUpdate" layoutX="224.0" layoutY="405.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #21541c; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btnUpdate" layoutX="582.0" layoutY="550.0" onAction="#btnUpdateOnAction" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #21541c; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnDelete" layoutX="475.0" layoutY="405.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #851823; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="btnDelete" layoutX="681.0" layoutY="550.0" onAction="#btnDeleteOnAction" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #851823; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Delete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btnClear" layoutX="614.0" layoutY="404.0" onAction="#btnClearOnAction" prefHeight="38.0" prefWidth="104.0" style="-fx-background-color: #857218; -fx-background-radius: 8; -fx-border-color: black; -fx-border-radius: 8;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btnClear" layoutX="782.0" layoutY="550.0" onAction="#btnClearOnAction" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #857218; -fx-background-radius: 12; -fx-border-color: black; -fx-border-radius: 12;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
       <Line endX="10.0" layoutX="393.0" layoutY="61.0" startX="-108.0" stroke="RED" strokeWidth="3.0" />
-      <TextField fx:id="txtSerachNIC" layoutX="584.0" layoutY="121.0" onAction="#txtSearchOnaction" prefHeight="31.0" prefWidth="158.0" style="-fx-background-radius: 10; -fx-background-color: #dedddc;" text="Search NIC">
+      <TextField fx:id="txtSerachNIC" layoutX="270.0" layoutY="102.0" onAction="#txtSearchOnaction" prefHeight="31.0" prefWidth="142.0" style="-fx-background-radius: 10; -fx-background-color: #dedddc;" text="Search NIC">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
@@ -81,14 +77,75 @@
             </InnerShadow>
          </effect></TextField>
       <ImageView fitHeight="85.0" fitWidth="115.0" layoutX="640.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <TextField fx:id="txtId" layoutX="137.0" layoutY="143.0" onAction="#txtIdOnAction" onKeyReleased="#txtStudentIdOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Id" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtAddress" layoutX="137.0" layoutY="242.0" onAction="#txtAddressOnAction" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Address" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtContact" layoutX="137.0" layoutY="288.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Contact" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtName" layoutX="137.0" layoutY="192.0" onAction="#txtNameOnAction" onKeyReleased="#txtStudentNameOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Name" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <ComboBox fx:id="comboCourse" layoutX="414.0" layoutY="189.0" onAction="#comboCourseOnAction" prefHeight="31.0" prefWidth="210.0" promptText="course" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtcourseName" layoutX="414.0" layoutY="241.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Name" style="-fx-border-radius: 8; -fx-background-radius: 8;" />
-      <TextField fx:id="txtDuration" layoutX="414.0" layoutY="289.0" prefHeight="31.0" prefWidth="210.0" promptText="Duration" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtFree" layoutX="413.0" layoutY="336.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Fee" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtNIC" layoutX="138.0" layoutY="333.0" onAction="#txtNICOnAction" onKeyReleased="#txtDateOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="NIC" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtId" layoutX="181.0" layoutY="169.0" onAction="#txtIdOnAction" onKeyReleased="#txtStudentIdOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Id" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtAddress" layoutX="181.0" layoutY="256.0" onAction="#txtAddressOnAction" onKeyReleased="#txtAddressOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Address" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtContact" layoutX="181.0" layoutY="301.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Contact" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtName" layoutX="181.0" layoutY="213.0" onAction="#txtNameOnAction" onKeyReleased="#txtStudentNameOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Student Name" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <ComboBox fx:id="comboCourse" layoutX="194.0" layoutY="439.0" onAction="#comboCourseOnAction" prefHeight="31.0" prefWidth="210.0" promptText="course" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtcourseName" layoutX="194.0" layoutY="485.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Name" style="-fx-border-radius: 8; -fx-background-radius: 8;" />
+      <TextField fx:id="txtDuration" layoutX="194.0" layoutY="531.0" prefHeight="31.0" prefWidth="210.0" promptText="Duration" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtFree" layoutX="193.0" layoutY="578.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Fee" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtNIC" layoutX="182.0" layoutY="345.0" onAction="#txtNICOnAction" onKeyReleased="#txtDateOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="NIC" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <Text fill="#5b5757" layoutX="53.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id :" wrappingWidth="95.13671875">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="56.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" wrappingWidth="119.13671875">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="56.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact No :" wrappingWidth="115.0">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="58.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="NIC :" wrappingWidth="68.13671875">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#272054" layoutX="46.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Students Details :" wrappingWidth="221.0">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <effect>
+            <ColorAdjust brightness="0.05" contrast="-0.38" hue="0.01" saturation="1.0" />
+         </effect>
+      </Text>
+      <Text fill="#5b5757" layoutX="54.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name :" wrappingWidth="121.0">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#272054" layoutX="46.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Course Details :" wrappingWidth="221.0">
+         <font>
+            <Font name="Cambria Bold" size="20.0" />
+         </font>
+         <effect>
+            <ColorAdjust brightness="0.05" contrast="-0.38" hue="0.01" saturation="1.0" />
+         </effect>
+      </Text>
+      <Text fill="#5b5757" layoutX="53.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Id :" wrappingWidth="95.13671875">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="52.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Name :" wrappingWidth="121.0">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="52.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration :" wrappingWidth="121.0">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
+      <Text fill="#5b5757" layoutX="52.0" layoutY="598.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course Fee :" wrappingWidth="121.0">
+         <font>
+            <Font name="Arial Black" size="14.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

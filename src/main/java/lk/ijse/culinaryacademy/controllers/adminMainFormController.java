@@ -106,7 +106,13 @@ public class adminMainFormController {
 
     }
 
+    public void btnUserOnAction(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/userForm.fxml"));
+        Pane settingPane = (Pane) fxmlLoader.load();
 
+        holderPane.getChildren().clear();
+        holderPane.getChildren().add(settingPane);
+    }
 
 
     public enum Pages{
@@ -117,7 +123,7 @@ public class adminMainFormController {
         btnPrograms.getStyleClass().remove("JFX-button-Programs-active");
         btnStudent.getStyleClass().remove("JFX-button-StudentRegistration-active");
         btnPayment.getStyleClass().remove("JFX-button-Register-active");
-        btnUserSetting.getStyleClass().remove("JFX-button-UserSetting-active");
+
 
 
         switch (page) {
@@ -133,9 +139,7 @@ public class adminMainFormController {
             case REGISTER:
                 btnPayment.getStyleClass().add("JFX-button-Register-active");
                 break;
-            case USER_SETTING:
-                btnUserSetting.getStyleClass().add("JFX-button-UserSetting-active");
-                break;
+
         }
     }
 }

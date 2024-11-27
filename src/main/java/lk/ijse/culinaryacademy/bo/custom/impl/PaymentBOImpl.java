@@ -39,7 +39,7 @@ public class PaymentBOImpl implements PaymentBO {
           paymentDto.getPaymentDate(),
           paymentDto.getPayAmount(),
           paymentDto.getStatus(),
-          paymentDto.getPayAmount(),
+          paymentDto.getUpfrontAmount(),
           paymentDto.getBalance(),
           paymentDto.getStudent_course()
   );

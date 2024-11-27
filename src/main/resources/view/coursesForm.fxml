@@ -21,7 +21,7 @@
 <AnchorPane fx:id="programPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="904.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.coursesFormController">
    <children>
       <VBox layoutX="22.0" layoutY="94.0" prefHeight="519.0" prefWidth="872.0" style="-fx-background-color: white; -fx-background-radius: 8;" styleClass="mainVBox" stylesheets="@../assets/a/css/pageStyle.css" />
-      <VBox layoutX="40.0" layoutY="122.0" prefHeight="447.0" prefWidth="404.0" style="-fx-background-color: #e0e0e0; -fx-background-radius: 15;">
+      <VBox layoutX="40.0" layoutY="122.0" prefHeight="447.0" prefWidth="404.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 15;">
          <effect>
             <DropShadow height="15.14" radius="7.07" spread="0.3" width="15.14" />
          </effect>

@@ -94,7 +94,7 @@ public class coursesFormController {
         colProgramId.setCellValueFactory(new PropertyValueFactory<>("courseId"));
         colProgramName.setCellValueFactory(new PropertyValueFactory<>("courseName"));
         colDuration.setCellValueFactory(new PropertyValueFactory<>("duration"));
-        colDuration.setCellValueFactory(new PropertyValueFactory<>("courseFee"));
+        colFee.setCellValueFactory(new PropertyValueFactory<>("courseFee"));
     }
 
     private void setTable() throws SQLException, IOException, ClassNotFoundException {
