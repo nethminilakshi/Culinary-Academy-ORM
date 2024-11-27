@@ -90,10 +90,6 @@ public class CourseDAOImpl implements CoursesDAO {
         return course;
     }
 
-    @Override
-    public String getLastId() throws Exception {
-        return null;
-    }
 
     @Override
     public String getCurrentId() throws IOException {

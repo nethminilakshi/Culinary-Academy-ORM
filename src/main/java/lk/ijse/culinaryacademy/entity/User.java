@@ -8,25 +8,24 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @NoArgsConstructor
-    @AllArgsConstructor
-    @Data
-    @Entity
-    @Table(name = "users")
-    public class User {
-        @Id
-        @Column(name = "user_id")
-        private String userId;
+@AllArgsConstructor
+@Data
+@Entity
+@Table(name = "users")
+public class User {
+    @Id
 
-        @Column(name = "username")
-        private String username;
+    private String userId;
 
-        @Column(name = "password")
-        private String password;
 
-        @Column(name = "user_role")
-        private String userRole;
+    private String username;
 
-        @Column(name = "contact")
-        private String contact;
+
+    private String password;
+
+    private String contact;
+
+
+    private String userRole;
 
 }

@@ -101,7 +101,8 @@ public class coursesFormController {
         courseObservableList.clear();
         List<Course> courseList = courseBo.getCourseList();
         for (Course course : courseList) {
-            CoursesTm courseTm =  new CoursesTm(course.getCourseId(),
+            CoursesTm courseTm =  new CoursesTm(
+                    course.getCourseId(),
                     course.getCourseName(),
                     course.getDuration(),
                     course.getCourseFee());
@@ -124,7 +125,7 @@ public class coursesFormController {
             txtId.setText(courseTm.getCourseId());
             txtName.setText(courseTm.getCourseName());
             txtDuration.setText(String.valueOf(courseTm.getDuration()));
-            txtFree.setText(String.valueOf(courseTm.getCourseFee()));
+          txtFree.setText(String.valueOf(courseTm.getCourseFee()));
         });
     }
 

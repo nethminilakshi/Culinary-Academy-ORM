@@ -40,16 +40,16 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
 
-    @Override
-    public String getLastId() throws Exception {
-        try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            String hql = "SELECT p.paymentId FROM Payment p ORDER BY p.paymentId DESC";
-            Query<String> query = session.createQuery(hql, String.class);
-            query.setMaxResults(1);
-            return query.uniqueResult();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    @Override
+//    public String getLastId() throws Exception {
+//        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+//            String hql = "SELECT p.paymentId FROM Payment p ORDER BY p.paymentId DESC";
+//            Query<String> query = session.createQuery(hql, String.class);
+//            query.setMaxResults(1);
+//            return query.uniqueResult();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 }

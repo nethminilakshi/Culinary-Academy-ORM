@@ -8,8 +8,8 @@ import lombok.*;
 public class UserTm {
 
     private String userId;
-    private String userName;
-    private String password;
-    private String role;
+    private String username;
+    private String UserContact;
+    private String UserRole;
 
 }

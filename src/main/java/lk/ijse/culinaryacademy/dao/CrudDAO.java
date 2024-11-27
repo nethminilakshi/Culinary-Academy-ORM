@@ -12,6 +12,6 @@ public interface CrudDAO<T> extends SuperDAO {
     public  boolean delete(String contact) throws SQLException, IOException;
     public List<T> getAll() throws SQLException, ClassNotFoundException, IOException;
     public T findById(String id) throws IOException;
-    String getLastId() throws Exception;
+
 
 }

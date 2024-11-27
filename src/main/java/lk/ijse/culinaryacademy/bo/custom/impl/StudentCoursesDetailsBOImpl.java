@@ -1,4 +1,6 @@
 package lk.ijse.culinaryacademy.bo.custom.impl;
 
-public class StudentCoursesDetailsBOImpl {
+import lk.ijse.culinaryacademy.bo.custom.StudentCoursesDetailsBO;
+
+public class StudentCoursesDetailsBOImpl implements StudentCoursesDetailsBO {
 }

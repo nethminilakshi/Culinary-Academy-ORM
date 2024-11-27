@@ -52,12 +52,12 @@ public class StudentDAOImpl implements StudentsDAO {
 
 
     @Override
-    public boolean delete(String contact) throws SQLException, IOException {
+    public boolean delete(String id) throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
         Transaction transaction = session.beginTransaction();
         NativeQuery<Student> nativeQuery = session.createNativeQuery
-                ("update student set status = 0 where contact = :contact");
-        nativeQuery.setParameter("contact", contact);
+                ("update Student set status = 0 where studentId = :id");
+       nativeQuery.setParameter("id", id);
         nativeQuery.executeUpdate();
         transaction.commit();
         session.close();
@@ -81,10 +81,6 @@ public class StudentDAOImpl implements StudentsDAO {
         return null;
     }
 
-    @Override
-    public String getLastId() throws Exception {
-        return null;
-    }
 
     @Override
     public String getCurrentId() throws IOException {
@@ -119,7 +115,7 @@ public class StudentDAOImpl implements StudentsDAO {
             session = FactoryConfiguration.getInstance().getSession();
             transaction = session.beginTransaction();
 
-            NativeQuery<Student> query = session.createNativeQuery("SELECT * FROM student WHERE stu_id = :id", Student.class);
+            NativeQuery<Student> query = session.createNativeQuery("SELECT * FROM student WHERE studentId = :id", Student.class);
             query.setParameter("id", studentId);
 
             student = query.uniqueResult();

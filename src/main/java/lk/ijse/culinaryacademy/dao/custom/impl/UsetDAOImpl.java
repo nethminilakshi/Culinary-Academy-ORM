@@ -41,35 +41,20 @@ public class UsetDAOImpl implements UserDAO {
     }
 
 
+//    @Override
+//    public String getLastId() throws Exception {
+//        return null;
+//    }
+
+
     @Override
-    public String getLastId() throws Exception {
+    public String getCurrentId() throws IOException {
         return null;
     }
 
     @Override
-    public List<String> getUser() {
-        Session session = null;
-        Transaction transaction = null;
-        List<String> userIds = new ArrayList<>();
-
-        try {
-            session = FactoryConfiguration.getInstance().getSession();
-            transaction = session.beginTransaction();
-
-            userIds = session.createQuery("SELECT u.userId FROM User u", String.class).list();
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
-        }
-        return userIds;
+    public List<String> getUserId() {
+        return null;
     }
 
     @Override
@@ -100,5 +85,20 @@ public class UsetDAOImpl implements UserDAO {
         }
 
         return user;
+    }
+
+    @Override
+    public boolean checkCredential(String username, String password) {
+        return false;
+    }
+
+    @Override
+    public boolean updateUser(User user) {
+        return false;
+    }
+
+    @Override
+    public String getUserRole(String username) {
+        return null;
     }
 }
