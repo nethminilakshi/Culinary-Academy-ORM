@@ -35,6 +35,9 @@ public class Regex {
             case USERNAME:
                 patternString = "^[a-zA-Z0-9_.]+$";
                 break;
+            case EMAIL:
+                patternString = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+                break;
             case DATE:
                 patternString = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
                 break;

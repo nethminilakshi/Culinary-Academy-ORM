@@ -157,7 +157,7 @@
             </Lighting>
          </effect>
       </TextField>
-      <TextField fx:id="txtPayAmount" layoutX="255.0" layoutY="356.0" onAction="#txtPayAmountOnAction" opacity="0.84" prefHeight="31.0" prefWidth="199.0" promptText="Pay Amount" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
+      <TextField fx:id="txtPayAmount" layoutX="255.0" layoutY="356.0" onAction="#txtPayAmountOnAction" onKeyReleased="#txtAmountOnKeyReleased" opacity="0.84" prefHeight="31.0" prefWidth="199.0" promptText="Pay Amount" style="-fx-font-size: 14px; -fx-font-family: 'Serif'; -fx-border-radius: 6; -fx-background-radius: 6;">
          <effect>
             <Lighting diffuseConstant="1.69" light="$null" specularConstant="0.0">
                <bumpInput>

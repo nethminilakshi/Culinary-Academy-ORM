@@ -1,4 +1,5 @@
 package lk.ijse.culinaryacademy.controllers;
+
 import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,8 @@ import lk.ijse.culinaryacademy.dao.custom.CoursesDAO;
 import lk.ijse.culinaryacademy.dto.CoursesDTO;
 import lk.ijse.culinaryacademy.entity.Course;
 import lk.ijse.culinaryacademy.tm.CoursesTm;
+import lk.ijse.culinaryacademy.util.Regex;
+import lk.ijse.culinaryacademy.util.TextFieldType;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -101,7 +104,7 @@ public class coursesFormController {
         courseObservableList.clear();
         List<Course> courseList = courseBo.getCourseList();
         for (Course course : courseList) {
-            CoursesTm courseTm =  new CoursesTm(
+            CoursesTm courseTm = new CoursesTm(
                     course.getCourseId(),
                     course.getCourseName(),
                     course.getDuration(),
@@ -125,7 +128,7 @@ public class coursesFormController {
             txtId.setText(courseTm.getCourseId());
             txtName.setText(courseTm.getCourseName());
             txtDuration.setText(String.valueOf(courseTm.getDuration()));
-          txtFree.setText(String.valueOf(courseTm.getCourseFee()));
+            txtFree.setText(String.valueOf(courseTm.getCourseFee()));
         });
     }
 
@@ -155,20 +158,22 @@ public class coursesFormController {
 
     @FXML
     void btnAddOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        String id = txtId.getText();
-        String name = txtName.getText();
-        String duration = txtDuration.getText();
-        double free = Double.parseDouble((txtFree.getText()));
+        if (isValidated()) {
+            String id = txtId.getText();
+            String name = txtName.getText();
+            String duration = txtDuration.getText();
+            double free = Double.parseDouble((txtFree.getText()));
 
-        CoursesDTO courseDto = new CoursesDTO(id, name, duration, free);
-        if (courseBo.save(courseDto)){
-            new Alert(Alert.AlertType.CONFIRMATION,"Course Added Successfully").show();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Course Not Added Successfully").show();
+            CoursesDTO courseDto = new CoursesDTO(id, name, duration, free);
+            if (courseBo.save(courseDto)) {
+                new Alert(Alert.AlertType.CONFIRMATION, "Course Added Successfully").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Course Not Added Successfully").show();
+            }
+            clearFields();
+            setTable();
+            generateNewId();
         }
-        clearFields();
-        setTable();
-        generateNewId();
     }
 
     @FXML
@@ -180,11 +185,12 @@ public class coursesFormController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        ButtonType yes = new ButtonType("Yes",ButtonBar.ButtonData.OK_DONE);
+        if (isValidated() ){
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
-        if(result.orElse(no) == yes) {
+        if (result.orElse(no) == yes) {
             if (courseBo.delete(txtId.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "User Deleted Successfully!").show();
             } else {
@@ -195,29 +201,31 @@ public class coursesFormController {
         setTable();
         generateNewId();
     }
-
+}
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        if (isValidated() ){
         String id = txtId.getText();
         String name = txtName.getText();
         String duration = txtDuration.getText();
         double free = Double.parseDouble(txtFree.getText());
 
         CoursesDTO courseDto = new CoursesDTO(id, name, duration, free);
-        if (courseBo.update(courseDto)){
-            new Alert(Alert.AlertType.CONFIRMATION,"Course Updated Successfully").show();
-        }else {
-            new Alert(Alert.AlertType.ERROR,"Course Not Updated Successfully").show();
+        if (courseBo.update(courseDto)) {
+            new Alert(Alert.AlertType.CONFIRMATION, "Course Updated Successfully").show();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Course Not Updated Successfully").show();
         }
         clearFields();
         setTable();
         generateNewId();
-    }
+    }}
 
     @FXML
     void tblOnClickAction(MouseEvent event) {
 
     }
+
     @FXML
     void txtDurationOnAction(ActionEvent event) {
         txtFree.requestFocus();
@@ -225,7 +233,7 @@ public class coursesFormController {
 
     @FXML
     void txtFreeOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        btnAddOnAction( event);
+        btnAddOnAction(event);
     }
 
     @FXML
@@ -237,18 +245,21 @@ public class coursesFormController {
     void txtNameOnAction(ActionEvent event) {
         txtDuration.requestFocus();
     }
+
     @FXML
     void txtDurationOnKeyReleased(KeyEvent event) {
-
+        Regex.setTextColor(TextFieldType.DURATION, txtDuration);
     }
+
     @FXML
     void txtNameOnKeyReleased(KeyEvent event) {
 
+        Regex.setTextColor(TextFieldType.NAME, txtName);
     }
 
     @FXML
     void txtCourseFeeOnKeyReleased(KeyEvent event) throws IOException {
-
+        Regex.setTextColor(TextFieldType.PRICE, txtFree);
     }
 
     @FXML
@@ -256,4 +267,10 @@ public class coursesFormController {
 
     }
 
+    public boolean isValidated() {
+        if (!Regex.setTextColor(TextFieldType.NAME, txtName)) return false;
+        if (!Regex.setTextColor(TextFieldType.PRICE, txtFree)) return false;
+        if (!Regex.setTextColor(TextFieldType.DURATION, txtDuration)) return false;
+        return true;
+    }
 }

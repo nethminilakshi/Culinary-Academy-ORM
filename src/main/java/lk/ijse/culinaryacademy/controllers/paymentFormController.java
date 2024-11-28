@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.culinaryacademy.bo.BOFactory;
 import lk.ijse.culinaryacademy.bo.custom.CoursesBO;
@@ -23,6 +24,8 @@ import lk.ijse.culinaryacademy.entity.Payment;
 import lk.ijse.culinaryacademy.entity.Student;
 import lk.ijse.culinaryacademy.entity.StudentCoursesDetails;
 import lk.ijse.culinaryacademy.tm.paymentTm;
+import lk.ijse.culinaryacademy.util.Regex;
+import lk.ijse.culinaryacademy.util.TextFieldType;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -177,6 +180,7 @@ public class paymentFormController {
 
     @FXML
     void btnConfirmOnAction(ActionEvent event) {
+        if (isValidated()) {
         if (txtId.getText().isEmpty() || comboCourses.getValue() == null || txtPayAmount.getText().isEmpty()) {
             new Alert(Alert.AlertType.WARNING, "Please fill in all required fields").show();
             return;
@@ -240,7 +244,7 @@ public class paymentFormController {
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "An unexpected error occurred: " + e.getMessage()).show();
         }
-    }
+    }}
 
     private void updateStudentCourseBalance(long studentCourseId, double newBalance) {
         for (Payment payment : paymentArrayList) {
@@ -266,34 +270,35 @@ public class paymentFormController {
 
     @FXML
     void btnSaveOnAction(ActionEvent event) throws SQLException, IOException, ClassNotFoundException {
-        paymentTm selectedPayment = tblPayment.getSelectionModel().getSelectedItem();
+        if (isValidated()) {
+            paymentTm selectedPayment = tblPayment.getSelectionModel().getSelectedItem();
 
-        if (selectedPayment == null) {
-            new Alert(Alert.AlertType.WARNING, "Please select a payment to save").show();
-            return;
+            if (selectedPayment == null) {
+                new Alert(Alert.AlertType.WARNING, "Please select a payment to save").show();
+                return;
+            }
+
+            StudentCoursesDetails studentCourse = StudentsCoursesDetailsDAO.getStudentCourseById(Long.valueOf(txtStuCouDetail.getText()));
+
+            PaymentDTO paymentDto = new PaymentDTO();
+            paymentDto.setPaymentId(txtId.getText());
+            paymentDto.setStatus(txtStatus.getText());
+            paymentDto.setBalance(selectedPayment.getBalance()); // Use value from the selected item
+            paymentDto.setPayAmount(Double.parseDouble(txtPayAmount.getText()));
+            paymentDto.setPaymentDate(txtDate.getText());
+            paymentDto.setStudent_course(studentCourse);
+
+            paymentBO.savePayment(paymentDto);
+
+            new Alert(Alert.AlertType.INFORMATION, "Payment saved successfully").show();
+
+            if (selectedPayment.getBalance() == 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Course fee is fully paid!").show();
+            }
+
+            getAllPayment();
         }
-
-        StudentCoursesDetails studentCourse = StudentsCoursesDetailsDAO.getStudentCourseById(Long.valueOf(txtStuCouDetail.getText()));
-
-        PaymentDTO paymentDto = new PaymentDTO();
-        paymentDto.setPaymentId(txtId.getText());
-        paymentDto.setStatus(txtStatus.getText());
-        paymentDto.setBalance(selectedPayment.getBalance()); // Use value from the selected item
-        paymentDto.setPayAmount(Double.parseDouble(txtPayAmount.getText()));
-        paymentDto.setPaymentDate(txtDate.getText());
-        paymentDto.setStudent_course(studentCourse);
-
-        paymentBO.savePayment(paymentDto);
-
-        new Alert(Alert.AlertType.INFORMATION, "Payment saved successfully").show();
-
-        if (selectedPayment.getBalance() == 0) {
-            new Alert(Alert.AlertType.INFORMATION, "Course fee is fully paid!").show();
-        }
-
-        getAllPayment();
     }
-
     @FXML
     void comboCoursesOnAction(ActionEvent event) {
         String selectedCourseName = comboCourses.getValue();
@@ -349,4 +354,13 @@ public class paymentFormController {
         txtPayAmount.requestFocus();
     }
 
+    public boolean isValidated() {
+        if(!Regex.setTextColor(TextFieldType.PRICE,txtCoursefee)) return false;
+        return true;
+    }
+
+    public void txtAmountOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.PRICE, txtCoursefee);
+
+    }
 }

@@ -84,8 +84,8 @@
       <ComboBox fx:id="comboCourse" layoutX="194.0" layoutY="439.0" onAction="#comboCourseOnAction" prefHeight="31.0" prefWidth="210.0" promptText="course" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
       <TextField fx:id="txtcourseName" layoutX="194.0" layoutY="485.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Name" style="-fx-border-radius: 8; -fx-background-radius: 8;" />
       <TextField fx:id="txtDuration" layoutX="194.0" layoutY="531.0" prefHeight="31.0" prefWidth="210.0" promptText="Duration" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtFree" layoutX="193.0" layoutY="578.0" prefHeight="31.0" prefWidth="210.0" promptText="Course Fee" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
-      <TextField fx:id="txtNIC" layoutX="182.0" layoutY="345.0" onAction="#txtNICOnAction" onKeyReleased="#txtDateOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="NIC" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtFree" layoutX="193.0" layoutY="578.0" onKeyReleased="#txtStudentFeeOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="Course Fee" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
+      <TextField fx:id="txtNIC" layoutX="182.0" layoutY="345.0" onAction="#txtNICOnAction" onKeyReleased="#txtNICOnKeyReleased" prefHeight="31.0" prefWidth="210.0" promptText="NIC" style="-fx-border-radius: 5; -fx-background-radius: 5;" />
       <Text fill="#5b5757" layoutX="53.0" layoutY="189.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Id :" wrappingWidth="95.13671875">
          <font>
             <Font name="Arial Black" size="14.0" />
@@ -137,7 +137,7 @@
             <Font name="Arial Black" size="14.0" />
          </font>
       </Text>
-      <Text fill="#5b5757" layoutX="52.0" layoutY="552.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration :" wrappingWidth="121.0">
+      <Text fill="#5b5757" layoutX="52.0" layoutY="551.0" onKeyReleased="#txtStudentDurationOnKeyReleased" strokeType="OUTSIDE" strokeWidth="0.0" text="Duration(month) :" wrappingWidth="135.0">
          <font>
             <Font name="Arial Black" size="14.0" />
          </font>

@@ -24,6 +24,8 @@ import lk.ijse.culinaryacademy.entity.Course;
 import lk.ijse.culinaryacademy.entity.Student;
 import lk.ijse.culinaryacademy.entity.StudentCoursesDetails;
 import lk.ijse.culinaryacademy.tm.StudentTm;
+import lk.ijse.culinaryacademy.util.Regex;
+import lk.ijse.culinaryacademy.util.TextFieldType;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -100,7 +102,7 @@ public class studentRegistrationFormController {
     @FXML
     private TextField txtcourseName;
 
-     StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
+    StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.STUDENT);
     CoursesBO coursesBO = (CoursesBO) BOFactory.getBoFactory().getBoType(BOFactory.BOType.COURSE);
     CoursesDAO coursesDAO = (CoursesDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.COURSE);
     StudentsDAO studentsDAO = (StudentsDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.STUDENT);
@@ -194,6 +196,7 @@ public class studentRegistrationFormController {
         }
         comboCourse.setItems(id);
     }
+
     @FXML
     void btnClearOnAction(ActionEvent event) {
         clearFields();
@@ -201,46 +204,50 @@ public class studentRegistrationFormController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws IOException, SQLException {
-        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
+        if (isValidated()) {
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
-        if (result.orElse(no) == yes) {
-            if (studentBO.delete(txtId.getText())) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Student Deleted Successfully!").show();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+            if (result.orElse(no) == yes) {
+                if (studentBO.delete(txtId.getText())) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Student Deleted Successfully!").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+                }
             }
         }
     }
 
     @FXML
     void btnAddOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        String studentId = txtId.getText();
-        Student existingStudent = studentsDAO.getStudentById(studentId);
+        if (isValidated()) {
+            String studentId = txtId.getText();
+            Student existingStudent = studentsDAO.getStudentById(studentId);
 
-        // If the student already exists, register them for the new course
-        if (existingStudent != null) {
-            registerStudentForCourse(existingStudent);
-        } else {
-            // Create and save a new student if not found
+            // If the student already exists, register them for the new course
+            if (existingStudent != null) {
+                registerStudentForCourse(existingStudent);
+            } else {
+                // Create and save a new student if not found
 //            User user = userDao.getUserById(comboUser.getValue());
 
-            StudentDTO studentDto = new StudentDTO();
-            studentDto.setStudentId(studentId);
-            studentDto.setName(txtName.getText());
-            studentDto.setAddress(txtAddress.getText());
-            studentDto.setContact(txtContact.getText());
-            studentDto.setNIC(txtNIC.getText());
+                StudentDTO studentDto = new StudentDTO();
+                studentDto.setStudentId(studentId);
+                studentDto.setName(txtName.getText());
+                studentDto.setAddress(txtAddress.getText());
+                studentDto.setContact(txtContact.getText());
+                studentDto.setNIC(txtNIC.getText());
 
-            studentBO.save(studentDto);
+                studentBO.save(studentDto);
 
-            // Retrieve the newly saved student and register them for the course
-            Student newStudent = studentsDAO.getStudentById(studentId);
-            registerStudentForCourse(newStudent);
+                // Retrieve the newly saved student and register them for the course
+                Student newStudent = studentsDAO.getStudentById(studentId);
+                registerStudentForCourse(newStudent);
+            }
+            setTable();
+            new Alert(Alert.AlertType.INFORMATION, "Student Added With Course Successfully!").show();
         }
-        setTable();
-        new Alert(Alert.AlertType.INFORMATION, "Student Added With Course Successfully!").show();
     }
 
     private void registerStudentForCourse(Student student) throws IOException, SQLException, ClassNotFoundException {
@@ -276,13 +283,14 @@ public class studentRegistrationFormController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        if (isValidated() ){
         String id = txtId.getText();
         String name = txtName.getText();
         String address = txtAddress.getText();
         String contact = txtContact.getText();
         String NIC = txtNIC.getText();
 
-        StudentDTO studentDto = new StudentDTO(id, name, address, contact,NIC);
+        StudentDTO studentDto = new StudentDTO(id, name, address, contact, NIC);
 
         if (studentBO.update
                 (studentDto)) {
@@ -295,7 +303,7 @@ public class studentRegistrationFormController {
         generateNewId();
 
     }
-
+}
     @FXML
     void comboCourseOnAction(ActionEvent event) throws IOException {
         String courseId =  comboCourse.getValue();
@@ -339,21 +347,6 @@ public class studentRegistrationFormController {
         studentTmSortedList.comparatorProperty().bind(tbleStudents.comparatorProperty());
         tbleStudents.setItems(studentTmSortedList);
 
-//        String nic = txtSerachNIC.getText();
-//
-//        StudentDTO studentDTO = studentBO.searchStudent(nic);
-//
-//        if (studentDTO != null) {
-//            txtId.setText(studentDTO.getStudentId());
-//            txtName.setText(studentDTO.getName());
-//            txtAddress.setText(studentDTO.getAddress());
-//            txtContact.setText(studentDTO.getContact());
-//            txtNIC.setText(studentDTO.getNIC());
-//
-//        } else {
-//            new Alert(Alert.AlertType.INFORMATION, "Not Found Customer").show();
-//        }
-
     }
 
 
@@ -386,21 +379,42 @@ public class studentRegistrationFormController {
     }
 
     public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.ADDRESS, txtAddress);
     }
 
     public void txtContactOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.CONTACT, txtContact);
     }
 
     public void txtStudentNameOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.NAME, txtName);
     }
 
-    public void txtDateOnKeyReleased(KeyEvent keyEvent) {
-    }
 
     public void txtSearchOnaction(ActionEvent actionEvent) {
     }
 
     public void tbleClickOnAction(MouseEvent mouseEvent) {
     }
+    public boolean isValidated() {
+        if(!Regex.setTextColor(TextFieldType.NAME,txtName)) return false;
+        if(!Regex.setTextColor(TextFieldType.ADDRESS,txtAddress)) return false;
+        if(!Regex.setTextColor(TextFieldType.CONTACT,txtContact)) return false;
+        if(!Regex.setTextColor(TextFieldType.NIC,txtNIC)) return false;
+        if (!Regex.setTextColor(TextFieldType.PRICE, txtFree)) return false;
+        if (!Regex.setTextColor(TextFieldType.DURATION, txtDuration)) return false;
+        return true;
+    }
 
+    public void txtStudentFeeOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.PRICE, txtFree);
+    }
+
+    public void txtNICOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.NIC, txtNIC);
+    }
+
+    public void txtStudentDurationOnKeyReleased(KeyEvent keyEvent) {
+        Regex.setTextColor(TextFieldType.DURATION, txtDuration);
+    }
 }

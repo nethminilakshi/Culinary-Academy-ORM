@@ -17,6 +17,8 @@ import lk.ijse.culinaryacademy.dao.custom.UserDAO;
 import lk.ijse.culinaryacademy.dto.UserDTO;
 import lk.ijse.culinaryacademy.entity.User;
 import lk.ijse.culinaryacademy.tm.UserTm;
+import lk.ijse.culinaryacademy.util.Regex;
+import lk.ijse.culinaryacademy.util.TextFieldType;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
@@ -151,29 +153,32 @@ public class userFormController {
             txtRole.setText(userTm.getUserRole());
         });
     }
+
     @FXML
     void btnAddOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
-        String id = txtUserId.getText();
-        String role = txtRole.getText();
-        String username = txtUsername.getText();
-        String rawPassword = txtPassword.getText();
-        String email = txtEmail.getText();
-        String contact = txtContact.getText();
+        if (isValidated()) {
+            String id = txtUserId.getText();
+            String role = txtRole.getText();
+            String username = txtUsername.getText();
+            String rawPassword = txtPassword.getText();
+            String email = txtEmail.getText();
+            String contact = txtContact.getText();
 
-        // Hash the password using BCrypt
-        String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
+            // Hash the password using BCrypt
+            String hashedPassword = BCrypt.hashpw(rawPassword, BCrypt.gensalt());
 
-        UserDTO userDto = new UserDTO(id, username, hashedPassword, contact, email, role);
-        if (userBO.save(userDto)) {
+            UserDTO userDto = new UserDTO(id, username, hashedPassword, contact, email, role);
+            if (userBO.save(userDto)) {
+                clearFields();
+                txtUserId.setText(generateNewId());
+                new Alert(Alert.AlertType.CONFIRMATION, "User Added Successfully!").show();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+            }
             clearFields();
-            txtUserId.setText(generateNewId());
-            new Alert(Alert.AlertType.CONFIRMATION, "User Added Successfully!").show();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "SQL Error").show();
+            setTable();
+            generateNewId();
         }
-        clearFields();
-        setTable();
-        generateNewId();
     }
 
     @FXML
@@ -185,12 +190,13 @@ public class userFormController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        if (isValidated()) {
 
-        ButtonType yes = new ButtonType("Yes",ButtonBar.ButtonData.OK_DONE);
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
         ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
         Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to remove?", yes, no).showAndWait();
 
-        if(result.orElse(no) == yes) {
+        if (result.orElse(no) == yes) {
             if (userBO.delete(txtUserId.getText())) {
                 new Alert(Alert.AlertType.CONFIRMATION, "User Deleted Successfully!").show();
             } else {
@@ -201,9 +207,10 @@ public class userFormController {
         setTable();
         generateNewId();
     }
-
+}
     @FXML
     void btnUpdateOnAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        if (isValidated()) {
         String id = txtUserId.getText();
         String role = txtRole.getText();
         String username = txtUsername.getText();
@@ -220,7 +227,7 @@ public class userFormController {
         clearFields();
         setTable();
         generateNewId();
-    }
+    }}
 
     private void clearFields() {
         txtUserId.clear();
@@ -259,26 +266,30 @@ public class userFormController {
 
     @FXML
     void txtUserNameOnKeyReleased(KeyEvent event) {
+        Regex.setTextColor(TextFieldType.NAME, txtUsername);
 
     }
 
     @FXML
     void txtUserRoleOnKeyReleased(KeyEvent event) {
+Regex.setTextColor(TextFieldType.NAME,txtRole);
 
     }
 
     @FXML
     void txtEmailOnKeyReleased(KeyEvent event) {
-
+        Regex.setTextColor(TextFieldType.EMAIL, txtEmail);
     }
 
     @FXML
     void txtPasswordOnKeyReleased(KeyEvent event) {
+        Regex.setTextColor(TextFieldType.PASSWORD, txtPassword);
 
     }
 
     @FXML
     void txtContactOnKeyReleased(KeyEvent event) {
+        Regex.setTextColor(TextFieldType.CONTACT, txtContact);
 
     }
     @FXML
@@ -289,5 +300,15 @@ public class userFormController {
     @FXML
     void txtUsernameOnAction(ActionEvent event) {
         txtEmail.requestFocus();
+    }
+
+    public boolean isValidated() {
+        if(!Regex.setTextColor(TextFieldType.NAME,txtUsername)) return false;
+        if(!Regex.setTextColor(TextFieldType.EMAIL,txtEmail)) return false;
+        if(!Regex.setTextColor(TextFieldType.PASSWORD,txtPassword)) return false;
+        if(!Regex.setTextColor(TextFieldType.CONTACT,txtContact)) return false;
+        if(!Regex.setTextColor(TextFieldType.NAME,txtRole)) return false;
+
+        return true;
     }
 }
