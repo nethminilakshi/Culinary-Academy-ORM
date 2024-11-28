@@ -91,11 +91,15 @@ public class LoginFormController {
 
     @FXML
     void btnRegisterOnAction(ActionEvent event) throws IOException {
-        URL resource = getClass().getResource("/view/registerForm.fxml");
-        assert resource != null;
-        Parent load = FXMLLoader.load(resource);
-        loginPane.getChildren().clear();
-        loginPane.getChildren().add(load);
+        Parent rootNode = FXMLLoader.load(this.getClass().getResource("/view/registerForm.fxml"));
+
+        Scene scene = new Scene(rootNode);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+
+        stage.setTitle("Registration Form");
+
+        stage.show();
 
 
     }
