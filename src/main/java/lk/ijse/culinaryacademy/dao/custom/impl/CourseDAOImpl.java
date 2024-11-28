@@ -10,6 +10,7 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import java.io.IOException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -91,6 +92,8 @@ public class CourseDAOImpl implements CoursesDAO {
     }
 
 
+
+
     @Override
     public String getCurrentId() throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -140,30 +143,65 @@ public class CourseDAOImpl implements CoursesDAO {
     }
 
     @Override
-    public List<String> getCourseIds() {
+    public int getProgramCount() {
+        int courseCount = 0;
         Session session = null;
-        Transaction transaction = null;
-        List<String> courseIds = new ArrayList<>();
 
         try {
+            // Get the session from the factory
             session = FactoryConfiguration.getInstance().getSession();
-            transaction = session.beginTransaction();
+            session.beginTransaction();
 
-            courseIds = session.createQuery("SELECT c.courseId FROM Course c", String.class).list();
+            // HQL query to count the number of courses
+            String hql = "SELECT COUNT(c) FROM Course c";
+            Query<Long> query = session.createQuery(hql, Long.class);
 
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
+            // Get the result and cast to int
+            Long countResult = query.uniqueResult();
+            if (countResult != null) {
+                courseCount = countResult.intValue();
             }
-            e.printStackTrace();
+
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            if (session != null && session.getTransaction() != null) {
+                session.getTransaction().rollback();
+            }
+            e.printStackTrace(); // For debugging
         } finally {
             if (session != null) {
                 session.close();
             }
         }
-        return courseIds;
+
+        return courseCount;
     }
+
+//    @Override
+//    public List<String> getCourseIds() {
+//        Session session = null;
+//        Transaction transaction = null;
+//        List<String> courseIds = new ArrayList<>();
+//
+//        try {
+//            session = FactoryConfiguration.getInstance().getSession();
+//            transaction = session.beginTransaction();
+//
+//            courseIds = session.createQuery("SELECT c.courseId FROM Course c", String.class).list();
+//
+//            transaction.commit();
+//        } catch (Exception e) {
+//            if (transaction != null) {
+//                transaction.rollback();
+//            }
+//            e.printStackTrace();
+//        } finally {
+//            if (session != null) {
+//                session.close();
+//            }
+//        }
+//        return courseIds;
+//    }
 
     @Override
     public Course getCourseById(String courseId) {
@@ -193,4 +231,6 @@ public class CourseDAOImpl implements CoursesDAO {
         }
         return course;
     }
+
+
 }

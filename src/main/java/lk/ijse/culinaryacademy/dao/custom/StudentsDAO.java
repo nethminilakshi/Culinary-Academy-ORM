@@ -16,5 +16,5 @@ public interface StudentsDAO extends CrudDAO<Student> {
 
     void saveStudentCourseDetails(StudentCoursesDetails studentCourse) throws IOException;
 
-
+    int getStudentCount();
 }

@@ -65,6 +65,8 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
+
+
     @Override
     public String getCurrentId() throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();

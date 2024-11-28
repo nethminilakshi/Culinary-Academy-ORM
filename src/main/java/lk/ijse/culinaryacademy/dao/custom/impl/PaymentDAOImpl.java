@@ -1,9 +1,10 @@
 package lk.ijse.culinaryacademy.dao.custom.impl;
 
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.XYChart;
 import lk.ijse.culinaryacademy.Config.FactoryConfiguration;
 import lk.ijse.culinaryacademy.dao.custom.PaymentDAO;
 import lk.ijse.culinaryacademy.entity.Payment;
-import lk.ijse.culinaryacademy.entity.StudentCoursesDetails;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
@@ -11,7 +12,6 @@ import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
@@ -55,6 +55,8 @@ public class PaymentDAOImpl implements PaymentDAO {
         return null;
     }
 
+
+
     @Override
     public String getCurrentId() throws IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -75,6 +77,34 @@ public class PaymentDAOImpl implements PaymentDAO {
         transaction.commit();
         session.close();
         return nextId;
+    }
+
+    @Override
+    public int registrationCount() throws IOException {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        Query query = session.createQuery("SELECT COUNT(paymentId) FROM Payment");
+        List<Long> list = query.list();
+        transaction.commit();
+        session.close();
+        return list.get(0).intValue();
+    }
+
+    @Override
+    public void payCount(LineChart<String, Number> barChartPayments) throws IOException {
+//        Session session = FactoryConfiguration.getInstance().getSession();
+//        Transaction transaction = session.beginTransaction();
+//        Query query = session.createQuery("SELECT paS payment_date, COUNT(*) AS payment_count FROM Payment GROUP BY date ORDER BY payment_date");
+//        List<Object[]> list = query.list();
+//        transaction.commit();
+//        session.close();
+//
+//        XYChart.Series<String, Number> series = new XYChart.Series<>();
+//        for (Object[] objects : list) {
+//            series.getData().add(new XYChart.Data<>(objects[0].toString(), objects[1]));
+//        }
+//        barChartPayments.getData().add(series);
+
     }
 
 

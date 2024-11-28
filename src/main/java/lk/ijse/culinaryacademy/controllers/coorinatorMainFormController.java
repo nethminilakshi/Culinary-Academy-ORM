@@ -34,6 +34,7 @@ public class coorinatorMainFormController {
 
     public  void initialize() throws IOException {
         loadAdminDashBoardForm();
+
     }
 
     private void loadAdminDashBoardForm() throws IOException {

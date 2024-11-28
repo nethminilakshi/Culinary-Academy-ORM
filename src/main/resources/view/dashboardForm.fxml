@@ -24,7 +24,7 @@
             <Point3D x="-12.0" z="1.0" />
          </rotationAxis>
       </ImageView>
-      <AnchorPane layoutX="30.0" layoutY="64.0" opacity="0.69" prefHeight="507.0" prefWidth="805.0" style="-fx-background-color: white; -fx-background-radius: 13; -fx-border-radius: 13;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="70.0" />
+      <AnchorPane layoutX="60.0" layoutY="74.0" opacity="0.69" prefHeight="507.0" prefWidth="805.0" style="-fx-background-color: white; -fx-background-radius: 13; -fx-border-radius: 13;" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="74.0" />
       <Label fx:id="lblDate" layoutX="567.0" layoutY="21.0" prefHeight="36.0" prefWidth="266.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="21.0" />
@@ -82,7 +82,7 @@
             </Text>
          </children>
       </Pane>
-      <LineChart layoutX="84.0" layoutY="110.0" prefHeight="425.0" prefWidth="488.0">
+      <LineChart fx:id="barChartPayments" layoutX="84.0" layoutY="110.0" prefHeight="425.0" prefWidth="488.0">
          <xAxis>
             <CategoryAxis side="BOTTOM" />
          </xAxis>
