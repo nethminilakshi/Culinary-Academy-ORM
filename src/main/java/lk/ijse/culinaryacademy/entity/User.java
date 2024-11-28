@@ -14,18 +14,14 @@ import java.util.List;
 @Table(name = "user")
 public class User {
     @Id
-
     private String userId;
-
-
     private String username;
-
-
     private String password;
-
     private String contact;
-
-
+    private String email;
     private String userRole;
+
+
+
 
 }

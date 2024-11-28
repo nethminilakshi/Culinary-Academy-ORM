@@ -70,7 +70,15 @@ public class adminMainFormController {
 
     @FXML
     void btnLogoutOnAction(ActionEvent event) {
-
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/loginForm.fxml"));
+        Pane loginPane = null;
+        try {
+            loginPane = (Pane) fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        holderPane.getChildren().clear();
+        holderPane.getChildren().add(loginPane);
     }
 
     @FXML

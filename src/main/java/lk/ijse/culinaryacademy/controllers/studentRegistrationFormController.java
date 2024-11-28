@@ -182,6 +182,7 @@ public class studentRegistrationFormController {
         txtSerachNIC.clear();
         txtFree.clear();
         txtcourseName.clear();
+        txtDuration.clear();
         txtNIC.clear();
     }
 
@@ -402,24 +403,4 @@ public class studentRegistrationFormController {
     public void tbleClickOnAction(MouseEvent mouseEvent) {
     }
 
-//    public void txtAddressOnKeyReleased(KeyEvent keyEvent) {
-//        Regex.setTextColor(TextFieldType.ADDRESS,txtAddress);
-//    }
-//
-//    public void txtDateOnKeyReleased(KeyEvent keyEvent) {
-//    }
-//
-//    public void txtContactOnKeyReleased(KeyEvent keyEvent) {
-//        Regex.setTextColor(TextFieldType.CONTACT, txtContact);
-//    }
-
-//    public void txtStudentNameOnKeyReleased(KeyEvent keyEvent) {
-//        Regex.setTextColor(TextFieldType.NAME, txtName);
-//    }
-//    public boolean isValidated() {
-////        if(!Regex.setTextColor(TextFieldType.NAME,txtName)) return false;
-////        if(!Regex.setTextColor(TextFieldType.ADDRESS,txtAddress)) return false;
-////        if(!Regex.setTextColor(TextFieldType.CONTACT,txtContact)) return false;
-////        return true;
-//    }
 }
