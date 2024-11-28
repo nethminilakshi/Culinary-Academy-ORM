@@ -12,7 +12,7 @@ public class Payment {
     @Id
 
     private String paymentId;
-    private String paymentDate;
+    private String payDate;
     private double payAmount;
     private String status;
     private double upfrontAmount;

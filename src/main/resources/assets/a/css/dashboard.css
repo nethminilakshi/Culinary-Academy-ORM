@@ -6,8 +6,8 @@
     rgba(200, 200, 200, 1) 50%,
     rgba(100, 100, 100, 1) 100%);
     -fx-text-fill: black; /* White text for contrast against darker background */
-    -fx-background-radius: 5px;
-    -fx-border-radius: 5px;
+    -fx-background-radius: 50px;
+    -fx-border-radius: 50px;
     -fx-border-color: rgba(80, 80, 80, 0.5);
 }
 
@@ -25,4 +25,9 @@
     rgba(220, 220, 220, 1) 50%,
     rgba(190, 190, 190, 1) 100%);
     -fx-effect: innershadow(gaussian, rgba(0,0,0,0.2), 3, 0, 0, 0);
+}
+.academy {
+    -fx-fill: white;
+    -fx-font-style: italic;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.4, 3, 3);
 }

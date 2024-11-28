@@ -12,8 +12,8 @@ public class PaymentDTO {
     private String paymentDate;
     private double payAmount;
     private String status;
-    private double upfrontAmount;
     private double balance;
     private StudentCoursesDetails student_course;
+
 
 }

@@ -21,7 +21,7 @@ public class PaymentBOImpl implements PaymentBO {
   for (Payment payment : payments) {
    paymentList.add(new Payment(
            payment.getPaymentId(),
-           payment.getPaymentDate(),
+           payment.getPayDate(),
            payment.getPayAmount(),
            payment.getStatus(),
            payment.getUpfrontAmount(),
@@ -39,7 +39,7 @@ public class PaymentBOImpl implements PaymentBO {
           paymentDto.getPaymentDate(),
           paymentDto.getPayAmount(),
           paymentDto.getStatus(),
-          paymentDto.getUpfrontAmount(),
+          paymentDto.getPayAmount(),
           paymentDto.getBalance(),
           paymentDto.getStudent_course()
   );

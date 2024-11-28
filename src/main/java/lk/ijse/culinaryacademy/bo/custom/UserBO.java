@@ -18,4 +18,6 @@ public interface UserBO extends SuperBO {
     boolean save(UserDTO userDto) throws SQLException, IOException;
 
     boolean delete(String text) throws SQLException, IOException;
+
+    User checkLoginCredential(String username, String password);
 }

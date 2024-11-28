@@ -1,66 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="pane" prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: white; -fx-background-color: #ededeb;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.LoginFormController">
+<AnchorPane fx:id="AdminPane" prefHeight="450.0" prefWidth="650.0" style="-fx-border-color: white; -fx-background-color: #e6e5e3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.LoginFormController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eeeeee" height="292.0" layoutX="41.0" layoutY="40.0" stroke="WHITE" strokeType="INSIDE" width="236.0" />
-      <ImageView fitHeight="292.0" fitWidth="242.0" layoutX="37.0" layoutY="41.0">
-         <image>
-            <Image url="@../assets/a/images/download.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="333.0" layoutY="86.0" prefHeight="31.0" prefWidth="146.0" text="Welcome" textFill="#649745">
+      <Label layoutX="351.0" layoutY="81.0" prefHeight="31.0" prefWidth="146.0" text="Welcome" textFill="#0e136f">
          <font>
             <Font name="System Bold Italic" size="28.0" />
          </font>
       </Label>
-      <Label layoutX="396.0" layoutY="127.0" prefHeight="23.0" prefWidth="146.0" text="Login with Username" textFill="#5e5e5e">
+      <Label layoutX="439.0" layoutY="116.0" prefHeight="23.0" prefWidth="146.0" text="Login with Username" textFill="#726f6f">
          <font>
             <Font size="14.0" />
          </font></Label>
-      <Label layoutX="339.0" layoutY="322.0" prefHeight="23.0" prefWidth="131.0" text="Don't have account?">
+      <Label layoutX="339.0" layoutY="352.0" prefHeight="23.0" prefWidth="131.0" text="Don't have account?">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="379.0" layoutY="351.0" prefHeight="23.0" prefWidth="114.0" text="Coordinator portal" textFill="#97ab4e">
+      <Text fill="#685a5a" layoutX="517.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.3, 2, 2);" text="Culinary Academy" wrappingWidth="125.0">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="Algerian" size="18.0" />
          </font>
-      </Label>
-      <Hyperlink layoutX="474.0" layoutY="322.0" text="Register Now" textFill="#6f9e55" underline="true">
+      </Text>
+      <ImageView fitHeight="334.0" fitWidth="243.0" layoutX="31.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/a/images/imge_login-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <MFXPasswordField fx:id="txtPassword" allowPaste="true" floatMode="BORDER" floatingText="Password" layoutX="323.0" layoutY="229.0" onAction="#txtPasswordOnAction" onKeyReleased="#txtPasswordOnKeyReleased" prefHeight="31.0" prefWidth="225.0" style="-fx-border-radius: 6; -fx-background-radius: 6;" />
+      <MFXTextField fx:id="txtUsername" floatMode="BORDER" floatingText="Username" layoutX="322.0" layoutY="169.0" onAction="#txUsernameOnAction" onKeyReleased="#txtUsernameOnKeyReleased" prefHeight="31.0" prefWidth="225.0" style="-fx-border-radius: 6; -fx-background-radius: 6;" />
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="377.0" layoutY="293.0" onAction="#btnLoginOnAction" prefHeight="23.0" prefWidth="118.0" style="-fx-background-color: #7f79b5; -fx-background-radius: 20; -fx-border-radius: 20;" text="Login" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-      </Hyperlink>
-      <Label layoutX="428.0" layoutY="6.0" prefHeight="40.0" prefWidth="165.0" text="Culinary Academy" textFill="#8d7777">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="TEXT_ONLY" focusTraversable="false" graphicTextGap="0.0" layoutX="380.0" layoutY="385.0" onAction="#btnRegisterOnAction" prefHeight="31.0" prefWidth="108.0" style="-fx-background-color: #121212; -fx-background-radius: 20; -fx-border-radius: 20;" text="Register" textFill="WHITE">
          <font>
-            <Font name="Serif Bold" size="19.0" />
-         </font>
-      </Label>
-      <JFXPasswordField fx:id="txtPassword" layoutX="344.0" layoutY="231.0" prefHeight="25.0" prefWidth="186.0" promptText="password">
-         <effect>
-            <Glow />
-         </effect></JFXPasswordField>
-      <JFXTextField fx:id="txtUsername" layoutX="343.0" layoutY="175.0" prefHeight="23.0" prefWidth="186.0" promptText="Username">
-         <effect>
-            <Glow />
-         </effect></JFXTextField>
-      <JFXButton buttonType="RAISED" layoutX="396.0" layoutY="273.0" onAction="#btnOnLogin" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: #859F3D;" text="Login" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />

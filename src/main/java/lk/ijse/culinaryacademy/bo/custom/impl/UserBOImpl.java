@@ -13,6 +13,7 @@ import java.util.List;
 
 public class UserBOImpl implements UserBO {
 
+    public static String userName;
     UserDAO userDAO = (UserDAO) DAOFactory.getDaoFactory().getDAOTypes(DAOFactory.DAOTypes.USER);
 
 
@@ -63,6 +64,11 @@ public class UserBOImpl implements UserBO {
     @Override
     public boolean delete(String id) throws SQLException, IOException {
         return userDAO.delete(id);
+    }
+
+    @Override
+    public User checkLoginCredential(String username, String password) {
+        return null;
     }
 
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 public class Launcher extends Application {
     @Override
    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("/view/MainForm.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("/view/adminMainForm.fxml"));
         Parent rootNode = fxmlLoader.load();
         Scene scene = new Scene(rootNode);
         stage.setTitle("Admin Main Form");
