@@ -12,6 +12,7 @@ import lk.ijse.culinaryacademy.bo.BOFactory;
 import lk.ijse.culinaryacademy.bo.custom.UserBO;
 import lk.ijse.culinaryacademy.util.Regex;
 import lk.ijse.culinaryacademy.util.TextFieldType;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.sql.SQLException;
 
@@ -28,7 +29,7 @@ public class registerFormController {
     private MFXTextField txtEmail;
 
     @FXML
-    private MFXTextField txtuserId;
+    private MFXTextField txtUserId;
 
     @FXML
     private MFXPasswordField txtPassword;
@@ -41,9 +42,8 @@ public class registerFormController {
 
     @FXML
     void btnSignUpOnAction(ActionEvent event) {
-        if (isValidated()) {
+        String userId = txtUserId.getText();
             String username = txtUsername.getText();
-            String userId = txtuserId.getText();
             String contact = txtContact.getText();
             String email = txtEmail.getText();
             String password = txtPassword.getText();
@@ -58,26 +58,40 @@ public class registerFormController {
 //            return;
 //        }
 
-            boolean isTrue = userBO.checkRegisterCredential(username, userId,contact, email, password, confirmPassword, role);
-            if (isTrue) {
-                new Alert(Alert.AlertType.INFORMATION, "Registration Successfully.").show();
-                clearField();
-            }
+        if (!password.equals(confirmPassword)) {
+            new Alert(Alert.AlertType.ERROR, "Password Mismatch.").show();
+            return;
         }
-    }
+
+        try {
+            // Encrypt the password
+            String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+
+            // Call the business logic method
+            boolean isRegistered = userBO.checkRegisterCredential(userId, username,hashedPassword, contact, email, role);
+
+            if (isRegistered) {
+                new Alert(Alert.AlertType.INFORMATION, "Registration successful.").show();
+                clearField(); // Clear fields only after successful registration
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Registration failed.").show();
+            }
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "" + e.getMessage()).show();
+        }
+        }
+
 
     private void clearField() {
         txtUsername.clear();
-        txtuserId.clear();
+        txtUserId.clear();
         txtContact.clear();
         txtEmail.clear();
         txtPassword.clear();
         txtConfirmPassword.clear();
     }
 
-    //    private String isValid() {
-//        return null;
-//    }
+
     @FXML
     void txtContactOnAction(ActionEvent event) {
 
@@ -85,7 +99,7 @@ public class registerFormController {
 
     @FXML
     void txtContactOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.CONTACT, txtContact);
+
 
     }
 
@@ -96,12 +110,12 @@ public class registerFormController {
 
     @FXML
     void txtConfirmPasswordOnAction(ActionEvent event) {
-
+        btnSignUpOnAction(event);
     }
 
     @FXML
     void txtConfirmPasswordOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.PASSWORD, txtConfirmPassword);
+//        Regex.setTextColor(TextFieldType.PASSWORD, txtConfirmPassword);
 
     }
 
@@ -112,46 +126,68 @@ public class registerFormController {
 
     @FXML
     void txtEmailOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.EMAIL, txtEmail);
+//        Regex.setTextColor(TextFieldType.EMAIL, txtEmail);
 
     }
 
-    @FXML
-    void txtNameOnAction(ActionEvent event) {
-
-    }
 
     @FXML
     void txtNameOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.NAME, txtuserId);
+//        Regex.setTextColor(TextFieldType.NAME, txtuserId);
 
     }
 
     @FXML
     void txtPasswordOnAction(ActionEvent event) {
-
+        txtConfirmPassword.requestFocus();
     }
 
     @FXML
     void txtPasswordOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.PASSWORD, txtPassword);
+//        Regex.setTextColor(TextFieldType.PASSWORD, txtPassword);
 
     }
 
     @FXML
     void txtUsernameOnKeyReleased(KeyEvent event) {
-        Regex.setTextColor(TextFieldType.USERNAME, txtUsername);
+//        Regex.setTextColor(TextFieldType.USERNAME, txtUsername);
     }
 
     public boolean isValidated() {
-        if (!Regex.setTextColor(TextFieldType.USERNAME, txtUsername)) return false;
-        if (!Regex.setTextColor(TextFieldType.NAME, txtuserId)) return false;
-        if (!Regex.setTextColor(TextFieldType.EMAIL, txtEmail)) return false;
-        if (!Regex.setTextColor(TextFieldType.PASSWORD, txtPassword)) return false;
-        if (!Regex.setTextColor(TextFieldType.PASSWORD, txtConfirmPassword)) return false;
-        if (!Regex.setTextColor(TextFieldType.CONTACT, txtContact)) return false;
+//        if (!Regex.setTextColor(TextFieldType.USERNAME, txtUsername)) return false;
+//        if (!Regex.setTextColor(TextFieldType.NAME, txtuserId)) return false;
+//        if (!Regex.setTextColor(TextFieldType.EMAIL, txtEmail)) return false;
+//        if (!Regex.setTextColor(TextFieldType.PASSWORD, txtPassword)) return false;
+//        if (!Regex.setTextColor(TextFieldType.PASSWORD, txtConfirmPassword)) return false;
+//        if (!Regex.setTextColor(TextFieldType.CONTACT, txtContact)) return false;
 
 
         return true;
+    }
+
+    public String isValid() {
+        String message = "";
+
+        if (!Regex.setTextColor(TextFieldType.USERNAME,txtUsername))
+            message += "Username must be between 3 and 16 characters long.\n\n";
+
+        if (!Regex.setTextColor(TextFieldType.NAME,txtUserId))
+            message += "Name must be at least 3 letters.\n\n";
+
+        if (!Regex.setTextColor(TextFieldType.EMAIL,txtEmail))
+            message += "Enter valid email address.\n\n";
+
+        if (!Regex.setTextColor(TextFieldType.PASSWORD,txtPassword))
+            message += """
+                    Please enter password following type,
+                    \t* Contains at least one alphabetic character and one digit.
+                    \t* Include special characters such as @$!%*?&.
+                    \t* Password at least 8 characters long.""";
+
+        return message.isEmpty() ? null : message;
+    }
+
+    public void txtUserIdOnAction(ActionEvent actionEvent) {
+        txtUsername.requestFocus();
     }
 }

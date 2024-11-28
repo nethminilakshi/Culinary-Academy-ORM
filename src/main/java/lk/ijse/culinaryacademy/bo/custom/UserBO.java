@@ -19,7 +19,7 @@ public interface UserBO extends SuperBO {
 
     boolean delete(String text) throws SQLException, IOException;
 
-    User checkLoginCredential(String username, String password) throws Exception;
+    User checkLoginCredential(String username) throws Exception;
 
-    boolean checkRegisterCredential(String s, String username, String name, String email, String password, String confirmPassword, String role);
+    boolean checkRegisterCredential(String userId, String username, String hashedPassword, String contact, String email, String role);
 }

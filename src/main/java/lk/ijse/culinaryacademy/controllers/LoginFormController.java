@@ -19,6 +19,7 @@ import lk.ijse.culinaryacademy.bo.BOFactory;
 import lk.ijse.culinaryacademy.bo.custom.UserBO;
 import lk.ijse.culinaryacademy.bo.custom.impl.UserBOImpl;
 import lk.ijse.culinaryacademy.entity.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,9 +57,11 @@ public class LoginFormController {
             return;
         }
 
-        User user = userBO.checkLoginCredential(username, password); // Get the User object
+        User user = userBO.checkLoginCredential(username); // Get the User object
         if (user != null) {
+            if (BCrypt.checkpw(password, user.getPassword())) {
             UserBOImpl.userName = user.getUsername(); // Assuming you have a method to get the username
+                UserBOImpl.userRole = user.getUserRole(); // get the username of the logged-in user
             String role = user.getUserRole(); // Assuming you have a method to get the user's role
 
             // Navigate based on the user's role
@@ -72,7 +75,7 @@ public class LoginFormController {
         } else {
             new Alert(Alert.AlertType.ERROR, "Invalid username or password. Please try again.").show();
         }
-    }
+    }}
 
     private void navigateToDashboard(String url) throws IOException {
         AnchorPane rootNode = FXMLLoader.load(getClass().getResource(url));

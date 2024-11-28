@@ -1,5 +1,7 @@
 package lk.ijse.culinaryacademy.util;
 
+import io.github.palexdev.materialfx.controls.MFXPasswordField;
+import io.github.palexdev.materialfx.controls.MFXTextField;
 import javafx.scene.control.TextField;
 
 import java.util.regex.Matcher;
@@ -41,6 +43,9 @@ public class Regex {
             case DATE:
                 patternString = "^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$";
                 break;
+            case DURATION:
+                patternString = "^\\d+$";
+                break;
         }
 
         if (text == null || text.trim().isEmpty()) {
@@ -64,6 +69,33 @@ public class Regex {
             textField.setStyle(" -fx-text-box-border: #f10000;\n" +
                     "    -fx-focus-color: #ff0000;\n" +
                     "    -fx-faint-focus-color: rgba(246,68,68,0);;");
+            return false;
+        }
+    }
+
+
+    public static boolean setTextColor(TextFieldType location, MFXTextField textField) {
+        if (Regex.isTextFieldValid(location, textField.getText())) {
+            textField.getStyleClass().removeAll("invalid-field");
+            textField.getStyleClass().add("valid-field");
+            return true;
+        } else {
+            // Apply invalid field CSS class
+            textField.getStyleClass().removeAll("valid-field");
+            textField.getStyleClass().add("invalid-field");
+            return false;
+        }
+    }
+
+    public static boolean setTextColor(TextFieldType location, MFXPasswordField field) {
+
+        if (Regex.isTextFieldValid(location, field.getText())) {
+            field.getStyleClass().removeAll("invalid-field");
+            field.getStyleClass().add("valid-field");
+            return true;
+        } else {
+            field.getStyleClass().removeAll("valid-field");
+            field.getStyleClass().add("invalid-field");
             return false;
         }
     }

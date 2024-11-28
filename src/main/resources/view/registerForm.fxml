@@ -49,7 +49,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <MFXTextField fx:id="txtName" floatMode="BORDER" floatingText="UserId" layoutX="370.0" layoutY="180.0" onAction="#txtNameOnAction" onKeyReleased="#txtNameOnKeyReleased" prefHeight="38.0" prefWidth="234.0" />
+      <MFXTextField fx:id="txtUserId" floatMode="BORDER" floatingText="UserId" layoutX="370.0" layoutY="180.0" onAction="#txtUserIdOnAction" onKeyReleased="#txtNameOnKeyReleased" prefHeight="38.0" prefWidth="234.0" />
       <MFXTextField fx:id="txtEmail" floatMode="BORDER" floatingText="Email" layoutX="371.0" layoutY="331.0" onAction="#txtEmailOnAction" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="38.0" prefWidth="234.0" />
       <MFXTextField fx:id="txtContact" floatMode="BORDER" floatingText="Contact" layoutX="370.0" layoutY="281.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="38.0" prefWidth="234.0" />
       <MFXTextField fx:id="txtUsername" floatMode="BORDER" floatingText="Username" layoutX="371.0" layoutY="230.0" onAction="#txUsernameOnAction" onKeyReleased="#txtUsernameOnKeyReleased" prefHeight="38.0" prefWidth="234.0" />

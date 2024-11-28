@@ -141,7 +141,7 @@ public class studentRegistrationFormController {
     }
 
     private void setTable() throws IOException, SQLException, ClassNotFoundException {
-        studentTmObservableList.clear();
+//        studentTmObservableList.clear();
         List<Student> studentList = studentBO.getStudentList();
         for (Student student : studentList) {
             StudentTm studentTm = new StudentTm(
@@ -246,6 +246,7 @@ public class studentRegistrationFormController {
                 registerStudentForCourse(newStudent);
             }
             setTable();
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "Student Added With Course Successfully!").show();
         }
     }
@@ -299,8 +300,9 @@ public class studentRegistrationFormController {
             new Alert(Alert.AlertType.ERROR, "Error updating student details").show();
         }
 
-        setTable();
+
         generateNewId();
+            setTable();
 
     }
 }

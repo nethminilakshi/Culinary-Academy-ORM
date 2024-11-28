@@ -221,36 +221,39 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User checkLogin(String username, String password) throws Exception {
+    public User checkLogin(String username) throws Exception {
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
-            String hql = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password";
-            Query<User> query = session.createQuery(hql, User.class);
+            Query<User> query = session.createQuery("FROM User WHERE username = :username", User.class);
             query.setParameter("username", username);
-            query.setParameter("password", password);
-            return query.uniqueResult(); // Return the User object if found
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Error while checking login credentials", e);
+            return query.uniqueResult();
         }
     }
 
     @Override
-    public boolean checkRegister(String username, String userId, String contact, String email, String password, String confirmPassword, String role) {
-        // Check if the password mismatches
-        if (!password.equals(confirmPassword)) {
-            return false;
-        }
-
+    public boolean checkRegister(String userId, String username, String hashedPassword, String contact, String email, String role) {
         try (Session session = FactoryConfiguration.getInstance().getSession()) {
             Transaction transaction = session.beginTransaction();
 
             try {
+                // Check if an admin already exists in the database
+                if ("Admin".equalsIgnoreCase(role)) {
+                    String hql = "SELECT COUNT(*) FROM User WHERE userRole = :adminRole";
+                    Long adminCount = (Long) session.createQuery(hql)
+                            .setParameter("adminRole", "admin")
+                            .uniqueResult();    // Use Long data type to avoid NullPointerException in Hibernate
+
+                    if (adminCount != null && adminCount > 0) {
+                        throw new Exception("An admin user already exists. Only one admin can be registered.");
+                    }
+                }
+
+                // Proceed with user registration
                 User user = new User();
-                user.setUsername(username);
                 user.setUserId(userId);
+                user.setUsername(username);
+                user.setPassword(hashedPassword);
                 user.setContact(contact);
                 user.setEmail(email);
-                user.setPassword(password);
                 user.setUserRole(role);
 
                 session.save(user);
@@ -260,8 +263,10 @@ public class UserDAOImpl implements UserDAO {
                 transaction.rollback();
                 throw new Exception("Error occurred while registering the user: " + e.getMessage(), e);
             }
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
     }
-}
+    }
