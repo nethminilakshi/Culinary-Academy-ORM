@@ -26,7 +26,7 @@ import java.sql.SQLException;
 
 public class LoginFormController {
     @FXML
-    private AnchorPane AdminPane;
+    private AnchorPane loginPane;
 
 
     @FXML
@@ -41,7 +41,7 @@ public class LoginFormController {
         txtUsername.requestFocus();
     }
     @FXML
-    void btnLoginOnAction(ActionEvent event) throws IOException {
+    void btnLoginOnAction(ActionEvent event) throws Exception {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
 
@@ -79,7 +79,7 @@ public class LoginFormController {
 
         Scene scene = new Scene(rootNode);
 
-        Stage stage = (Stage) this.AdminPane.getScene().getWindow();
+        Stage stage = (Stage) this.loginPane.getScene().getWindow();
         stage.setScene(scene);
         stage.centerOnScreen();
         stage.setTitle("Dashboard Form");
@@ -94,12 +94,10 @@ public class LoginFormController {
         URL resource = getClass().getResource("/view/registerForm.fxml");
         assert resource != null;
         Parent load = FXMLLoader.load(resource);
-        AdminPane.getChildren().clear();
-        AdminPane.getChildren().add(load);
-        TranslateTransition transition = new TranslateTransition(Duration.seconds(1), AdminPane);
-        transition.setFromX(load.getScene().getWidth());
-        transition.setToX(0);
-        transition.play();
+        loginPane.getChildren().clear();
+        loginPane.getChildren().add(load);
+
+
     }
 
     @FXML
@@ -109,7 +107,11 @@ public class LoginFormController {
 
     @FXML
     void txtPasswordOnAction(ActionEvent event) {
-
+        try {
+            btnLoginOnAction(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

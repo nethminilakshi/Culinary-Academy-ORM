@@ -36,7 +36,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
 
-
     @Override
     public boolean delete(String id) throws SQLException, IOException {
         Session session = FactoryConfiguration.getInstance().getSession();
@@ -126,7 +125,7 @@ public class UserDAOImpl implements UserDAO {
             transaction = session.beginTransaction();
 
             NativeQuery<User> query = session.createNativeQuery("SELECT * FROM User U WHERE U.userId = :id", User.class);
-            query.setParameter("id",value);
+            query.setParameter("id", value);
 
             user = query.uniqueResult();
 
@@ -218,6 +217,51 @@ public class UserDAOImpl implements UserDAO {
         } catch (Exception e) {
             e.printStackTrace();
             return null; // Handle or log the exception appropriately
+        }
+    }
+
+    @Override
+    public User checkLogin(String username, String password) throws Exception {
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            String hql = "SELECT u FROM User u WHERE u.username = :username AND u.password = :password";
+            Query<User> query = session.createQuery(hql, User.class);
+            query.setParameter("username", username);
+            query.setParameter("password", password);
+            return query.uniqueResult(); // Return the User object if found
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Error while checking login credentials", e);
+        }
+    }
+
+    @Override
+    public boolean checkRegister(String username, String userId, String contact, String email, String password, String confirmPassword, String role) {
+        // Check if the password mismatches
+        if (!password.equals(confirmPassword)) {
+            return false;
+        }
+
+        try (Session session = FactoryConfiguration.getInstance().getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                User user = new User();
+                user.setUsername(username);
+                user.setUserId(userId);
+                user.setContact(contact);
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setUserRole(role);
+
+                session.save(user);
+                transaction.commit();
+                return true;
+            } catch (Exception e) {
+                transaction.rollback();
+                throw new Exception("Error occurred while registering the user: " + e.getMessage(), e);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

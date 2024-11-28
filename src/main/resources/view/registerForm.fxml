@@ -1,14 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="lk.ijse.culinaryacademy.controllers.registerFormController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="registerPane" prefHeight="580.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.registerFormController">
+   <children>
+      <Pane layoutX="332.0" layoutY="96.0" prefHeight="450.0" prefWidth="310.0" style="-fx-background-color: white; -fx-background-radius: 15; -fx-border-radius: 15; -fx-border-color: white;">
+         <effect>
+            <InnerShadow height="0.0" radius="0.0" width="0.0">
+               <input>
+                  <InnerShadow />
+               </input>
+            </InnerShadow>
+         </effect>
+         <children>
+            <Label layoutX="45.0" layoutY="20.0" prefHeight="38.0" prefWidth="215.0" text="Admin Register" textFill="#271265">
+               <font>
+                  <Font name="Constantia Bold" size="29.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <ImageView fitHeight="442.0" fitWidth="284.0" layoutX="20.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/a/images/imge_login-removebg-preview.png" />
+         </image>
+      </ImageView>
+      <Text fill="#685a5a" layoutX="558.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 5, 0.3, 2, 2);" text="Culinary Academy" wrappingWidth="125.0">
+         <font>
+            <Font name="Algerian" size="21.0" />
+         </font>
+      </Text>
+      <JFXButton fx:id="btnSignUp" buttonType="RAISED" layoutX="430.0" layoutY="478.0" onAction="#btnSignUpOnAction" prefHeight="22.0" prefWidth="115.0" style="-fx-background-color: #4f4f4f; -fx-background-radius: 20;" text="Sign Up" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <MFXTextField fx:id="txtName" floatMode="BORDER" floatingText="UserId" layoutX="370.0" layoutY="180.0" onAction="#txtNameOnAction" onKeyReleased="#txtNameOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+      <MFXTextField fx:id="txtEmail" floatMode="BORDER" floatingText="Email" layoutX="371.0" layoutY="331.0" onAction="#txtEmailOnAction" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+      <MFXTextField fx:id="txtContact" floatMode="BORDER" floatingText="Contact" layoutX="370.0" layoutY="281.0" onAction="#txtContactOnAction" onKeyReleased="#txtContactOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+      <MFXTextField fx:id="txtUsername" floatMode="BORDER" floatingText="Username" layoutX="371.0" layoutY="230.0" onAction="#txUsernameOnAction" onKeyReleased="#txtUsernameOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+      <MFXPasswordField fx:id="txtPassword" allowPaste="true" floatMode="BORDER" floatingText="Password" layoutX="373.0" layoutY="381.0" onAction="#txtPasswordOnAction" onKeyReleased="#txtPasswordOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+      <MFXPasswordField fx:id="txtConfirmPassword" allowPaste="true" floatMode="BORDER" floatingText="Confirm Password" layoutX="374.0" layoutY="430.0" onAction="#txtConfirmPasswordOnAction" onKeyReleased="#txtConfirmPasswordOnKeyReleased" prefHeight="38.0" prefWidth="234.0" stylesheets="@../../../../../../Downloads/Culinary-Academy/Culinary-Academy/src/main/resources/assets/css/validation.css" />
+   </children>
 </AnchorPane>

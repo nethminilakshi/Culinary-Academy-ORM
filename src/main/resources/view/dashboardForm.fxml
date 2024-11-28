@@ -1,8 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="dashboardPane" prefHeight="650.0" prefWidth="904.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.dashBoardFormController">
-
+<AnchorPane fx:id="dashboardPane" prefHeight="650.0" prefWidth="904.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.culinaryacademy.controllers.dashBoardFormController">
+   <children>
+      <ImageView fitHeight="650.0" fitWidth="904.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="0.0">
+         <image>
+            <Image url="@../assets/a/images/pngtree-man-with-chef-coat-working-in-kitchen-of-a-restaurant-close-picture-image_2662771.jpg" />
+         </image>
+         <rotationAxis>
+            <Point3D x="-12.0" z="1.0" />
+         </rotationAxis>
+      </ImageView>
+      <AnchorPane layoutX="30.0" layoutY="64.0" opacity="0.69" prefHeight="507.0" prefWidth="805.0" style="-fx-background-color: white; -fx-background-radius: 13; -fx-border-radius: 13;" AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="70.0" />
+      <Label fx:id="lblDate" layoutX="567.0" layoutY="21.0" prefHeight="36.0" prefWidth="266.0" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Pane layoutX="622.0" layoutY="135.0" prefHeight="110.0" prefWidth="158.0" style="-fx-background-radius: 10;" styleClass="box" stylesheets="@../assets/a/css/dashboard.css">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7473683953285217" green="0.7473683953285217" blue="0.7473683953285217" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label layoutX="23.0" layoutY="35.0" text="Students" textFill="#747d8c">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Text fx:id="lblStudentCount" fill="#121212" layoutX="13.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="100.336669921875">
+               <font>
+                  <Font name="Mongolian Baiti" size="30.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="46.0" layoutY="64.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/a/images/icons8-student-48.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="624.0" layoutY="260.0" prefHeight="110.0" prefWidth="158.0" style="-fx-background-radius: 10;" styleClass="box" stylesheets="@../assets/a/css/dashboard.css">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7473683953285217" green="0.7473683953285217" blue="0.7473683953285217" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label layoutX="29.0" layoutY="38.0" text="Courses" textFill="#747d8c">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="59.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/a/images/icons8-courses-64.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="lblCoursesCount" fill="#121212" layoutX="21.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="100.336669921875">
+               <font>
+                  <Font name="Mongolian Baiti" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <LineChart layoutX="84.0" layoutY="110.0" prefHeight="425.0" prefWidth="488.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </LineChart>
+      <Pane layoutX="625.0" layoutY="388.0" prefHeight="110.0" prefWidth="158.0" style="-fx-background-radius: 10;" styleClass="box" stylesheets="@../assets/a/css/dashboard.css">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.7473683953285217" green="0.7473683953285217" blue="0.7473683953285217" />
+               </color>
+            </DropShadow>
+         </effect>
+         <children>
+            <Label layoutX="29.0" layoutY="40.0" prefHeight="30.0" prefWidth="100.0" text="Payments" textFill="#747d8c">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="59.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/a/images/icons8-courses-64.png" />
+               </image>
+            </ImageView>
+            <Text fx:id="lblPaymentCount" fill="#121212" layoutX="21.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2" textAlignment="CENTER" wrappingWidth="100.336669921875">
+               <font>
+                  <Font name="Mongolian Baiti" size="30.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
 </AnchorPane>

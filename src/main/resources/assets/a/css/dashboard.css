@@ -31,3 +31,19 @@
     -fx-font-style: italic;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 5, 0.4, 3, 3);
 }
+
+.box {
+    /* Background color */
+    -fx-background-color: white;
+
+    /* Shadow effect */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 10, 0.3, 0, 0);
+
+    /* Rounded corners */
+    -fx-background-radius: 10px;
+
+    /* Optional border */
+    -fx-border-color: rgba(200,200,200,0.5);
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+}

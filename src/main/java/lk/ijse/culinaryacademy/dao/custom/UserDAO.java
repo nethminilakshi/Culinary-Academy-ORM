@@ -17,4 +17,8 @@ public interface UserDAO extends CrudDAO<User> {
     boolean updateUser(User user);
 
     String getUserRole(String username);
+
+    User checkLogin(String username, String password) throws Exception;
+
+    boolean checkRegister(String username, String name, String contact, String email, String password, String confirmPassword, String role);
 }

@@ -67,8 +67,15 @@ public class UserBOImpl implements UserBO {
     }
 
     @Override
-    public User checkLoginCredential(String username, String password) {
-        return null;
+    public User checkLoginCredential(String username, String password) throws Exception {
+
+        return userDAO.checkLogin(username, password);
+    }
+
+    @Override
+    public boolean checkRegisterCredential(String username, String userId,String contact, String email, String password, String confirmPassword, String role) {
+        return userDAO.checkRegister(username, userId,contact, email, password, confirmPassword, role);
+
     }
 
 }
